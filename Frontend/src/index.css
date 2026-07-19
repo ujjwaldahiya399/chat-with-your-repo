@@ -1,0 +1,347 @@
+:root {
+  --bg: #12151c;
+  --surface: #1b1f29;
+  --text: #e8e6e0;
+  --text-muted: #8b93a5;
+  --accent: #c9a227;
+  --accent-bg: rgba(201, 162, 39, 0.12);
+  --stream: #5fa8d3;
+  --error: #d3705f;
+  --border: rgba(139, 147, 165, 0.25);
+  --header-bg: #171b24;
+  --answer-tint: #20242f;
+
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --sans: 'IBM Plex Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+#root {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 56px 20px 80px;
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 32px 16px 56px;
+  }
+
+  .panel-header,
+  .panel-body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 15px 24px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.mark {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.panel-body {
+  padding: 28px 24px 32px;
+}
+
+.title {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid rgba(139, 147, 165, 0.25);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 11px 13px;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+button:focus-visible,
+a.source-chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  align-self: flex-start;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+button:active:not(:disabled) {
+  filter: brightness(0.9);
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.error {
+  color: var(--error);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.success {
+  color: var(--stream);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.section-divider {
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.answer-card {
+  background: var(--answer-tint);
+  border-top: 1px solid var(--border);
+  margin: 8px -24px 0;
+  padding: 18px 24px;
+}
+
+@media (max-width: 480px) {
+  .answer-card {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.answer {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* react-markdown renders block elements (p, pre, ul, ...) as children of
+   .answer instead of one plain pre-wrapped text node, so spacing is now
+   handled per-element below rather than via white-space: pre-wrap. */
+.answer > *:last-child {
+  margin-bottom: 0;
+}
+
+.answer p {
+  margin: 0 0 1em;
+}
+
+.answer ul,
+.answer ol {
+  margin: 0 0 1em;
+  padding-left: 1.3em;
+}
+
+.answer li {
+  margin: 0 0 0.3em;
+}
+
+.answer a {
+  color: var(--accent);
+}
+
+.answer code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+}
+
+.answer pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 0 0 1em;
+  overflow-x: auto;
+}
+
+/* Inline-code styling above would double up inside a code block, so reset
+   it here — the block already has its own background/border from .answer pre. */
+.answer pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* rehype-highlight only adds hljs-* classnames, no colors — deliberately
+   not importing a prebuilt Prism/hljs theme (per design-system instruction),
+   so token colors are hand-mapped to the existing palette instead. Not
+   every hljs-* class is covered — unstyled tokens just inherit .answer's
+   text color, which is a reasonable fallback, not a bug. */
+.answer .hljs-comment,
+.answer .hljs-quote {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.answer .hljs-keyword,
+.answer .hljs-selector-tag,
+.answer .hljs-literal,
+.answer .hljs-section,
+.answer .hljs-link,
+.answer .hljs-doctag {
+  color: var(--accent);
+}
+
+.answer .hljs-string,
+.answer .hljs-attr,
+.answer .hljs-symbol,
+.answer .hljs-bullet,
+.answer .hljs-addition {
+  color: var(--stream);
+}
+
+.answer .hljs-title,
+.answer .hljs-name,
+.answer .hljs-type,
+.answer .hljs-built_in,
+.answer .hljs-number {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.answer .hljs-deletion {
+  color: var(--error);
+}
+
+.cursor {
+  display: inline-block;
+  color: var(--stream);
+  animation: blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.sources {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 10px;
+  border-left: 1px solid rgba(139, 147, 165, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.source-chip {
+  display: inline-block;
+  width: fit-content;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-radius: 4px;
+  padding: 4px 9px;
+  text-decoration: none;
+}
+
+/* Only <a>-wrapped chips (github_url present) get a hover cue — plain
+   <span> chips (old local chunks, no github_url) stay static, since
+   they aren't actually clickable. */
+a.source-chip:hover {
+  text-decoration: underline;
+  filter: brightness(1.15);
+}
