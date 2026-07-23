@@ -6,7 +6,9 @@ file and line the answer came from.
 
 ## Demo
 
-<video src="./Record-RAG-compressed.mp4" controls width="100%"></video>
+
+https://github.com/user-attachments/assets/d50acb6d-7524-405c-8769-e92f8e65d33e
+
 
 ## What it does
 
