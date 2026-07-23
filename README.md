@@ -4,6 +4,10 @@ A RAG-powered tool that lets you ask natural-language questions about
 a codebase and get grounded, cited answers — pointing to the exact
 file and line the answer came from.
 
+## Demo
+
+<video src="./Record-RAG-compressed.mp4" controls width="100%"></video>
+
 ## What it does
 
 Paste a GitHub repo URL, and the app clones it, chunks it along
