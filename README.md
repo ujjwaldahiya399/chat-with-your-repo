@@ -6,6 +6,9 @@ file and line the answer came from.
 
 
 
+https://github.com/user-attachments/assets/d50acb6d-7524-405c-8769-e92f8e65d33e
+
+
 ## What it does
 
 Paste a GitHub repo URL, and the app clones it, chunks it along
