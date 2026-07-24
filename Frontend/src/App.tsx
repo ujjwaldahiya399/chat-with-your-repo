@@ -2,8 +2,7 @@ import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 
-// ponytail: hardcoded, no env config until there's a second environment to point at
-const API = 'http://localhost:8000'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 type Source = { file_path: string; start_line: number; github_url: string | null }
 type EmbedResult = { files_embedded: number; total_chunks_in_collection: number }

@@ -4,9 +4,7 @@ A RAG-powered tool that lets you ask natural-language questions about
 a codebase and get grounded, cited answers — pointing to the exact
 file and line the answer came from.
 
-## Demo
 
-<video src="./Record-RAG-compressed.mp4" controls width="100%"></video>
 
 ## What it does
 
@@ -68,7 +66,13 @@ code blocks.
   including subfolder paths)
 - ✅ Frontend: chat UI, live streaming, clickable GitHub citations,
   markdown rendering with syntax-highlighted code blocks
-- 🚧 Deployment — not yet started
+- 🚧 Deployment — code is deploy-ready (Render + Vercel config
+  prepared), live deployment pending
+- ⚠️ **Known limitation (Render free tier):** the filesystem is
+  ephemeral, so `chroma_db/` is wiped on every restart or redeploy.
+  Any repo you've embedded will need to be re-embedded after the
+  backend restarts. Accepted for this portfolio demo — not something
+  a persistent volume/managed vector DB has been added to solve yet.
 
 ## Running locally
 

@@ -1,7 +1,7 @@
-groq
-python-dotenv
-sentence-transformers
-chromadb
-fastapi
-uvicorn
-pydantic
+groq==1.5.0
+python-dotenv==1.2.2
+sentence-transformers==5.6.0
+chromadb==1.5.9
+fastapi==0.139.2
+uvicorn==0.51.0
+pydantic==2.13.4

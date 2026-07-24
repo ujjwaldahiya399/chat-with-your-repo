@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 from contextlib import asynccontextmanager
 
@@ -57,10 +58,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# ponytail: wide open for local dev, lock to the deployed frontend origin before shipping
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[os.environ.get("FRONTEND_URL", "http://localhost:5173")],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -192,4 +192,4 @@ def ask(body: AskRequest, request: Request):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
