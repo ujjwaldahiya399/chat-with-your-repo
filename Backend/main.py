@@ -1,5 +1,6 @@
 import json
 import os
+import resource  # ponytail: temp OOM diagnostic, remove once Render memory is confirmed/ruled out
 import sys
 from contextlib import asynccontextmanager
 
@@ -49,9 +50,15 @@ class AskRequest(BaseModel):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # ponytail: temp OOM diagnostic, remove once Render memory is confirmed/ruled out
+    print(f"Memory before model load: {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.1f} MB")
     app.state.model = SentenceTransformer(MODEL_NAME)
+    # ponytail: temp OOM diagnostic, remove once Render memory is confirmed/ruled out
+    print(f"Memory after model load: {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.1f} MB")
     app.state.client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
     app.state.collection = app.state.client.get_or_create_collection(COLLECTION_NAME)
+    # ponytail: temp OOM diagnostic, remove once Render memory is confirmed/ruled out
+    print(f"Memory after Chroma init: {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.1f} MB")
     app.state.api_key = load_api_key()
     yield
 
