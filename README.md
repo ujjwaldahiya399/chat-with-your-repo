@@ -8,6 +8,11 @@ file and line the answer came from.
 
 https://github.com/user-attachments/assets/d50acb6d-7524-405c-8769-e92f8e65d33e
 
+## Live Demo
+
+**https://chat-with-your-repo.vercel.app**
+
+This is a real, working deployment anyone can use — not just a local demo.
 
 ## What it does
 
@@ -69,13 +74,15 @@ code blocks.
   including subfolder paths)
 - ✅ Frontend: chat UI, live streaming, clickable GitHub citations,
   markdown rendering with syntax-highlighted code blocks
-- 🚧 Deployment — code is deploy-ready (Render + Vercel config
-  prepared), live deployment pending
-- ⚠️ **Known limitation (Render free tier):** the filesystem is
-  ephemeral, so `chroma_db/` is wiped on every restart or redeploy.
-  Any repo you've embedded will need to be re-embedded after the
-  backend restarts. Accepted for this portfolio demo — not something
-  a persistent volume/managed vector DB has been added to solve yet.
+- ✅ Deployment — backend live on Google Cloud Run, frontend live on
+  Vercel, fully connected and verified end to end (repo embedding,
+  streaming answers, citations all tested against the live URLs, not
+  just locally)
+- ⚠️ **Known limitation (Cloud Run):** the container filesystem is
+  ephemeral, so `chroma_db/` is wiped on every redeploy or cold start.
+  Any repo you've embedded will need to be re-embedded after that.
+  Accepted for this portfolio demo — not something a persistent
+  volume/managed vector DB has been added to solve yet.
 
 ## Running locally
 
