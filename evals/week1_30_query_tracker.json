@@ -1,0 +1,311 @@
+[
+  {
+    "id": "R01",
+    "repository": "chat-with-your-repo",
+    "question": "What embedding model, ChromaDB directory, and collection name are configured by the backend?",
+    "relevant_chunks": [
+      "Backend/embed.py:1"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R02",
+    "repository": "chat-with-your-repo",
+    "question": "How does Python chunking divide a source file around top-level functions and classes?",
+    "relevant_chunks": [
+      "Backend/ingest.py:13"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R03",
+    "repository": "chat-with-your-repo",
+    "question": "How does the chunker keep decorators attached to the functions or classes they decorate?",
+    "relevant_chunks": [
+      "Backend/ingest.py:6",
+      "Backend/ingest.py:13"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R04",
+    "repository": "chat-with-your-repo",
+    "question": "What happens when Python AST parsing fails, and how are the fallback chunks created?",
+    "relevant_chunks": [
+      "Backend/ingest.py:13",
+      "Backend/ingest.py:68"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R05",
+    "repository": "chat-with-your-repo",
+    "question": "How are non-Python documents chunked, and what is the default number of lines per chunk?",
+    "relevant_chunks": [
+      "Backend/ingest.py:84",
+      "Backend/ingest.py:68"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R06",
+    "repository": "chat-with-your-repo",
+    "question": "How is a Python file with no top-level functions or classes represented in the index?",
+    "relevant_chunks": [
+      "Backend/ingest.py:13"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R07",
+    "repository": "chat-with-your-repo",
+    "question": "How does get_chunks respond when the requested file does not exist?",
+    "relevant_chunks": [
+      "Backend/ingest.py:84"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R08",
+    "repository": "chat-with-your-repo",
+    "question": "Which folders and file extensions does repository ingestion skip or accept?",
+    "relevant_chunks": [
+      "Backend/embed_repo.py:1",
+      "Backend/embed_repo.py:17"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R09",
+    "repository": "chat-with-your-repo",
+    "question": "Which GitHub URL formats are accepted and how is the canonical repository URL constructed?",
+    "relevant_chunks": [
+      "Backend/embed_repo.py:66"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R10",
+    "repository": "chat-with-your-repo",
+    "question": "How is a GitHub branch shallow-cloned, and what happens if git clone fails?",
+    "relevant_chunks": [
+      "Backend/embed_repo.py:80"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R11",
+    "repository": "chat-with-your-repo",
+    "question": "How is the temporary cloned repository removed after embedding finishes or raises an error?",
+    "relevant_chunks": [
+      "Backend/embed_repo.py:103"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R12",
+    "repository": "chat-with-your-repo",
+    "question": "Trace the code path from a GitHub URL to embedded searchable chunks stored in ChromaDB.",
+    "relevant_chunks": [
+      "Backend/embed_repo.py:103",
+      "Backend/embed_repo.py:80",
+      "Backend/embed_repo.py:17",
+      "Backend/embed.py:32"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R13",
+    "repository": "chat-with-your-repo",
+    "question": "How are chunk IDs and metadata scoped to the correct GitHub repository and branch?",
+    "relevant_chunks": [
+      "Backend/embed.py:32"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R14",
+    "repository": "chat-with-your-repo",
+    "question": "How does re-indexing a modified file prevent stale duplicate chunks from remaining in ChromaDB?",
+    "relevant_chunks": [
+      "Backend/embed.py:32",
+      "Backend/NOTES.md:51"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R15",
+    "repository": "chat-with-your-repo",
+    "question": "How does the backend normalize case-insensitive local file paths before generating chunk IDs?",
+    "relevant_chunks": [
+      "Backend/embed.py:14",
+      "Backend/embed.py:32"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R16",
+    "repository": "chat-with-your-repo",
+    "question": "How is a GitHub blob URL with a source line number built from retrieved chunk metadata?",
+    "relevant_chunks": [
+      "Backend/embed.py:86"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R17",
+    "repository": "chat-with-your-repo",
+    "question": "How does the ask.py CLI filter retrieval to one repository when --repo-url is supplied?",
+    "relevant_chunks": [
+      "Backend/ask.py:11"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R18",
+    "repository": "chat-with-your-repo",
+    "question": "How does ask.py encode the user's question and obtain its top-k matching ChromaDB chunks?",
+    "relevant_chunks": [
+      "Backend/ask.py:11"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R19",
+    "repository": "chat-with-your-repo",
+    "question": "How are retrieved chunks given source labels and then sent to Groq as a streamed response?",
+    "relevant_chunks": [
+      "Backend/ask.py:11",
+      "Backend/query.py:22"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R20",
+    "repository": "chat-with-your-repo",
+    "question": "What instructions tell the LLM to cite Source N and respond I don't know when retrieved context lacks an answer?",
+    "relevant_chunks": [
+      "Backend/query.py:1"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R21",
+    "repository": "chat-with-your-repo",
+    "question": "How does the backend obtain GROQ_API_KEY, and what happens if it is missing?",
+    "relevant_chunks": [
+      "Backend/query.py:55"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R22",
+    "repository": "chat-with-your-repo",
+    "question": "How are Groq API exceptions handled during streaming in the command-line application?",
+    "relevant_chunks": [
+      "Backend/query.py:76",
+      "Backend/query.py:22"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R23",
+    "repository": "chat-with-your-repo",
+    "question": "How are the final source listings constructed from retrieval metadata instead of from the language model's citations?",
+    "relevant_chunks": [
+      "Backend/ask.py:11",
+      "Backend/embed.py:86"
+    ],
+    "answerable": true,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R24",
+    "repository": "chat-with-your-repo",
+    "question": "Which React component contains the search form submit handler in the frontend?",
+    "relevant_chunks": [],
+    "answerable": false,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "R25",
+    "repository": "chat-with-your-repo",
+    "question": "What exact HTTP request timeout in seconds is configured for the FastAPI /ask endpoint?",
+    "relevant_chunks": [],
+    "answerable": false,
+    "status": "pilot labels verified against 32-chunk manifest"
+  },
+  {
+    "id": "TCG01",
+    "repository": "AI-test-case-generator-using-Groq-API",
+    "question": "Where does the generator create the Groq API client?",
+    "relevant_chunks": [
+      "generator.py:1"
+    ],
+    "status": "previously verified; separate repo index"
+  },
+  {
+    "id": "TCG02",
+    "repository": "AI-test-case-generator-using-Groq-API",
+    "question": "Which test checks the Groq API environment variable exists?",
+    "relevant_chunks": [
+      "tests/test_generator.py:5"
+    ],
+    "status": "previously verified; separate repo index"
+  },
+  {
+    "id": "TCG03",
+    "repository": "AI-test-case-generator-using-Groq-API",
+    "question": "Which file defines the password minimum length for login?",
+    "relevant_chunks": [
+      "sample_requirement.txt:1"
+    ],
+    "status": "previously verified; separate repo index"
+  },
+  {
+    "id": "QA01",
+    "repository": "Agentic-AI-QA-Copilot",
+    "question": "Where is the GitHub pull-request client initialized, and how are changed files obtained?",
+    "relevant_chunks": [],
+    "status": "source paths verified against local QA Copilot project",
+    "relevant_paths": [
+      "main.py",
+      "tools/github_utils.py"
+    ]
+  },
+  {
+    "id": "QA02",
+    "repository": "Agentic-AI-QA-Copilot",
+    "question": "How does the QA pipeline pass execution outcomes to its reporting stage?",
+    "relevant_chunks": [],
+    "status": "source paths verified against local QA Copilot project",
+    "relevant_paths": [
+      "agents/nodes/test_runner.py",
+      "agents/state.py",
+      "agents/graph.py",
+      "agents/nodes/report.py"
+    ]
+  }
+]

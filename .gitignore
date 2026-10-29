@@ -1,3 +1,10 @@
 CLAUDE.md
 .DS_Store
 Backend/.DS_Store
+Backend/.venv/
+evals/chroma_benchmark/
+evals/__pycache__/
+evals/*.sqlite3
+.pytest_cache/
+__pycache__/
+*.pyc
