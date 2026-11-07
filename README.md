@@ -16,13 +16,9 @@ This is a real, working deployment anyone can use — not just a local demo.
 
 ## What it does
 
-Paste a GitHub repo URL, and the app clones it, chunks it along
-function/class boundaries (AST-aware, not blind character splits),
-embeds each chunk, and indexes it for retrieval. Ask a question in
-plain English and get a streamed, cited answer back — every claim in
-the response is backed by a clickable link to the real file and line
-on GitHub.
+Paste a GitHub repo URL. The app clones the repo, splits source files into chunks using function and class boundaries for Python, then embeds and indexes those chunks for retrieval.
 
+Ask a question in plain English to get a streamed answer with inline citations and links to the GitHub files and lines the app retrieved.
 ## Stack
 
 **Backend:** Python, FastAPI, ChromaDB (vector storage),
