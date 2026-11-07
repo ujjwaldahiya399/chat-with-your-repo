@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:39.297091+00:00",
+  "question_id": "R22",
+  "question": "How are Groq API exceptions handled during streaming in the command-line application?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:1a0dc7293380bd9a84fb99d7db1b3259b7375a03747b8ba66e6ef1ebffa3eda5",
+      "metadata": {
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+        "symbol": "safe_query_stream",
+        "parent_start_line": 76,
+        "token_count": 174,
+        "start_line": 76,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_id": "parent:5c47649210855464c45e59f8844b6436aaf230d076f29810fff6dc78485bf302",
+        "source_origin": "git",
+        "parent_end_line": 85,
+        "token_budget": 220,
+        "parent_kind": "definition",
+        "file_path": "Backend/query.py",
+        "end_line": 85,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "metadata_schema_version": 1
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:4458464058dde7764cb4067c44a2fa89c579f309b307ab1a055519e8954c9a15",
+      "metadata": {
+        "parent_end_line": 73,
+        "file_path": "Backend/query.py",
+        "source_origin": "git",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_count": 113,
+        "parent_id": "parent:60ddec2f0c2cb9056914a3145b823e91051f8dd35d0abbce8780482b895e04b4",
+        "parent_kind": "definition",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_budget": 220,
+        "start_line": 67,
+        "metadata_schema_version": 1,
+        "end_line": 73,
+        "symbol": "safe_query",
+        "parent_start_line": 67,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916"
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:67ffe69bba31e7976695fc5940682c5780a68f405e1b700e18d7ffdc6efa611c",
+      "metadata": {
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_origin": "git",
+        "file_path": "Backend/query.py",
+        "metadata_schema_version": 1,
+        "parent_start_line": 22,
+        "parent_end_line": 43,
+        "start_line": 22,
+        "parent_id": "parent:2ee3d0cb4f1669ec841a83771c7be53a461b51eebf38d1f22e9d63c4edbab82a",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_count": 130,
+        "end_line": 29,
+        "token_budget": 220,
+        "symbol": "query_stream",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_kind": "definition",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:0b5d31c3cf56bc8fa409f50ed495f295ded41e8cdbd6195f39c00dae12f7844d",
+      "metadata": {
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "local",
+        "parent_end_line": 186,
+        "parent_start_line": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "symbol": "<document>",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "file_path": "Backend/NOTES.md",
+        "parent_kind": "text",
+        "start_line": 151,
+        "end_line": 161,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_budget": 220,
+        "token_count": 213,
+        "metadata_schema_version": 1
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:90e51f8bb9875fa9b5b99d93191b1117599e5bd7a24eb5564248e25d39d46b3e",
+      "metadata": {
+        "end_line": 52,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_budget": 220,
+        "start_line": 46,
+        "source_origin": "git",
+        "symbol": "query",
+        "parent_end_line": 52,
+        "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+        "parent_kind": "definition",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:11fccbad1bd01a76fdb78b205384f20182db38b64abad0740de167cf8668da4e",
+        "metadata_schema_version": 1,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_path": "Backend/query.py",
+        "parent_start_line": 46,
+        "token_count": 129
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "cli_uses_safe_stream",
+      "file_path": "Backend/ask.py",
+      "start_line": 64,
+      "end_line": 65,
+      "required_lines": 2,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "id": "catch_report_and_exit",
+      "file_path": "Backend/query.py",
+      "start_line": 81,
+      "end_line": 85,
+      "required_lines": 5,
+      "covered_lines": 5,
+      "complete": true,
+      "missing_lines": []
+    }
+  ],
+  "complete_evidence_units": 1,
+  "total_evidence_units": 2,
+  "evidence_unit_coverage_at_k": 0.5,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

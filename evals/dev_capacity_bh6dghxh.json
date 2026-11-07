@@ -1,0 +1,1537 @@
+{
+  "purpose": "development",
+  "top_k": 5,
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "runner_sha256": "82a51ece65810719b50cd9a070bbb8af2f64c26244ba6a348d9144d955ac251b",
+  "scope": "Exact evidence-capacity oracle using source-range metadata; not a retriever, answer-quality measure, or token-budget comparison.",
+  "fully_coverable_questions_at_5": 22,
+  "questions": [
+    {
+      "question_id": "R01",
+      "question": "What embedding model, ChromaDB directory, and collection name are configured by the backend?",
+      "minimum_chunks": 1,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:f597ade48a12649fa146348ee0176174940388824cfdb61541027287ec08f5ca",
+          "metadata": {
+            "symbol": "<module>",
+            "metadata_schema_version": 1,
+            "end_line": 13,
+            "parent_kind": "module",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "token_budget": 220,
+            "token_count": 100,
+            "parent_start_line": 1,
+            "source_origin": "git",
+            "parent_end_line": 13,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:73dd71601cbd3214f86da461e87e22fcd517d414550117eb68870fa9c358994e",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "file_path": "Backend/embed.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "start_line": 1
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R02",
+      "question": "How does Python chunking divide a source file around top-level functions and classes?",
+      "minimum_chunks": 4,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:4b2ebcfca802748e505d6e355726727c98690fd7552cbb7352311a35cb39befb",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "symbol": "chunk_python_file",
+            "parent_start_line": 13,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_end_line": 65,
+            "file_path": "Backend/ingest.py",
+            "end_line": 30,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_kind": "definition",
+            "token_count": 217,
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "start_line": 13,
+            "source_origin": "git"
+          }
+        },
+        {
+          "chunk_id": "chunk:80fcd1af059d3c7405dd50f8ca217b6637cd426f68c949c6a9e23067a87b3d41",
+          "metadata": {
+            "file_path": "Backend/ingest.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "source_origin": "git",
+            "start_line": 31,
+            "parent_end_line": 65,
+            "symbol": "chunk_python_file",
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_start_line": 13,
+            "end_line": 44,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 155,
+            "parent_kind": "definition"
+          }
+        },
+        {
+          "chunk_id": "chunk:36ea7194c4f23479cb947ffe0fca50e5441eb1bdacce696156de19e558c1a95d",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "file_path": "Backend/ingest.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_start_line": 13,
+            "token_budget": 220,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "source_origin": "git",
+            "parent_end_line": 65,
+            "start_line": 45,
+            "symbol": "chunk_python_file",
+            "token_count": 211,
+            "parent_kind": "definition",
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "end_line": 62
+          }
+        },
+        {
+          "chunk_id": "chunk:8a343cfa3947eb9b3de9fd80cb3a272cc0b677c064188d63527a8579f9136c8c",
+          "metadata": {
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_budget": 220,
+            "end_line": 65,
+            "parent_end_line": 65,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "source_origin": "git",
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_start_line": 13,
+            "start_line": 63,
+            "token_count": 43,
+            "symbol": "chunk_python_file",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "file_path": "Backend/ingest.py",
+            "parent_kind": "definition",
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R03",
+      "question": "How does the chunker keep decorators attached to the functions or classes they decorate?",
+      "minimum_chunks": 3,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:ce33588e7c051b6515730fca2d0db5920cbb14b90a582bb1387a170e8b1a67c5",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "end_line": 10,
+            "parent_id": "parent:08927cea1e0953aed5de01b7760568a091fa04b15d68754afe8114f2c9c329cf",
+            "parent_kind": "definition",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ingest.py",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "_def_start_line",
+            "parent_end_line": 10,
+            "token_count": 81,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_start_line": 6,
+            "start_line": 6,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+          }
+        },
+        {
+          "chunk_id": "chunk:80fcd1af059d3c7405dd50f8ca217b6637cd426f68c949c6a9e23067a87b3d41",
+          "metadata": {
+            "file_path": "Backend/ingest.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "source_origin": "git",
+            "start_line": 31,
+            "parent_end_line": 65,
+            "symbol": "chunk_python_file",
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_start_line": 13,
+            "end_line": 44,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 155,
+            "parent_kind": "definition"
+          }
+        },
+        {
+          "chunk_id": "chunk:36ea7194c4f23479cb947ffe0fca50e5441eb1bdacce696156de19e558c1a95d",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "file_path": "Backend/ingest.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_start_line": 13,
+            "token_budget": 220,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "source_origin": "git",
+            "parent_end_line": 65,
+            "start_line": 45,
+            "symbol": "chunk_python_file",
+            "token_count": 211,
+            "parent_kind": "definition",
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "end_line": 62
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R04",
+      "question": "What happens when Python AST parsing fails, and how are the fallback chunks created?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:4b2ebcfca802748e505d6e355726727c98690fd7552cbb7352311a35cb39befb",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "symbol": "chunk_python_file",
+            "parent_start_line": 13,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_end_line": 65,
+            "file_path": "Backend/ingest.py",
+            "end_line": 30,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_kind": "definition",
+            "token_count": 217,
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "start_line": 13,
+            "source_origin": "git"
+          }
+        },
+        {
+          "chunk_id": "chunk:46bbb867647ccf93e1036b5b95bc857da18952ff0644882bdc9b13a7b4a91dc1",
+          "metadata": {
+            "parent_end_line": 81,
+            "source_origin": "git",
+            "metadata_schema_version": 1,
+            "end_line": 81,
+            "token_count": 175,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ingest.py",
+            "parent_id": "parent:9ff6a3c353f1ce467b065d693f52de172c7a29c6fdcfcf756868a5c1ea3db6a9",
+            "start_line": 68,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_kind": "definition",
+            "token_budget": 220,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "chunk_fixed_size",
+            "parent_start_line": 68
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R05",
+      "question": "How are non-Python documents chunked, and what is the default number of lines per chunk?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:46bbb867647ccf93e1036b5b95bc857da18952ff0644882bdc9b13a7b4a91dc1",
+          "metadata": {
+            "parent_end_line": 81,
+            "source_origin": "git",
+            "metadata_schema_version": 1,
+            "end_line": 81,
+            "token_count": 175,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ingest.py",
+            "parent_id": "parent:9ff6a3c353f1ce467b065d693f52de172c7a29c6fdcfcf756868a5c1ea3db6a9",
+            "start_line": 68,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_kind": "definition",
+            "token_budget": 220,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "chunk_fixed_size",
+            "parent_start_line": 68
+          }
+        },
+        {
+          "chunk_id": "chunk:9bd22c1313dc4efd44e09f6511744659aec7bc214a215a21fd34a89f8e33b509",
+          "metadata": {
+            "token_count": 129,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "source_origin": "git",
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "symbol": "get_chunks",
+            "parent_end_line": 94,
+            "file_path": "Backend/ingest.py",
+            "end_line": 94,
+            "parent_kind": "definition",
+            "start_line": 84,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_id": "parent:0c90686162840e2b2abded0381d6c80f3119fd2d866f4b63fe5e975d47b4d683",
+            "parent_start_line": 84,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R06",
+      "question": "How is a Python file with no top-level functions or classes represented in the index?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:4b2ebcfca802748e505d6e355726727c98690fd7552cbb7352311a35cb39befb",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "symbol": "chunk_python_file",
+            "parent_start_line": 13,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_end_line": 65,
+            "file_path": "Backend/ingest.py",
+            "end_line": 30,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_kind": "definition",
+            "token_count": 217,
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "start_line": 13,
+            "source_origin": "git"
+          }
+        },
+        {
+          "chunk_id": "chunk:80fcd1af059d3c7405dd50f8ca217b6637cd426f68c949c6a9e23067a87b3d41",
+          "metadata": {
+            "file_path": "Backend/ingest.py",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "source_origin": "git",
+            "start_line": 31,
+            "parent_end_line": 65,
+            "symbol": "chunk_python_file",
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "parent_start_line": 13,
+            "end_line": 44,
+            "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 155,
+            "parent_kind": "definition"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R07",
+      "question": "How does get_chunks respond when the requested file does not exist?",
+      "minimum_chunks": 1,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:9bd22c1313dc4efd44e09f6511744659aec7bc214a215a21fd34a89f8e33b509",
+          "metadata": {
+            "token_count": 129,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "source_origin": "git",
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+            "symbol": "get_chunks",
+            "parent_end_line": 94,
+            "file_path": "Backend/ingest.py",
+            "end_line": 94,
+            "parent_kind": "definition",
+            "start_line": 84,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_id": "parent:0c90686162840e2b2abded0381d6c80f3119fd2d866f4b63fe5e975d47b4d683",
+            "parent_start_line": 84,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R08",
+      "question": "Which folders and file extensions does repository ingestion skip or accept?",
+      "minimum_chunks": 3,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:dfab639a71fd31530fecf87822d391b093e8806302ffc64ab77594b61620395b",
+          "metadata": {
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_kind": "module",
+            "symbol": "<module>",
+            "file_path": "Backend/embed_repo.py",
+            "end_line": 16,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "source_origin": "git",
+            "parent_id": "parent:0e4715e2f67c80c7870937642f92b07db33cd906be865062a4807c7674d9bcc9",
+            "token_count": 137,
+            "start_line": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "metadata_schema_version": 1,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "token_budget": 220,
+            "parent_start_line": 1,
+            "parent_end_line": 16
+          }
+        },
+        {
+          "chunk_id": "chunk:7eaf3dd26f261e440aa2303751e42e166ed64dba8a11e6a36a208c9e4ae83109",
+          "metadata": {
+            "end_line": 33,
+            "token_budget": 220,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+            "parent_end_line": 63,
+            "parent_kind": "definition",
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 105,
+            "file_path": "Backend/embed_repo.py",
+            "start_line": 29,
+            "symbol": "embed_repo",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 17
+          }
+        },
+        {
+          "chunk_id": "chunk:6652342771b79f793597804bf7ed6b2376c2dc27361278c1bc35dc22a8924a52",
+          "metadata": {
+            "parent_end_line": 63,
+            "token_budget": 220,
+            "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 17,
+            "file_path": "Backend/embed_repo.py",
+            "start_line": 34,
+            "metadata_schema_version": 1,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 202,
+            "end_line": 51,
+            "symbol": "embed_repo",
+            "parent_kind": "definition",
+            "source_origin": "git"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R09",
+      "question": "Which GitHub URL formats are accepted and how is the canonical repository URL constructed?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:0eea4fd25e0c4f93ce02c695464a8209fa45118ca53e3a99036b9493f9a0aeeb",
+          "metadata": {
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "file_path": "Backend/embed_repo.py",
+            "token_budget": 220,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "metadata_schema_version": 1,
+            "symbol": "parse_github_url",
+            "parent_end_line": 77,
+            "parent_kind": "definition",
+            "end_line": 73,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "token_count": 207,
+            "start_line": 66,
+            "source_origin": "git",
+            "parent_start_line": 66,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_id": "parent:99e7ca482a38b44e3c22305c0625898a8bed581d9b803001b26d059a97e81a92"
+          }
+        },
+        {
+          "chunk_id": "chunk:575af93f54514069dd2ba8590d7e19c004637e4708c6858fcec112905d1b711a",
+          "metadata": {
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "parent_end_line": 77,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 101,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_id": "parent:99e7ca482a38b44e3c22305c0625898a8bed581d9b803001b26d059a97e81a92",
+            "start_line": 74,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "end_line": 77,
+            "symbol": "parse_github_url",
+            "file_path": "Backend/embed_repo.py",
+            "parent_kind": "definition",
+            "token_budget": 220,
+            "parent_start_line": 66,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "source_origin": "git",
+            "metadata_schema_version": 1
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R10",
+      "question": "How is a GitHub branch shallow-cloned, and what happens if git clone fails?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:dc5308ba5505e330c5d1d6dfc66753f8332acbcbd1a0c8e9c34565f1f8362657",
+          "metadata": {
+            "parent_start_line": 80,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 210,
+            "start_line": 80,
+            "parent_id": "parent:7902656ad36afc3c45f13abe0b83312cc7a2db0dcf969ab19486bb89e402aa50",
+            "symbol": "clone_repo",
+            "source_origin": "git",
+            "end_line": 91,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "parent_kind": "definition",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_end_line": 100,
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "file_path": "Backend/embed_repo.py"
+          }
+        },
+        {
+          "chunk_id": "chunk:8aff9a49824315be47f555bf3baced442df7ad41f656885c783e762e31f64b57",
+          "metadata": {
+            "symbol": "clone_repo",
+            "parent_start_line": 80,
+            "start_line": 92,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "end_line": 100,
+            "parent_end_line": 100,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "parent_id": "parent:7902656ad36afc3c45f13abe0b83312cc7a2db0dcf969ab19486bb89e402aa50",
+            "file_path": "Backend/embed_repo.py",
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "parent_kind": "definition",
+            "source_origin": "git",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "token_budget": 220,
+            "token_count": 141
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R11",
+      "question": "How is the temporary cloned repository removed after embedding finishes or raises an error?",
+      "minimum_chunks": 1,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:67cc45ab13a3085c5f88e7d51cae189df66cece4bbce25a498d58a5f56c759ce",
+          "metadata": {
+            "symbol": "embed_repo_from_url",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_origin": "git",
+            "parent_start_line": 103,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:c506ed675e231dccb493e9c627ba01dbd55cdb78c3c6b3ac27ebdbf5fa81aa1d",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 182,
+            "parent_end_line": 111,
+            "start_line": 103,
+            "token_budget": 220,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "end_line": 111,
+            "file_path": "Backend/embed_repo.py",
+            "parent_kind": "definition",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R12",
+      "question": "Trace the code path from a GitHub URL to embedded searchable chunks stored in ChromaDB.",
+      "minimum_chunks": 9,
+      "can_fit_at_5": false,
+      "witness": [
+        {
+          "chunk_id": "chunk:758a38bb33a213218606f0fe2f5503f8d89cc60da9466a994684fc3dbc095a9a",
+          "metadata": {
+            "token_budget": 220,
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "start_line": 41,
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_start_line": 32,
+            "end_line": 56,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_end_line": 83,
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "metadata_schema_version": 1,
+            "token_count": 212,
+            "symbol": "embed_file"
+          }
+        },
+        {
+          "chunk_id": "chunk:df3b36b4d78635e801ebeb92ba5ad313a06824c1c413e864982319a4cde18d5d",
+          "metadata": {
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "symbol": "embed_file",
+            "metadata_schema_version": 1,
+            "parent_kind": "definition",
+            "file_path": "Backend/embed.py",
+            "source_origin": "git",
+            "token_count": 201,
+            "start_line": 57,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 32,
+            "end_line": 67,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_end_line": 83,
+            "token_budget": 220,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        },
+        {
+          "chunk_id": "chunk:ef33cc545c51054eae402fddabff1a2ef7e1caa0b9afae4ca010ff311284a3a0",
+          "metadata": {
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_start_line": 32,
+            "end_line": 78,
+            "start_line": 68,
+            "token_budget": 220,
+            "token_count": 210,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_end_line": 83,
+            "symbol": "embed_file",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition"
+          }
+        },
+        {
+          "chunk_id": "chunk:8d7ec617ce2d8289d1549a7be920c8a4dd9809e63a91f6c3ed962da271f0465c",
+          "metadata": {
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "symbol": "embed_file",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_end_line": 83,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "parent_kind": "definition",
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "start_line": 79,
+            "file_path": "Backend/embed.py",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "token_count": 112,
+            "end_line": 83,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "source_origin": "git",
+            "parent_start_line": 32
+          }
+        },
+        {
+          "chunk_id": "chunk:67cc45ab13a3085c5f88e7d51cae189df66cece4bbce25a498d58a5f56c759ce",
+          "metadata": {
+            "symbol": "embed_repo_from_url",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_origin": "git",
+            "parent_start_line": 103,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:c506ed675e231dccb493e9c627ba01dbd55cdb78c3c6b3ac27ebdbf5fa81aa1d",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 182,
+            "parent_end_line": 111,
+            "start_line": 103,
+            "token_budget": 220,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "end_line": 111,
+            "file_path": "Backend/embed_repo.py",
+            "parent_kind": "definition",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo"
+          }
+        },
+        {
+          "chunk_id": "chunk:7eaf3dd26f261e440aa2303751e42e166ed64dba8a11e6a36a208c9e4ae83109",
+          "metadata": {
+            "end_line": 33,
+            "token_budget": 220,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+            "parent_end_line": 63,
+            "parent_kind": "definition",
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 105,
+            "file_path": "Backend/embed_repo.py",
+            "start_line": 29,
+            "symbol": "embed_repo",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 17
+          }
+        },
+        {
+          "chunk_id": "chunk:6652342771b79f793597804bf7ed6b2376c2dc27361278c1bc35dc22a8924a52",
+          "metadata": {
+            "parent_end_line": 63,
+            "token_budget": 220,
+            "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 17,
+            "file_path": "Backend/embed_repo.py",
+            "start_line": 34,
+            "metadata_schema_version": 1,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 202,
+            "end_line": 51,
+            "symbol": "embed_repo",
+            "parent_kind": "definition",
+            "source_origin": "git"
+          }
+        },
+        {
+          "chunk_id": "chunk:dc5308ba5505e330c5d1d6dfc66753f8332acbcbd1a0c8e9c34565f1f8362657",
+          "metadata": {
+            "parent_start_line": 80,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 210,
+            "start_line": 80,
+            "parent_id": "parent:7902656ad36afc3c45f13abe0b83312cc7a2db0dcf969ab19486bb89e402aa50",
+            "symbol": "clone_repo",
+            "source_origin": "git",
+            "end_line": 91,
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "parent_kind": "definition",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_end_line": 100,
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "file_path": "Backend/embed_repo.py"
+          }
+        },
+        {
+          "chunk_id": "chunk:8aff9a49824315be47f555bf3baced442df7ad41f656885c783e762e31f64b57",
+          "metadata": {
+            "symbol": "clone_repo",
+            "parent_start_line": 80,
+            "start_line": 92,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "end_line": 100,
+            "parent_end_line": 100,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "parent_id": "parent:7902656ad36afc3c45f13abe0b83312cc7a2db0dcf969ab19486bb89e402aa50",
+            "file_path": "Backend/embed_repo.py",
+            "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+            "parent_kind": "definition",
+            "source_origin": "git",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "token_budget": 220,
+            "token_count": 141
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R13",
+      "question": "How are chunk IDs and metadata scoped to the correct GitHub repository and branch?",
+      "minimum_chunks": 3,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:758a38bb33a213218606f0fe2f5503f8d89cc60da9466a994684fc3dbc095a9a",
+          "metadata": {
+            "token_budget": 220,
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "start_line": 41,
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_start_line": 32,
+            "end_line": 56,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_end_line": 83,
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "metadata_schema_version": 1,
+            "token_count": 212,
+            "symbol": "embed_file"
+          }
+        },
+        {
+          "chunk_id": "chunk:df3b36b4d78635e801ebeb92ba5ad313a06824c1c413e864982319a4cde18d5d",
+          "metadata": {
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "symbol": "embed_file",
+            "metadata_schema_version": 1,
+            "parent_kind": "definition",
+            "file_path": "Backend/embed.py",
+            "source_origin": "git",
+            "token_count": 201,
+            "start_line": 57,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 32,
+            "end_line": 67,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_end_line": 83,
+            "token_budget": 220,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        },
+        {
+          "chunk_id": "chunk:ef33cc545c51054eae402fddabff1a2ef7e1caa0b9afae4ca010ff311284a3a0",
+          "metadata": {
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_start_line": 32,
+            "end_line": 78,
+            "start_line": 68,
+            "token_budget": 220,
+            "token_count": 210,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_end_line": 83,
+            "symbol": "embed_file",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R14",
+      "question": "How does re-indexing a modified file prevent stale duplicate chunks from remaining in ChromaDB?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:ef33cc545c51054eae402fddabff1a2ef7e1caa0b9afae4ca010ff311284a3a0",
+          "metadata": {
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_start_line": 32,
+            "end_line": 78,
+            "start_line": 68,
+            "token_budget": 220,
+            "token_count": 210,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_end_line": 83,
+            "symbol": "embed_file",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition"
+          }
+        },
+        {
+          "chunk_id": "chunk:8d7ec617ce2d8289d1549a7be920c8a4dd9809e63a91f6c3ed962da271f0465c",
+          "metadata": {
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "symbol": "embed_file",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_end_line": 83,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "parent_kind": "definition",
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "start_line": 79,
+            "file_path": "Backend/embed.py",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "token_count": 112,
+            "end_line": 83,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "source_origin": "git",
+            "parent_start_line": 32
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R15",
+      "question": "How does the backend normalize case-insensitive local file paths before generating chunk IDs?",
+      "minimum_chunks": 4,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:aed048e95b0b9cffe6947e6efb92e981857542879bfb5039ea914e8a3b929d74",
+          "metadata": {
+            "parent_end_line": 29,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "start_line": 14,
+            "symbol": "_real_case_path",
+            "token_budget": 220,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/embed.py",
+            "token_count": 201,
+            "parent_kind": "definition",
+            "metadata_schema_version": 1,
+            "source_origin": "git",
+            "end_line": 26,
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "parent_id": "parent:ca783e090c70dd798caf8c66fa8b13f158bf83d24d8be942e6a226c1c517dd08",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 14
+          }
+        },
+        {
+          "chunk_id": "chunk:204a3af3fd5e9c4a591a06245ce00def2d6f9276e75680ffca2b74c68ffcb5ff",
+          "metadata": {
+            "file_path": "Backend/embed.py",
+            "token_budget": 220,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_end_line": 29,
+            "end_line": 29,
+            "parent_id": "parent:ca783e090c70dd798caf8c66fa8b13f158bf83d24d8be942e6a226c1c517dd08",
+            "token_count": 75,
+            "start_line": 27,
+            "source_origin": "git",
+            "parent_kind": "definition",
+            "parent_start_line": 14,
+            "symbol": "_real_case_path",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "metadata_schema_version": 1
+          }
+        },
+        {
+          "chunk_id": "chunk:758a38bb33a213218606f0fe2f5503f8d89cc60da9466a994684fc3dbc095a9a",
+          "metadata": {
+            "token_budget": 220,
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "start_line": 41,
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_start_line": 32,
+            "end_line": 56,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "parent_end_line": 83,
+            "file_path": "Backend/embed.py",
+            "parent_kind": "definition",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "metadata_schema_version": 1,
+            "token_count": 212,
+            "symbol": "embed_file"
+          }
+        },
+        {
+          "chunk_id": "chunk:df3b36b4d78635e801ebeb92ba5ad313a06824c1c413e864982319a4cde18d5d",
+          "metadata": {
+            "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "symbol": "embed_file",
+            "metadata_schema_version": 1,
+            "parent_kind": "definition",
+            "file_path": "Backend/embed.py",
+            "source_origin": "git",
+            "token_count": 201,
+            "start_line": 57,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 32,
+            "end_line": 67,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_end_line": 83,
+            "token_budget": 220,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R16",
+      "question": "How is a GitHub blob URL with a source line number built from retrieved chunk metadata?",
+      "minimum_chunks": 1,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:ecabdf50cf347e57765217514fc97bac846e7d1662c71d74120a2a2f5ec9cc6b",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "parent_id": "parent:5a60d0e48261e755dba4b42e8ab88de426d9ea2f42e170f7d4a9d63628f61234",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "build_github_url",
+            "end_line": 93,
+            "file_path": "Backend/embed.py",
+            "parent_start_line": 86,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_kind": "definition",
+            "start_line": 86,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "token_count": 173,
+            "parent_end_line": 93,
+            "source_origin": "git"
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R17",
+      "question": "How does the ask.py CLI filter retrieval to one repository when --repo-url is supplied?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:75d6d2d205123bf7ebf40a64f0be2e572f3ed36a5b90cecdfc6faa8b7de96b0a",
+          "metadata": {
+            "parent_id": "parent:f36bede833b4a7105e3315cda99effa2b0bf5b956040926db4a460b89602aa5c",
+            "parent_end_line": 19,
+            "token_count": 164,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 11,
+            "start_line": 11,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_origin": "git",
+            "symbol": "parse_args",
+            "token_budget": 220,
+            "parent_kind": "definition",
+            "metadata_schema_version": 1,
+            "end_line": 19,
+            "file_path": "Backend/ask.py",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a"
+          }
+        },
+        {
+          "chunk_id": "chunk:b47c3e6ceee12e8dd550a4c7f150baf5ba0cd1968b2bf8847614435df21e9f71",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "parent_end_line": 78,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "<module>",
+            "token_budget": 220,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "start_line": 35,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 20,
+            "source_origin": "git",
+            "end_line": 45,
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ask.py",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 199
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R18",
+      "question": "How does ask.py encode the user's question and obtain its top-k matching ChromaDB chunks?",
+      "minimum_chunks": 3,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:75d6d2d205123bf7ebf40a64f0be2e572f3ed36a5b90cecdfc6faa8b7de96b0a",
+          "metadata": {
+            "parent_id": "parent:f36bede833b4a7105e3315cda99effa2b0bf5b956040926db4a460b89602aa5c",
+            "parent_end_line": 19,
+            "token_count": 164,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 11,
+            "start_line": 11,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_origin": "git",
+            "symbol": "parse_args",
+            "token_budget": 220,
+            "parent_kind": "definition",
+            "metadata_schema_version": 1,
+            "end_line": 19,
+            "file_path": "Backend/ask.py",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a"
+          }
+        },
+        {
+          "chunk_id": "chunk:d12fe0a481ef600fedf47376dd665cd462627c342645bf35dd349059baaf82e2",
+          "metadata": {
+            "token_budget": 220,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_end_line": 78,
+            "parent_kind": "module",
+            "token_count": 216,
+            "file_path": "Backend/ask.py",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "start_line": 20,
+            "symbol": "<module>",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "metadata_schema_version": 1,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 20,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "end_line": 34
+          }
+        },
+        {
+          "chunk_id": "chunk:b47c3e6ceee12e8dd550a4c7f150baf5ba0cd1968b2bf8847614435df21e9f71",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "parent_end_line": 78,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "<module>",
+            "token_budget": 220,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "start_line": 35,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 20,
+            "source_origin": "git",
+            "end_line": 45,
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ask.py",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 199
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R19",
+      "question": "How are retrieved chunks given source labels and then sent to Groq as a streamed response?",
+      "minimum_chunks": 5,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:2c4383d43cf70d293f3c4fd8fe0a0731b0e6d7c94e0c4ada2dbb5f179445cb57",
+          "metadata": {
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_end_line": 78,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "token_count": 208,
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "source_origin": "git",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "end_line": 60,
+            "parent_start_line": 20,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_budget": 220,
+            "symbol": "<module>",
+            "file_path": "Backend/ask.py",
+            "metadata_schema_version": 1,
+            "start_line": 46
+          }
+        },
+        {
+          "chunk_id": "chunk:54ca7b3cce46415590af949da4cb8f6d0416cbbfda1b4bde240e7fceef688c29",
+          "metadata": {
+            "token_count": 165,
+            "parent_end_line": 78,
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "start_line": 61,
+            "symbol": "<module>",
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 20,
+            "file_path": "Backend/ask.py",
+            "end_line": 72,
+            "token_budget": 220,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "metadata_schema_version": 1
+          }
+        },
+        {
+          "chunk_id": "chunk:67ffe69bba31e7976695fc5940682c5780a68f405e1b700e18d7ffdc6efa611c",
+          "metadata": {
+            "token_count": 130,
+            "start_line": 22,
+            "symbol": "query_stream",
+            "source_origin": "git",
+            "parent_end_line": 43,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "file_path": "Backend/query.py",
+            "parent_id": "parent:2ee3d0cb4f1669ec841a83771c7be53a461b51eebf38d1f22e9d63c4edbab82a",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_budget": 220,
+            "parent_kind": "definition",
+            "end_line": 29,
+            "metadata_schema_version": 1,
+            "parent_start_line": 22,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+          }
+        },
+        {
+          "chunk_id": "chunk:249882a5611ca0daf2a9006cd0b17918e8f0b75ee57b96bed804efa400c2b2d8",
+          "metadata": {
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_kind": "definition",
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "metadata_schema_version": 1,
+            "end_line": 43,
+            "parent_start_line": 22,
+            "file_path": "Backend/query.py",
+            "source_origin": "git",
+            "parent_end_line": 43,
+            "token_count": 132,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "symbol": "query_stream",
+            "parent_id": "parent:2ee3d0cb4f1669ec841a83771c7be53a461b51eebf38d1f22e9d63c4edbab82a",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "start_line": 30,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "token_budget": 220
+          }
+        },
+        {
+          "chunk_id": "chunk:1a0dc7293380bd9a84fb99d7db1b3259b7375a03747b8ba66e6ef1ebffa3eda5",
+          "metadata": {
+            "end_line": 85,
+            "parent_end_line": 85,
+            "parent_id": "parent:5c47649210855464c45e59f8844b6436aaf230d076f29810fff6dc78485bf302",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_kind": "definition",
+            "source_origin": "git",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "parent_start_line": 76,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "safe_query_stream",
+            "start_line": 76,
+            "file_path": "Backend/query.py",
+            "token_count": 174,
+            "token_budget": 220,
+            "metadata_schema_version": 1
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R20",
+      "question": "What instructions tell the LLM to cite Source N and respond I don't know when retrieved context lacks an answer?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:7281f798a2b040b6be890653838757cc90b57c9037fe097ca1f8c465984ae10b",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "end_line": 16,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "token_count": 206,
+            "symbol": "<module>",
+            "parent_kind": "module",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_start_line": 1,
+            "token_budget": 220,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_id": "parent:e458274b3ac7d0a2ac29bfd7c12f97c96db444dff49cb2e10f59ccd8f56dd3ff",
+            "source_origin": "git",
+            "start_line": 6,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "file_path": "Backend/query.py",
+            "parent_end_line": 21,
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916"
+          }
+        },
+        {
+          "chunk_id": "chunk:0d9deb4bae867cab68da01e97383dd72769e18c1eaf94487fe4742071ab2f4ec",
+          "metadata": {
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_kind": "module",
+            "parent_id": "parent:e458274b3ac7d0a2ac29bfd7c12f97c96db444dff49cb2e10f59ccd8f56dd3ff",
+            "parent_start_line": 1,
+            "parent_end_line": 21,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "metadata_schema_version": 1,
+            "token_count": 51,
+            "file_path": "Backend/query.py",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "start_line": 17,
+            "end_line": 21,
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "source_origin": "git",
+            "symbol": "<module>",
+            "token_budget": 220
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R21",
+      "question": "How does the backend obtain GROQ_API_KEY, and what happens if it is missing?",
+      "minimum_chunks": 1,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:0dffabbc12539bb01573a6bf9a10842e664bc53c434fc95829618027dabe3d75",
+          "metadata": {
+            "file_path": "Backend/query.py",
+            "token_budget": 220,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_id": "parent:12e95b584d29ac830d83056bcfc753fb7c04b8fe8e0709109f76e15298e28053",
+            "parent_start_line": 55,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "parent_end_line": 64,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 138,
+            "end_line": 64,
+            "metadata_schema_version": 1,
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "symbol": "load_api_key",
+            "parent_kind": "definition",
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "start_line": 55
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R22",
+      "question": "How are Groq API exceptions handled during streaming in the command-line application?",
+      "minimum_chunks": 2,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:54ca7b3cce46415590af949da4cb8f6d0416cbbfda1b4bde240e7fceef688c29",
+          "metadata": {
+            "token_count": 165,
+            "parent_end_line": 78,
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "start_line": 61,
+            "symbol": "<module>",
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 20,
+            "file_path": "Backend/ask.py",
+            "end_line": 72,
+            "token_budget": 220,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "metadata_schema_version": 1
+          }
+        },
+        {
+          "chunk_id": "chunk:1a0dc7293380bd9a84fb99d7db1b3259b7375a03747b8ba66e6ef1ebffa3eda5",
+          "metadata": {
+            "end_line": 85,
+            "parent_end_line": 85,
+            "parent_id": "parent:5c47649210855464c45e59f8844b6436aaf230d076f29810fff6dc78485bf302",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_kind": "definition",
+            "source_origin": "git",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+            "parent_start_line": 76,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "safe_query_stream",
+            "start_line": 76,
+            "file_path": "Backend/query.py",
+            "token_count": 174,
+            "token_budget": 220,
+            "metadata_schema_version": 1
+          }
+        }
+      ]
+    },
+    {
+      "question_id": "R23",
+      "question": "How are the final source listings constructed from retrieval metadata instead of from the language model's citations?",
+      "minimum_chunks": 4,
+      "can_fit_at_5": true,
+      "witness": [
+        {
+          "chunk_id": "chunk:b47c3e6ceee12e8dd550a4c7f150baf5ba0cd1968b2bf8847614435df21e9f71",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "parent_end_line": 78,
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "<module>",
+            "token_budget": 220,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "start_line": 35,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "parent_start_line": 20,
+            "source_origin": "git",
+            "end_line": 45,
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "file_path": "Backend/ask.py",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "token_count": 199
+          }
+        },
+        {
+          "chunk_id": "chunk:54ca7b3cce46415590af949da4cb8f6d0416cbbfda1b4bde240e7fceef688c29",
+          "metadata": {
+            "token_count": 165,
+            "parent_end_line": 78,
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "start_line": 61,
+            "symbol": "<module>",
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_start_line": 20,
+            "file_path": "Backend/ask.py",
+            "end_line": 72,
+            "token_budget": 220,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+            "parent_kind": "module",
+            "metadata_schema_version": 1
+          }
+        },
+        {
+          "chunk_id": "chunk:7343d3652e5e05557e50fd9ecbd3d93ff935d230bffd1e513d7dd971fa908b94",
+          "metadata": {
+            "end_line": 78,
+            "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+            "parent_end_line": 78,
+            "start_line": 73,
+            "metadata_schema_version": 1,
+            "parent_start_line": 20,
+            "file_path": "Backend/ask.py",
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "token_count": 114,
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "parent_kind": "module",
+            "token_budget": 220,
+            "source_origin": "git",
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "symbol": "<module>",
+            "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a"
+          }
+        },
+        {
+          "chunk_id": "chunk:ecabdf50cf347e57765217514fc97bac846e7d1662c71d74120a2a2f5ec9cc6b",
+          "metadata": {
+            "metadata_schema_version": 1,
+            "token_budget": 220,
+            "parent_id": "parent:5a60d0e48261e755dba4b42e8ab88de426d9ea2f42e170f7d4a9d63628f61234",
+            "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+            "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+            "symbol": "build_github_url",
+            "end_line": 93,
+            "file_path": "Backend/embed.py",
+            "parent_start_line": 86,
+            "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+            "parent_kind": "definition",
+            "start_line": 86,
+            "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+            "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+            "token_count": 173,
+            "parent_end_line": 93,
+            "source_origin": "git"
+          }
+        }
+      ]
+    }
+  ]
+}

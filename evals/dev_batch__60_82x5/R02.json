@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:06.840859+00:00",
+  "question_id": "R02",
+  "question": "How does Python chunking divide a source file around top-level functions and classes?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:a24babd7f21ed7698a7f7fa0e9be58930349e42a3906af1e75d2a69bb23d8382",
+      "metadata": {
+        "symbol": "<document>",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "parent_kind": "text",
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "token_count": 211,
+        "token_budget": 220,
+        "source_origin": "local",
+        "start_line": 33,
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "parent_start_line": 1,
+        "parent_end_line": 186,
+        "end_line": 45,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "file_path": "Backend/NOTES.md"
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:4b2ebcfca802748e505d6e355726727c98690fd7552cbb7352311a35cb39befb",
+      "metadata": {
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "symbol": "chunk_python_file",
+        "parent_kind": "definition",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 30,
+        "parent_end_line": 65,
+        "token_count": 217,
+        "metadata_schema_version": 1,
+        "file_path": "Backend/ingest.py",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_budget": 220,
+        "parent_start_line": 13,
+        "start_line": 13,
+        "source_origin": "git"
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:9bd22c1313dc4efd44e09f6511744659aec7bc214a215a21fd34a89f8e33b509",
+      "metadata": {
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_origin": "git",
+        "start_line": 84,
+        "symbol": "get_chunks",
+        "end_line": 94,
+        "token_budget": 220,
+        "metadata_schema_version": 1,
+        "parent_start_line": 84,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_kind": "definition",
+        "parent_end_line": 94,
+        "parent_id": "parent:0c90686162840e2b2abded0381d6c80f3119fd2d866f4b63fe5e975d47b4d683",
+        "file_path": "Backend/ingest.py",
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_count": 129
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:46bbb867647ccf93e1036b5b95bc857da18952ff0644882bdc9b13a7b4a91dc1",
+      "metadata": {
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "metadata_schema_version": 1,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_count": 175,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 81,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "symbol": "chunk_fixed_size",
+        "parent_id": "parent:9ff6a3c353f1ce467b065d693f52de172c7a29c6fdcfcf756868a5c1ea3db6a9",
+        "start_line": 68,
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "file_path": "Backend/ingest.py",
+        "parent_start_line": 68,
+        "source_origin": "git",
+        "parent_end_line": 81,
+        "token_budget": 220,
+        "parent_kind": "definition"
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:8a343cfa3947eb9b3de9fd80cb3a272cc0b677c064188d63527a8579f9136c8c",
+      "metadata": {
+        "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_count": 43,
+        "file_path": "Backend/ingest.py",
+        "metadata_schema_version": 1,
+        "parent_end_line": 65,
+        "end_line": 65,
+        "token_budget": 220,
+        "start_line": 63,
+        "symbol": "chunk_python_file",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_start_line": 13,
+        "parent_kind": "definition",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "git",
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "collect_definitions",
+      "file_path": "Backend/ingest.py",
+      "start_line": 28,
+      "end_line": 30,
+      "required_lines": 3,
+      "covered_lines": 3,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "preserve_opening_code",
+      "file_path": "Backend/ingest.py",
+      "start_line": 40,
+      "end_line": 44,
+      "required_lines": 5,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "id": "build_definition_chunks",
+      "file_path": "Backend/ingest.py",
+      "start_line": 47,
+      "end_line": 63,
+      "required_lines": 17,
+      "covered_lines": 1,
+      "complete": false,
+      "missing_lines": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    }
+  ],
+  "complete_evidence_units": 1,
+  "total_evidence_units": 3,
+  "evidence_unit_coverage_at_k": 0.3333333333333333,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

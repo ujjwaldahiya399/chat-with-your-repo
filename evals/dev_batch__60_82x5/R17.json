@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:31.675173+00:00",
+  "question_id": "R17",
+  "question": "How does the ask.py CLI filter retrieval to one repository when --repo-url is supplied?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:75d6d2d205123bf7ebf40a64f0be2e572f3ed36a5b90cecdfc6faa8b7de96b0a",
+      "metadata": {
+        "symbol": "parse_args",
+        "parent_kind": "definition",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "source_origin": "git",
+        "metadata_schema_version": 1,
+        "parent_end_line": 19,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_id": "parent:f36bede833b4a7105e3315cda99effa2b0bf5b956040926db4a460b89602aa5c",
+        "end_line": 19,
+        "token_budget": 220,
+        "parent_start_line": 11,
+        "file_path": "Backend/ask.py",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "start_line": 11,
+        "token_count": 164,
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a"
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:b47c3e6ceee12e8dd550a4c7f150baf5ba0cd1968b2bf8847614435df21e9f71",
+      "metadata": {
+        "file_path": "Backend/ask.py",
+        "parent_kind": "module",
+        "parent_end_line": 78,
+        "end_line": 45,
+        "source_origin": "git",
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "parent_start_line": 20,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "metadata_schema_version": 1,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_budget": 220,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "symbol": "<module>",
+        "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "start_line": 35,
+        "token_count": 199
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:0eea4fd25e0c4f93ce02c695464a8209fa45118ca53e3a99036b9493f9a0aeeb",
+      "metadata": {
+        "start_line": 66,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_kind": "definition",
+        "metadata_schema_version": 1,
+        "end_line": 73,
+        "parent_end_line": 77,
+        "parent_start_line": 66,
+        "symbol": "parse_github_url",
+        "source_origin": "git",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "token_count": 207,
+        "token_budget": 220,
+        "parent_id": "parent:99e7ca482a38b44e3c22305c0625898a8bed581d9b803001b26d059a97e81a92",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "file_path": "Backend/embed_repo.py",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:575af93f54514069dd2ba8590d7e19c004637e4708c6858fcec112905d1b711a",
+      "metadata": {
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "parse_github_url",
+        "token_count": 101,
+        "parent_kind": "definition",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "source_origin": "git",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "parent_end_line": 77,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 77,
+        "parent_id": "parent:99e7ca482a38b44e3c22305c0625898a8bed581d9b803001b26d059a97e81a92",
+        "token_budget": 220,
+        "start_line": 74,
+        "metadata_schema_version": 1,
+        "file_path": "Backend/embed_repo.py",
+        "parent_start_line": 66
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:54ca7b3cce46415590af949da4cb8f6d0416cbbfda1b4bde240e7fceef688c29",
+      "metadata": {
+        "token_count": 165,
+        "symbol": "<module>",
+        "metadata_schema_version": 1,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "start_line": 61,
+        "parent_kind": "module",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "git",
+        "token_budget": 220,
+        "end_line": 72,
+        "parent_end_line": 78,
+        "file_path": "Backend/ask.py",
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+        "parent_start_line": 20
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "repository_argument",
+      "file_path": "Backend/ask.py",
+      "start_line": 18,
+      "end_line": 18,
+      "required_lines": 1,
+      "covered_lines": 1,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "repository_filter_condition",
+      "file_path": "Backend/ask.py",
+      "start_line": 38,
+      "end_line": 38,
+      "required_lines": 1,
+      "covered_lines": 1,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "apply_repository_filter",
+      "file_path": "Backend/ask.py",
+      "start_line": 41,
+      "end_line": 43,
+      "required_lines": 3,
+      "covered_lines": 3,
+      "complete": true,
+      "missing_lines": []
+    }
+  ],
+  "complete_evidence_units": 3,
+  "total_evidence_units": 3,
+  "evidence_unit_coverage_at_k": 1.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

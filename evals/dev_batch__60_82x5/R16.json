@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:30.163774+00:00",
+  "question_id": "R16",
+  "question": "How is a GitHub blob URL with a source line number built from retrieved chunk metadata?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:ecabdf50cf347e57765217514fc97bac846e7d1662c71d74120a2a2f5ec9cc6b",
+      "metadata": {
+        "source_origin": "git",
+        "symbol": "build_github_url",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_id": "parent:5a60d0e48261e755dba4b42e8ab88de426d9ea2f42e170f7d4a9d63628f61234",
+        "parent_end_line": 93,
+        "parent_kind": "definition",
+        "metadata_schema_version": 1,
+        "end_line": 93,
+        "token_budget": 220,
+        "token_count": 173,
+        "parent_start_line": 86,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "file_path": "Backend/embed.py",
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "start_line": 86
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:7343d3652e5e05557e50fd9ecbd3d93ff935d230bffd1e513d7dd971fa908b94",
+      "metadata": {
+        "start_line": 73,
+        "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "<module>",
+        "metadata_schema_version": 1,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "source_origin": "git",
+        "end_line": 78,
+        "parent_start_line": 20,
+        "parent_end_line": 78,
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "file_path": "Backend/ask.py",
+        "parent_kind": "module",
+        "token_budget": 220,
+        "token_count": 114,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:0eea4fd25e0c4f93ce02c695464a8209fa45118ca53e3a99036b9493f9a0aeeb",
+      "metadata": {
+        "metadata_schema_version": 1,
+        "file_path": "Backend/embed_repo.py",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "end_line": 73,
+        "token_count": 207,
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "parent_end_line": 77,
+        "start_line": 66,
+        "parent_id": "parent:99e7ca482a38b44e3c22305c0625898a8bed581d9b803001b26d059a97e81a92",
+        "parent_start_line": 66,
+        "token_budget": 220,
+        "symbol": "parse_github_url",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_kind": "definition",
+        "source_origin": "git",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:67cc45ab13a3085c5f88e7d51cae189df66cece4bbce25a498d58a5f56c759ce",
+      "metadata": {
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_id": "parent:c506ed675e231dccb493e9c627ba01dbd55cdb78c3c6b3ac27ebdbf5fa81aa1d",
+        "token_count": 182,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 111,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 103,
+        "start_line": 103,
+        "metadata_schema_version": 1,
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "source_origin": "git",
+        "file_path": "Backend/embed_repo.py",
+        "parent_kind": "definition",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_end_line": 111,
+        "symbol": "embed_repo_from_url",
+        "token_budget": 220
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:2177767a1be5cdcf69708cff4384ee5b258d1da570d5210a967fedb48b95421e",
+      "metadata": {
+        "metadata_schema_version": 1,
+        "file_path": "Backend/embed.py",
+        "start_line": 32,
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_kind": "definition",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_end_line": 83,
+        "source_origin": "git",
+        "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+        "parent_start_line": 32,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 40,
+        "token_count": 209,
+        "symbol": "embed_file",
+        "token_budget": 220,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "github_url_from_metadata",
+      "file_path": "Backend/embed.py",
+      "start_line": 91,
+      "end_line": 93,
+      "required_lines": 3,
+      "covered_lines": 3,
+      "complete": true,
+      "missing_lines": []
+    }
+  ],
+  "complete_evidence_units": 1,
+  "total_evidence_units": 1,
+  "evidence_unit_coverage_at_k": 1.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

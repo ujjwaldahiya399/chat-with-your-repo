@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:27.063239+00:00",
+  "question_id": "R14",
+  "question": "How does re-indexing a modified file prevent stale duplicate chunks from remaining in ChromaDB?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:fe8817df4d7058e824b09c8c9047dcd0a01b388cf380b7d74c82cd9e56b3cf32",
+      "metadata": {
+        "token_budget": 220,
+        "end_line": 127,
+        "source_origin": "local",
+        "parent_start_line": 1,
+        "token_count": 211,
+        "symbol": "<document>",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "start_line": 116,
+        "metadata_schema_version": 1,
+        "file_path": "Backend/NOTES.md",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "parent_kind": "text",
+        "parent_end_line": 186
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:5509287643c39391d4139e940b9df09233951646a1b590bd95aba98ceb9fdae1",
+      "metadata": {
+        "start_line": 52,
+        "metadata_schema_version": 1,
+        "parent_start_line": 17,
+        "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "git",
+        "parent_kind": "definition",
+        "file_path": "Backend/embed_repo.py",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 63,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_count": 171,
+        "symbol": "embed_repo",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "end_line": 63,
+        "token_budget": 220
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:29eb2aa74d48fa6af6b25ea45cc7175f5e9fc50e0fd757794e0ede1d94c86416",
+      "metadata": {
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "metadata_schema_version": 1,
+        "parent_kind": "text",
+        "parent_end_line": 186,
+        "start_line": 140,
+        "end_line": 150,
+        "token_count": 208,
+        "source_origin": "local",
+        "parent_start_line": 1,
+        "token_budget": 220,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "file_path": "Backend/NOTES.md",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "<document>"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:1fa7c55c4fb50d5661f72ebcdda1aebd0564066dcd4e8e63c784f16e2951ca1e",
+      "metadata": {
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "file_path": "Backend/NOTES.md",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_start_line": 1,
+        "token_budget": 220,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "local",
+        "parent_kind": "text",
+        "symbol": "<document>",
+        "token_count": 195,
+        "parent_end_line": 186,
+        "start_line": 103,
+        "end_line": 115,
+        "metadata_schema_version": 1
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:2ae56333cd054df64dec3d81627e0b502f4a33806f8588137085598309a74d7d",
+      "metadata": {
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "<document>",
+        "parent_kind": "text",
+        "token_budget": 220,
+        "end_line": 88,
+        "file_path": "Backend/NOTES.md",
+        "metadata_schema_version": 1,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "local",
+        "parent_start_line": 1,
+        "parent_end_line": 186,
+        "start_line": 70,
+        "token_count": 211
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "file_and_repository_delete_scope",
+      "file_path": "Backend/embed.py",
+      "start_line": 76,
+      "end_line": 78,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "id": "delete_then_upsert",
+      "file_path": "Backend/embed.py",
+      "start_line": 79,
+      "end_line": 80,
+      "required_lines": 2,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        79,
+        80
+      ]
+    }
+  ],
+  "complete_evidence_units": 0,
+  "total_evidence_units": 2,
+  "evidence_unit_coverage_at_k": 0.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

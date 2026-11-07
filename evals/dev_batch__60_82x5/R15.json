@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:28.685160+00:00",
+  "question_id": "R15",
+  "question": "How does the backend normalize case-insensitive local file paths before generating chunk IDs?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:aed048e95b0b9cffe6947e6efb92e981857542879bfb5039ea914e8a3b929d74",
+      "metadata": {
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "parent_start_line": 14,
+        "start_line": 14,
+        "token_count": 201,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "metadata_schema_version": 1,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_end_line": 29,
+        "parent_id": "parent:ca783e090c70dd798caf8c66fa8b13f158bf83d24d8be942e6a226c1c517dd08",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_budget": 220,
+        "symbol": "_real_case_path",
+        "end_line": 26,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "git",
+        "file_path": "Backend/embed.py",
+        "parent_kind": "definition"
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:02e6b20d64a1ebc01a1f69726201b8ee1cf3ac1ca2e754229c831ac02baa2d40",
+      "metadata": {
+        "token_count": 218,
+        "source_origin": "local",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_budget": 220,
+        "file_path": "Backend/NOTES.md",
+        "metadata_schema_version": 1,
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "<document>",
+        "start_line": 46,
+        "parent_start_line": 1,
+        "parent_end_line": 186,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 57,
+        "parent_kind": "text"
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:2ae56333cd054df64dec3d81627e0b502f4a33806f8588137085598309a74d7d",
+      "metadata": {
+        "parent_kind": "text",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "metadata_schema_version": 1,
+        "start_line": 70,
+        "end_line": 88,
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "source_origin": "local",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_end_line": 186,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "parent_start_line": 1,
+        "token_count": 211,
+        "symbol": "<document>",
+        "token_budget": 220,
+        "file_path": "Backend/NOTES.md"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:64e25e836b8bdfda3cd3b98ea31b2ba3d9a3ef1d47d4e9770a65cd6a7278edf4",
+      "metadata": {
+        "symbol": "<document>",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "metadata_schema_version": 1,
+        "parent_kind": "text",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 186,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "local",
+        "end_line": 69,
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "token_budget": 220,
+        "start_line": 58,
+        "file_path": "Backend/NOTES.md",
+        "token_count": 214,
+        "parent_start_line": 1
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:9bd22c1313dc4efd44e09f6511744659aec7bc214a215a21fd34a89f8e33b509",
+      "metadata": {
+        "parent_end_line": 94,
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "start_line": 84,
+        "source_origin": "git",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 84,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_count": 129,
+        "file_path": "Backend/ingest.py",
+        "metadata_schema_version": 1,
+        "token_budget": 220,
+        "end_line": 94,
+        "parent_id": "parent:0c90686162840e2b2abded0381d6c80f3119fd2d866f4b63fe5e975d47b4d683",
+        "parent_kind": "definition",
+        "symbol": "get_chunks"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "resolve_actual_path_casing",
+      "file_path": "Backend/embed.py",
+      "start_line": 25,
+      "end_line": 29,
+      "required_lines": 5,
+      "covered_lines": 2,
+      "complete": false,
+      "missing_lines": [
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "id": "use_normalized_local_path",
+      "file_path": "Backend/embed.py",
+      "start_line": 47,
+      "end_line": 49,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "id": "generate_ids_from_stored_path",
+      "file_path": "Backend/embed.py",
+      "start_line": 64,
+      "end_line": 65,
+      "required_lines": 2,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        64,
+        65
+      ]
+    }
+  ],
+  "complete_evidence_units": 0,
+  "total_evidence_units": 3,
+  "evidence_unit_coverage_at_k": 0.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

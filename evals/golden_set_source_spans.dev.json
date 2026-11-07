@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "questions": [
+    {
+      "id": "R02",
+      "question": "How does Python chunking divide a source file around top-level functions and classes?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "collect_definitions",
+          "file_path": "Backend/ingest.py",
+          "start_line": 28,
+          "end_line": 30
+        },
+        {
+          "id": "preserve_opening_code",
+          "file_path": "Backend/ingest.py",
+          "start_line": 40,
+          "end_line": 44
+        },
+        {
+          "id": "build_definition_chunks",
+          "file_path": "Backend/ingest.py",
+          "start_line": 47,
+          "end_line": 63
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "question": "What embedding model, ChromaDB directory, and collection name are configured by the backend?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "embedding_model",
+          "file_path": "Backend/embed.py",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "id": "database_directory",
+          "file_path": "Backend/embed.py",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "id": "collection_name",
+          "file_path": "Backend/embed.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "question": "How does the chunker keep decorators attached to the functions or classes they decorate?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "decorator_start_helper",
+          "file_path": "Backend/ingest.py",
+          "start_line": 6,
+          "end_line": 10
+        },
+        {
+          "id": "opening_code_boundary",
+          "file_path": "Backend/ingest.py",
+          "start_line": 40,
+          "end_line": 42
+        },
+        {
+          "id": "definition_start",
+          "file_path": "Backend/ingest.py",
+          "start_line": 49,
+          "end_line": 50
+        },
+        {
+          "id": "next_definition_boundary",
+          "file_path": "Backend/ingest.py",
+          "start_line": 55,
+          "end_line": 56
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "question": "What happens when Python AST parsing fails, and how are the fallback chunks created?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "ast_failure_fallback",
+          "file_path": "Backend/ingest.py",
+          "start_line": 19,
+          "end_line": 23
+        },
+        {
+          "id": "default_chunk_size",
+          "file_path": "Backend/ingest.py",
+          "start_line": 68,
+          "end_line": 68
+        },
+        {
+          "id": "fixed_size_chunk_creation",
+          "file_path": "Backend/ingest.py",
+          "start_line": 75,
+          "end_line": 79
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "question": "How are non-Python documents chunked, and what is the default number of lines per chunk?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "file_type_routing",
+          "file_path": "Backend/ingest.py",
+          "start_line": 92,
+          "end_line": 94
+        },
+        {
+          "id": "default_chunk_size",
+          "file_path": "Backend/ingest.py",
+          "start_line": 68,
+          "end_line": 68
+        },
+        {
+          "id": "fixed_size_chunk_creation",
+          "file_path": "Backend/ingest.py",
+          "start_line": 75,
+          "end_line": 79
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "question": "How is a Python file with no top-level functions or classes represented in the index?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "top_level_definition_detection",
+          "file_path": "Backend/ingest.py",
+          "start_line": 28,
+          "end_line": 30
+        },
+        {
+          "id": "whole_file_fallback",
+          "file_path": "Backend/ingest.py",
+          "start_line": 32,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "question": "How does get_chunks respond when the requested file does not exist?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "missing_file_error_and_exit",
+          "file_path": "Backend/ingest.py",
+          "start_line": 88,
+          "end_line": 90
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "question": "Which folders and file extensions does repository ingestion skip or accept?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "excluded_directory_names",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "allowed_extensions",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "id": "directory_pruning",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 30,
+          "end_line": 33
+        },
+        {
+          "id": "extension_filter",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 39,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "question": "Which GitHub URL formats are accepted and how is the canonical repository URL constructed?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "accepted_url_pattern",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 73,
+          "end_line": 73
+        },
+        {
+          "id": "invalid_url_rejection",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 74,
+          "end_line": 75
+        },
+        {
+          "id": "canonical_repository_url",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 76,
+          "end_line": 77
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "question": "How is a GitHub branch shallow-cloned, and what happens if git clone fails?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "default_branch",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 80,
+          "end_line": 80
+        },
+        {
+          "id": "temporary_directory_and_shallow_clone",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 90,
+          "end_line": 96
+        },
+        {
+          "id": "clone_failure_cleanup_and_error",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 97,
+          "end_line": 99
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "question": "How is the temporary cloned repository removed after embedding finishes or raises an error?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "embedding_cleanup_finally",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 107,
+          "end_line": 111
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "question": "Trace the code path from a GitHub URL to embedded searchable chunks stored in ChromaDB.",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "url_orchestration",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 107,
+          "end_line": 109
+        },
+        {
+          "id": "clone_repository",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 90,
+          "end_line": 96
+        },
+        {
+          "id": "directory_filtering",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 30,
+          "end_line": 33
+        },
+        {
+          "id": "accepted_file_embedding",
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 39,
+          "end_line": 44
+        },
+        {
+          "id": "file_chunking",
+          "file_path": "Backend/embed.py",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "model_and_collection",
+          "file_path": "Backend/embed.py",
+          "start_line": 58,
+          "end_line": 60
+        },
+        {
+          "id": "chunk_documents_and_embeddings",
+          "file_path": "Backend/embed.py",
+          "start_line": 66,
+          "end_line": 72
+        },
+        {
+          "id": "persist_chunks",
+          "file_path": "Backend/embed.py",
+          "start_line": 80,
+          "end_line": 80
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "question": "How are chunk IDs and metadata scoped to the correct GitHub repository and branch?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "repository_relative_path",
+          "file_path": "Backend/embed.py",
+          "start_line": 45,
+          "end_line": 46
+        },
+        {
+          "id": "repository_branch_chunk_ids",
+          "file_path": "Backend/embed.py",
+          "start_line": 64,
+          "end_line": 65
+        },
+        {
+          "id": "repository_branch_metadata",
+          "file_path": "Backend/embed.py",
+          "start_line": 67,
+          "end_line": 71
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "question": "How does re-indexing a modified file prevent stale duplicate chunks from remaining in ChromaDB?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "file_and_repository_delete_scope",
+          "file_path": "Backend/embed.py",
+          "start_line": 76,
+          "end_line": 78
+        },
+        {
+          "id": "delete_then_upsert",
+          "file_path": "Backend/embed.py",
+          "start_line": 79,
+          "end_line": 80
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "question": "How does the backend normalize case-insensitive local file paths before generating chunk IDs?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "resolve_actual_path_casing",
+          "file_path": "Backend/embed.py",
+          "start_line": 25,
+          "end_line": 29
+        },
+        {
+          "id": "use_normalized_local_path",
+          "file_path": "Backend/embed.py",
+          "start_line": 47,
+          "end_line": 49
+        },
+        {
+          "id": "generate_ids_from_stored_path",
+          "file_path": "Backend/embed.py",
+          "start_line": 64,
+          "end_line": 65
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "question": "How is a GitHub blob URL with a source line number built from retrieved chunk metadata?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "github_url_from_metadata",
+          "file_path": "Backend/embed.py",
+          "start_line": 91,
+          "end_line": 93
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "question": "How does the ask.py CLI filter retrieval to one repository when --repo-url is supplied?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "repository_argument",
+          "file_path": "Backend/ask.py",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "id": "repository_filter_condition",
+          "file_path": "Backend/ask.py",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "id": "apply_repository_filter",
+          "file_path": "Backend/ask.py",
+          "start_line": 41,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "question": "How does ask.py encode the user's question and obtain its top-k matching ChromaDB chunks?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "top_k_argument",
+          "file_path": "Backend/ask.py",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "id": "embedding_model",
+          "file_path": "Backend/ask.py",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "id": "collection_connection",
+          "file_path": "Backend/ask.py",
+          "start_line": 34,
+          "end_line": 35
+        },
+        {
+          "id": "encode_question",
+          "file_path": "Backend/ask.py",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "query_and_extract_matches",
+          "file_path": "Backend/ask.py",
+          "start_line": 41,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "R19",
+      "question": "How are retrieved chunks given source labels and then sent to Groq as a streamed response?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "number_and_join_sources",
+          "file_path": "Backend/ask.py",
+          "start_line": 54,
+          "end_line": 58
+        },
+        {
+          "id": "stream_to_terminal",
+          "file_path": "Backend/ask.py",
+          "start_line": 64,
+          "end_line": 65
+        },
+        {
+          "id": "stream_wrapper_forwarding",
+          "file_path": "Backend/query.py",
+          "start_line": 81,
+          "end_line": 82
+        },
+        {
+          "id": "groq_stream_request",
+          "file_path": "Backend/query.py",
+          "start_line": 29,
+          "end_line": 38
+        },
+        {
+          "id": "yield_content_events",
+          "file_path": "Backend/query.py",
+          "start_line": 40,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "question": "What instructions tell the LLM to cite Source N and respond I don't know when retrieved context lacks an answer?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "grounding_and_citation_instruction",
+          "file_path": "Backend/query.py",
+          "start_line": 13,
+          "end_line": 17
+        },
+        {
+          "id": "missing_answer_instruction",
+          "file_path": "Backend/query.py",
+          "start_line": 17,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "R21",
+      "question": "How does the backend obtain GROQ_API_KEY, and what happens if it is missing?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "load_key_from_environment",
+          "file_path": "Backend/query.py",
+          "start_line": 57,
+          "end_line": 58
+        },
+        {
+          "id": "missing_key_error_and_exit",
+          "file_path": "Backend/query.py",
+          "start_line": 60,
+          "end_line": 62
+        },
+        {
+          "id": "return_api_key",
+          "file_path": "Backend/query.py",
+          "start_line": 64,
+          "end_line": 64
+        }
+      ]
+    },
+    {
+      "id": "R22",
+      "question": "How are Groq API exceptions handled during streaming in the command-line application?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "cli_uses_safe_stream",
+          "file_path": "Backend/ask.py",
+          "start_line": 64,
+          "end_line": 65
+        },
+        {
+          "id": "catch_report_and_exit",
+          "file_path": "Backend/query.py",
+          "start_line": 81,
+          "end_line": 85
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "question": "How are the final source listings constructed from retrieval metadata instead of from the language model's citations?",
+      "answerable": true,
+      "required_evidence": [
+        {
+          "id": "metadata_from_retrieval",
+          "file_path": "Backend/ask.py",
+          "start_line": 41,
+          "end_line": 45
+        },
+        {
+          "id": "source_listing_from_metadata",
+          "file_path": "Backend/ask.py",
+          "start_line": 72,
+          "end_line": 78
+        },
+        {
+          "id": "github_link_from_metadata",
+          "file_path": "Backend/embed.py",
+          "start_line": 91,
+          "end_line": 93
+        }
+      ]
+    }
+  ]
+}
