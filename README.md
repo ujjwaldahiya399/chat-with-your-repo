@@ -6,13 +6,11 @@ file and line the answer came from.
 
 
 
+
+## Recorded Demo
+
 https://github.com/user-attachments/assets/d50acb6d-7524-405c-8769-e92f8e65d33e
 
-## Live Demo
-
-**https://chat-with-your-repo.vercel.app**
-
-This is a real, working deployment anyone can use — not just a local demo.
 
 ## What it does
 
