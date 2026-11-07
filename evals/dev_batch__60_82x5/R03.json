@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:09.951387+00:00",
+  "question_id": "R03",
+  "question": "How does the chunker keep decorators attached to the functions or classes they decorate?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:a24babd7f21ed7698a7f7fa0e9be58930349e42a3906af1e75d2a69bb23d8382",
+      "metadata": {
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_kind": "text",
+        "source_origin": "local",
+        "start_line": 33,
+        "symbol": "<document>",
+        "token_budget": 220,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "file_path": "Backend/NOTES.md",
+        "parent_start_line": 1,
+        "end_line": 45,
+        "parent_end_line": 186,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_count": 211
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:36ea7194c4f23479cb947ffe0fca50e5441eb1bdacce696156de19e558c1a95d",
+      "metadata": {
+        "file_path": "Backend/ingest.py",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+        "parent_start_line": 13,
+        "parent_kind": "definition",
+        "token_count": 211,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_origin": "git",
+        "parent_end_line": 65,
+        "metadata_schema_version": 1,
+        "start_line": 45,
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "symbol": "chunk_python_file",
+        "token_budget": 220,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "end_line": 62
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:c2cf503a6b965fcf6d4a9a199f7ed6b5f2e58141b8f3cef2b522b3dd00f3cbc8",
+      "metadata": {
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_id": "parent:869562d8af23a4db6476fea5238b694332729a3fbdd8cffd33de0fd6c6f204fd",
+        "end_line": 21,
+        "parent_kind": "definition",
+        "file_path": "Backend/test_decorator.py",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "symbol": "Handler",
+        "metadata_schema_version": 1,
+        "token_count": 23,
+        "parent_end_line": 21,
+        "token_budget": 220,
+        "file_sha256": "b492805ab91a68c62922ad72ded9339f7625015a2c8252b68a2efaec6103eba9",
+        "start_line": 20,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_start_line": 20,
+        "source_origin": "git"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:c5bc40177c7f91cab6a3c21088bbceb400e89fa6dbd70176afab0cd20449e852",
+      "metadata": {
+        "source_origin": "git",
+        "parent_kind": "definition",
+        "file_path": "Backend/test_decorator.py",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 11,
+        "file_sha256": "b492805ab91a68c62922ad72ded9339f7625015a2c8252b68a2efaec6103eba9",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_budget": 220,
+        "parent_id": "parent:504f6594fdde3617c8bc77e574928333d737941543ea505e862f6efa88de9b34",
+        "token_count": 44,
+        "start_line": 9,
+        "symbol": "cached_func",
+        "parent_start_line": 9,
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 11,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:9c08001269e5b816e424fa68a1045ef87c1d3bd04755cd2358b24f0c5f9098e0",
+      "metadata": {
+        "file_sha256": "b492805ab91a68c62922ad72ded9339f7625015a2c8252b68a2efaec6103eba9",
+        "start_line": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 8,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_origin": "git",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "metadata_schema_version": 1,
+        "token_budget": 220,
+        "parent_start_line": 1,
+        "parent_end_line": 8,
+        "parent_id": "parent:febff3bc36b591299558153cb0f30346d67ba6dc412f12b8b1c9b214b29248e4",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_path": "Backend/test_decorator.py",
+        "parent_kind": "module",
+        "symbol": "<module>",
+        "token_count": 38
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "decorator_start_helper",
+      "file_path": "Backend/ingest.py",
+      "start_line": 6,
+      "end_line": 10,
+      "required_lines": 5,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "opening_code_boundary",
+      "file_path": "Backend/ingest.py",
+      "start_line": 40,
+      "end_line": 42,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        40,
+        41,
+        42
+      ]
+    },
+    {
+      "id": "definition_start",
+      "file_path": "Backend/ingest.py",
+      "start_line": 49,
+      "end_line": 50,
+      "required_lines": 2,
+      "covered_lines": 2,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "next_definition_boundary",
+      "file_path": "Backend/ingest.py",
+      "start_line": 55,
+      "end_line": 56,
+      "required_lines": 2,
+      "covered_lines": 2,
+      "complete": true,
+      "missing_lines": []
+    }
+  ],
+  "complete_evidence_units": 2,
+  "total_evidence_units": 4,
+  "evidence_unit_coverage_at_k": 0.5,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

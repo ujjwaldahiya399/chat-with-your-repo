@@ -16,13 +16,9 @@ This is a real, working deployment anyone can use — not just a local demo.
 
 ## What it does
 
-Paste a GitHub repo URL, and the app clones it, chunks it along
-function/class boundaries (AST-aware, not blind character splits),
-embeds each chunk, and indexes it for retrieval. Ask a question in
-plain English and get a streamed, cited answer back — every claim in
-the response is backed by a clickable link to the real file and line
-on GitHub.
+Paste a GitHub repo URL. The app clones the repo, splits source files into chunks using function and class boundaries for Python, then embeds and indexes those chunks for retrieval.
 
+Ask a question in plain English to get a streamed answer with inline citations and links to the GitHub files and lines the app retrieved.
 ## Stack
 
 **Backend:** Python, FastAPI, ChromaDB (vector storage),
@@ -102,3 +98,36 @@ npm run dev
 ```
 
 Requires a `GROQ_API_KEY` in `Backend/.env`.
+
+<!-- week2-evaluation-start -->
+
+## Week 2 retrieval evaluation
+
+### Original chunk-ID benchmark
+
+The original benchmark used 32 chunks from eight backend files. The metrics below average the 23 answerable questions. Two additional questions were outside the indexed corpus.
+
+| Retrieval method | Precision@5 | Recall@5 | MRR@5 |
+|---|---:|---:|---:|
+| Semantic | 0.252 | 0.891 | 0.812 |
+| BM25 | 0.191 | 0.696 | 0.686 |
+| Semantic + BM25 RRF | 0.217 | 0.761 | 0.755 |
+
+### Source evidence on the experimental index
+
+A separate frozen index uses token-aware structural chunks and records their source revision and line ranges. All 70 required evidence units are present across the index. A unit counts when the retrieved passages together cover its complete labeled source span. All methods below return up to five chunks for each of the 23 development questions.
+
+| Retrieval method | Evidence units covered | Questions with all evidence | Decision |
+|---|---:|---:|---|
+| Semantic top five | 31/70 (44.3%) | 8/23 | Comparison baseline |
+| BM25 top five | 32/70 (45.7%) | 7/23 | Keep experimental |
+| RRF of semantic and BM25 top-five lists | 32/70 (45.7%) | 6/23 | Keep experimental |
+| Cross-encoder reranking of semantic top 20 | 41/70 (58.6%) | 9/23 | Keep experimental |
+
+Cross-encoder prediction added a median of 49 ms in the development run, excluding model loading and answer generation. One question requires at least nine chunks to cover all its evidence under this representation.
+
+In a separate six-question pilot using the same `openai/gpt-oss-120b` generation settings for both methods, semantic retrieval produced two fully correct and complete answers out of four answerable cases. Reranking produced one. Both methods gave the expected refusal on both questions outside the corpus. On the branch-deletion question, the reranked answer incorrectly inferred that the repository URL scopes deletion to a branch. Keep the application retrieval baseline and retain the reranker as an experiment.
+
+The original benchmark counts matching chunk IDs. The newer benchmark counts complete source spans and uses a different index. The six-case answer pilot uses one generation per method per question on a familiar development corpus. See the [answer-quality review](docs/WEEK2_ANSWER_QUALITY_REVIEW.md) for the scoring, timing scope, and source evidence.
+
+<!-- week2-evaluation-end -->

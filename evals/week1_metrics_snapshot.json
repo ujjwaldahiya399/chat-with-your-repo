@@ -1,0 +1,22 @@
+{
+  "three_way_baseline": {
+    "Semantic": {
+      "precision@5": 0.252,
+      "recall@5": 0.891,
+      "mrr@5": 0.812,
+      "top1_accuracy": 0.696
+    },
+    "BM25": {
+      "precision@5": 0.191,
+      "recall@5": 0.696,
+      "mrr@5": 0.686,
+      "top1_accuracy": 0.609
+    },
+    "Hybrid_RRF": {
+      "precision@5": 0.217,
+      "recall@5": 0.761,
+      "mrr@5": 0.755,
+      "top1_accuracy": 0.652
+    }
+  }
+}

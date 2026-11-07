@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:33.188771+00:00",
+  "question_id": "R18",
+  "question": "How does ask.py encode the user's question and obtain its top-k matching ChromaDB chunks?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:d12fe0a481ef600fedf47376dd665cd462627c342645bf35dd349059baaf82e2",
+      "metadata": {
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "metadata_schema_version": 1,
+        "symbol": "<module>",
+        "parent_end_line": 78,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "source_origin": "git",
+        "parent_start_line": 20,
+        "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 34,
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "file_path": "Backend/ask.py",
+        "token_budget": 220,
+        "token_count": 216,
+        "start_line": 20,
+        "parent_kind": "module"
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:fe7b1d8291a861fc5242518e513e479e904f14e891b97731f678cd5d4b3d8e13",
+      "metadata": {
+        "parent_id": "parent:f0e38431189065569dd92f47769399d31a04ee1f125437c85b5720acc0908ac8",
+        "file_path": "Backend/ask.py",
+        "start_line": 1,
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_end_line": 10,
+        "source_origin": "git",
+        "token_count": 83,
+        "token_budget": 220,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 10,
+        "parent_start_line": 1,
+        "metadata_schema_version": 1,
+        "symbol": "<module>",
+        "parent_kind": "module",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:1fa7c55c4fb50d5661f72ebcdda1aebd0564066dcd4e8e63c784f16e2951ca1e",
+      "metadata": {
+        "file_path": "Backend/NOTES.md",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "token_count": 195,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 186,
+        "start_line": 103,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "source_origin": "local",
+        "end_line": 115,
+        "parent_kind": "text",
+        "metadata_schema_version": 1,
+        "symbol": "<document>",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "token_budget": 220
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:e071d6da06ff1c15a7c20595f127a2e69b97cc3bfe840389bf721254c18faf76",
+      "metadata": {
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "end_line": 139,
+        "token_count": 192,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "start_line": 128,
+        "token_budget": 220,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_kind": "text",
+        "file_path": "Backend/NOTES.md",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_origin": "local",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 1,
+        "metadata_schema_version": 1,
+        "parent_end_line": 186,
+        "symbol": "<document>"
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:ea94c917b2ccd541f44705f7fea7dbb832892680f307987d8e4e7bfb0ce6b104",
+      "metadata": {
+        "parent_end_line": 186,
+        "parent_start_line": 1,
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_budget": 220,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "<document>",
+        "parent_kind": "text",
+        "file_path": "Backend/NOTES.md",
+        "start_line": 1,
+        "end_line": 15,
+        "token_count": 194,
+        "source_origin": "local",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "top_k_argument",
+      "file_path": "Backend/ask.py",
+      "start_line": 14,
+      "end_line": 14,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        14
+      ]
+    },
+    {
+      "id": "embedding_model",
+      "file_path": "Backend/ask.py",
+      "start_line": 32,
+      "end_line": 32,
+      "required_lines": 1,
+      "covered_lines": 1,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "collection_connection",
+      "file_path": "Backend/ask.py",
+      "start_line": 34,
+      "end_line": 35,
+      "required_lines": 2,
+      "covered_lines": 1,
+      "complete": false,
+      "missing_lines": [
+        35
+      ]
+    },
+    {
+      "id": "encode_question",
+      "file_path": "Backend/ask.py",
+      "start_line": 37,
+      "end_line": 37,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        37
+      ]
+    },
+    {
+      "id": "query_and_extract_matches",
+      "file_path": "Backend/ask.py",
+      "start_line": 41,
+      "end_line": 45,
+      "required_lines": 5,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    }
+  ],
+  "complete_evidence_units": 1,
+  "total_evidence_units": 5,
+  "evidence_unit_coverage_at_k": 0.2,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

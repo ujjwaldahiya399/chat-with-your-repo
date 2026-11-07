@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:14.583720+00:00",
+  "question_id": "R06",
+  "question": "How is a Python file with no top-level functions or classes represented in the index?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:96e01d94e9d36339d917707300efda33dae4b9e5c2af3089909eda1bb0cd8257",
+      "metadata": {
+        "end_line": 9,
+        "parent_id": "parent:8d3ddeaf9ed9e0fd3d5e865250453ee4d4e3973f2da74913cc8cf708f23d0bef",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_sha256": "e1cc88227edac5184a5abf60f566d768427b7bdcb74d87db86a0ec839bc2aff0",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "metadata_schema_version": 1,
+        "file_path": "Backend/requirements.txt",
+        "parent_start_line": 1,
+        "symbol": "<document>",
+        "source_origin": "git",
+        "token_budget": 220,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 9,
+        "token_count": 125,
+        "start_line": 1,
+        "parent_kind": "text"
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:e071d6da06ff1c15a7c20595f127a2e69b97cc3bfe840389bf721254c18faf76",
+      "metadata": {
+        "symbol": "<document>",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 186,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 1,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_origin": "local",
+        "file_path": "Backend/NOTES.md",
+        "token_count": 192,
+        "token_budget": 220,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "start_line": 128,
+        "end_line": 139,
+        "parent_kind": "text",
+        "metadata_schema_version": 1
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:a24babd7f21ed7698a7f7fa0e9be58930349e42a3906af1e75d2a69bb23d8382",
+      "metadata": {
+        "parent_end_line": 186,
+        "parent_kind": "text",
+        "token_count": 211,
+        "parent_start_line": 1,
+        "symbol": "<document>",
+        "end_line": 45,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "file_path": "Backend/NOTES.md",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_origin": "local",
+        "metadata_schema_version": 1,
+        "token_budget": 220,
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "start_line": 33
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:29eb2aa74d48fa6af6b25ea45cc7175f5e9fc50e0fd757794e0ede1d94c86416",
+      "metadata": {
+        "file_path": "Backend/NOTES.md",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_kind": "text",
+        "symbol": "<document>",
+        "token_count": 208,
+        "parent_end_line": 186,
+        "parent_start_line": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "end_line": 150,
+        "source_origin": "local",
+        "file_sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+        "metadata_schema_version": 1,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_budget": 220,
+        "parent_id": "parent:0e23bfb4c7be00135777a4eae1e9930b7f22e75be655de8a760f8187fc40cb25",
+        "start_line": 140
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:36ea7194c4f23479cb947ffe0fca50e5441eb1bdacce696156de19e558c1a95d",
+      "metadata": {
+        "file_sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+        "metadata_schema_version": 1,
+        "parent_end_line": 65,
+        "token_budget": 220,
+        "parent_start_line": 13,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "parent_kind": "definition",
+        "symbol": "chunk_python_file",
+        "end_line": 62,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "token_count": 211,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_id": "parent:0b64224a99a0abda1d9ea16a4b69356cf7f05b24f7de72dfc693aec94769effa",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_origin": "git",
+        "start_line": 45,
+        "file_path": "Backend/ingest.py"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "top_level_definition_detection",
+      "file_path": "Backend/ingest.py",
+      "start_line": 28,
+      "end_line": 30,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "id": "whole_file_fallback",
+      "file_path": "Backend/ingest.py",
+      "start_line": 32,
+      "end_line": 34,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        32,
+        33,
+        34
+      ]
+    }
+  ],
+  "complete_evidence_units": 0,
+  "total_evidence_units": 2,
+  "evidence_unit_coverage_at_k": 0.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

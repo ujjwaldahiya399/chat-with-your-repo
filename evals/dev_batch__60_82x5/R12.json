@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:24.040419+00:00",
+  "question_id": "R12",
+  "question": "Trace the code path from a GitHub URL to embedded searchable chunks stored in ChromaDB.",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:ecabdf50cf347e57765217514fc97bac846e7d1662c71d74120a2a2f5ec9cc6b",
+      "metadata": {
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_start_line": 86,
+        "parent_id": "parent:5a60d0e48261e755dba4b42e8ab88de426d9ea2f42e170f7d4a9d63628f61234",
+        "token_count": 173,
+        "metadata_schema_version": 1,
+        "start_line": 86,
+        "symbol": "build_github_url",
+        "source_origin": "git",
+        "token_budget": 220,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "end_line": 93,
+        "parent_kind": "definition",
+        "file_path": "Backend/embed.py",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_end_line": 93
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:2177767a1be5cdcf69708cff4384ee5b258d1da570d5210a967fedb48b95421e",
+      "metadata": {
+        "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+        "source_origin": "git",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "symbol": "embed_file",
+        "metadata_schema_version": 1,
+        "token_budget": 220,
+        "token_count": 209,
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "file_path": "Backend/embed.py",
+        "end_line": 40,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_kind": "definition",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "start_line": 32,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_end_line": 83,
+        "parent_start_line": 32
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:5509287643c39391d4139e940b9df09233951646a1b590bd95aba98ceb9fdae1",
+      "metadata": {
+        "metadata_schema_version": 1,
+        "start_line": 52,
+        "end_line": 63,
+        "parent_kind": "definition",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "symbol": "embed_repo",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "file_path": "Backend/embed_repo.py",
+        "token_budget": 220,
+        "token_count": 171,
+        "source_origin": "git",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_start_line": 17,
+        "parent_end_line": 63,
+        "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:dfab639a71fd31530fecf87822d391b093e8806302ffc64ab77594b61620395b",
+      "metadata": {
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_end_line": 16,
+        "symbol": "<module>",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "start_line": 1,
+        "parent_id": "parent:0e4715e2f67c80c7870937642f92b07db33cd906be865062a4807c7674d9bcc9",
+        "parent_start_line": 1,
+        "token_budget": 220,
+        "end_line": 16,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_count": 137,
+        "metadata_schema_version": 1,
+        "source_origin": "git",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "file_path": "Backend/embed_repo.py",
+        "parent_kind": "module"
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:758a38bb33a213218606f0fe2f5503f8d89cc60da9466a994684fc3dbc095a9a",
+      "metadata": {
+        "token_count": 212,
+        "parent_start_line": 32,
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+        "parent_kind": "definition",
+        "metadata_schema_version": 1,
+        "file_path": "Backend/embed.py",
+        "symbol": "embed_file",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "token_budget": 220,
+        "start_line": 41,
+        "source_origin": "git",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "parent_end_line": 83,
+        "end_line": 56
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "url_orchestration",
+      "file_path": "Backend/embed_repo.py",
+      "start_line": 107,
+      "end_line": 109,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        107,
+        108,
+        109
+      ]
+    },
+    {
+      "id": "clone_repository",
+      "file_path": "Backend/embed_repo.py",
+      "start_line": 90,
+      "end_line": 96,
+      "required_lines": 7,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "id": "directory_filtering",
+      "file_path": "Backend/embed_repo.py",
+      "start_line": 30,
+      "end_line": 33,
+      "required_lines": 4,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "id": "accepted_file_embedding",
+      "file_path": "Backend/embed_repo.py",
+      "start_line": 39,
+      "end_line": 44,
+      "required_lines": 6,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "id": "file_chunking",
+      "file_path": "Backend/embed.py",
+      "start_line": 51,
+      "end_line": 51,
+      "required_lines": 1,
+      "covered_lines": 1,
+      "complete": true,
+      "missing_lines": []
+    },
+    {
+      "id": "model_and_collection",
+      "file_path": "Backend/embed.py",
+      "start_line": 58,
+      "end_line": 60,
+      "required_lines": 3,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "id": "chunk_documents_and_embeddings",
+      "file_path": "Backend/embed.py",
+      "start_line": 66,
+      "end_line": 72,
+      "required_lines": 7,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72
+      ]
+    },
+    {
+      "id": "persist_chunks",
+      "file_path": "Backend/embed.py",
+      "start_line": 80,
+      "end_line": 80,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        80
+      ]
+    }
+  ],
+  "complete_evidence_units": 1,
+  "total_evidence_units": 8,
+  "evidence_unit_coverage_at_k": 0.125,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

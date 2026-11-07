@@ -1,0 +1,22 @@
+{
+  "method": "warm local retrieval",
+  "samples": 115,
+  "top_k": 5,
+  "summary_ms": {
+    "embedding_ms": {
+      "p50": 4.35,
+      "p95": 9.05,
+      "mean": 5.45
+    },
+    "search_ms": {
+      "p50": 0.39,
+      "p95": 0.7,
+      "mean": 0.43
+    },
+    "total_ms": {
+      "p50": 4.71,
+      "p95": 9.66,
+      "mean": 5.88
+    }
+  }
+}

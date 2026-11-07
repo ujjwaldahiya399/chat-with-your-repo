@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "purpose": "fresh_scenario_confirmation_pilot_not_independent_holdout",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "query_py_sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+  "candidate_report_sha256": "1d6046b2ccc7859e4b6feafe9a8bad6b862994ab92ebd5c75836cee5433edd41",
+  "questions": [
+    {
+      "id": "A01",
+      "answerable": true,
+      "question": "I index Backend/example.py from main, then index that same relative path from feature in the same repository. Will the main branch chunks remain alongside the feature branch chunks? Explain the IDs and the deletion filter.",
+      "expected_claims": [
+        "IDs include repo_url and branch, so main and feature IDs differ.",
+        "The deletion filter matches file_path and repo_url but has no branch condition.",
+        "Assuming the second indexing succeeds, existing main records for that repository and file are deleted before feature records are upserted; branch-prefixed IDs do not protect them."
+      ],
+      "evidence": [
+        {
+          "file_path": "Backend/embed.py",
+          "start_line": 45,
+          "end_line": 46,
+          "text_sha256": "45b54a637b68655110133c70db65ed5eed114b9e1ec5db7cd30e23662f9bd0e4"
+        },
+        {
+          "file_path": "Backend/embed.py",
+          "start_line": 64,
+          "end_line": 71,
+          "text_sha256": "676f1286e9b5ebdf8a75d9692fc8c446d9d74f2a9587b1182f273b409a31d160"
+        },
+        {
+          "file_path": "Backend/embed.py",
+          "start_line": 76,
+          "end_line": 80,
+          "text_sha256": "76721f28ac92441838c47c35875ec8902d215a9173817d7753a9c6f6c8e0fc62"
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "answerable": true,
+      "question": "Suppose embed_repo visits two eligible files: embed_file raises SystemExit for the first and ValueError for the second. The existing collection contains 12 chunks and neither attempt changes it. Does the walk stop, and what does embed_repo return if the final collection lookup succeeds?",
+      "expected_claims": [
+        "SystemExit is caught, a warning is printed, files_failed increases, and walking continues.",
+        "ValueError is caught by except Exception; it also produces a warning and increments files_failed.",
+        "No file increments files_embedded; the final return is (0, 12), where 12 is the total collection count, not chunks added in this run."
+      ],
+      "evidence": [
+        {
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 24,
+          "end_line": 28,
+          "text_sha256": "e12807935823de9cd6611c1a1dee4bfb767d8cef4833b7e11f7966be371f1cdd"
+        },
+        {
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 43,
+          "end_line": 54,
+          "text_sha256": "117c960c1bca6c7c6b0b5890ec1000eb33cb386d9d27e9c7db5ac4545cc122f9"
+        },
+        {
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 57,
+          "end_line": 63,
+          "text_sha256": "6f56e45d5dc46fee397e3d97dfc5ffd25e4a1daafec8a951b11ad9fbbc5945f0"
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "answerable": true,
+      "question": "For existing zero-byte empty.py and empty.md files, what does get_chunks return for each, and would embed_file proceed to load an embedding model or write either file to Chroma?",
+      "expected_claims": [
+        "Empty Python has no definitions, so get_chunks returns [(1, \"\")].",
+        "Empty Markdown uses fixed-size chunking; no lines means it returns [].",
+        "Both yield an empty combined string; embed_file prints an error and exits with code 1 before model loading and database access."
+      ],
+      "evidence": [
+        {
+          "file_path": "Backend/ingest.py",
+          "start_line": 15,
+          "end_line": 20,
+          "text_sha256": "d1f5b52f4dd47970b07d7d59eb8ad8a105ea19b34fbdd07463aaae64eb516de3"
+        },
+        {
+          "file_path": "Backend/ingest.py",
+          "start_line": 28,
+          "end_line": 34,
+          "text_sha256": "3671e134ff702d925bb674d64a7e61e0075e00d5342e59a66541e0183e5e9aa0"
+        },
+        {
+          "file_path": "Backend/ingest.py",
+          "start_line": 68,
+          "end_line": 81,
+          "text_sha256": "7bfe76d03e7d0c8d6e185f2d794105864f943cdc2461ee66855228faf4805ba8"
+        },
+        {
+          "file_path": "Backend/ingest.py",
+          "start_line": 84,
+          "end_line": 94,
+          "text_sha256": "36e144fbe670869a7ac175d6c2099022395ac982adf92b3eada122245b86551f"
+        },
+        {
+          "file_path": "Backend/embed.py",
+          "start_line": 51,
+          "end_line": 60,
+          "text_sha256": "b4e73f099d6186cbdb90322b7d453a3bae58da52eed6a6873cae999be4ffa5a2"
+        }
+      ]
+    },
+    {
+      "id": "A04",
+      "answerable": true,
+      "question": "clone_repo receives the string \"  https://github.com/acme/widget.git  \". Assuming parsing succeeds, is the URL argument passed to git clone stripped or canonicalized? Distinguish the validation input, subprocess argument, and repository URL returned after a successful clone.",
+      "expected_claims": [
+        "parse_github_url validates url.strip(), so surrounding whitespace does not invalidate this example.",
+        "The subprocess argument list uses the original url variable, including surrounding spaces and .git; it does not substitute the canonical URL.",
+        "If cloning succeeds, the returned repo_url is https://github.com/acme/widget; code alone does not establish that git accepts the original spaced string."
+      ],
+      "evidence": [
+        {
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 73,
+          "end_line": 77,
+          "text_sha256": "7d5de26f7f02000d89865d1f5b9ba7a9e68b7d5161d573827c91650c2fde9111"
+        },
+        {
+          "file_path": "Backend/embed_repo.py",
+          "start_line": 90,
+          "end_line": 100,
+          "text_sha256": "ca32469886f5f1657e8d593b3732adb6c3c60f9937348e456a9bfda5636e01a3"
+        }
+      ]
+    },
+    {
+      "id": "U01",
+      "answerable": false,
+      "question": "What exact requests-per-minute limit is enforced per authenticated user by the deployed /ask endpoint, and where is that enforcement configured?",
+      "expected_claims": [
+        "Exact refusal: I don't know. The frozen eight-file corpus supplies no per-user deployed rate-limit value or enforcement configuration. Do not infer absence of rate limiting in the unseen application."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "U02",
+      "answerable": false,
+      "question": "What was the measured production p95 end-to-end latency for /ask over the last 24 hours, including model loading and streamed generation?",
+      "expected_claims": [
+        "Exact refusal: I don't know. The frozen corpus contains no production telemetry for this period. Development retrieval timing cannot answer it."
+      ],
+      "evidence": []
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "git_base_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "files": [
+    {
+      "path": "Backend/NOTES.md",
+      "sha256": "edc6828c74ea686c39381f1418871b28ca78b43ed0920de918f7b075cab04f20",
+      "size_bytes": 10282,
+      "origin": "local",
+      "source_commit": null
+    },
+    {
+      "path": "Backend/ask.py",
+      "sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+      "size_bytes": 3418,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/embed.py",
+      "sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+      "size_bytes": 4358,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/embed_repo.py",
+      "sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+      "size_bytes": 4733,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/ingest.py",
+      "sha256": "9ab9c69c12ec5194046505c3b25821d02fac853cb804aadf86d577878c83bd29",
+      "size_bytes": 3632,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/query.py",
+      "sha256": "8f446d43bb070da8942f7177bbf165629753b2c3726623c90cc2c6f5e4368916",
+      "size_bytes": 3638,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/requirements.txt",
+      "sha256": "e1cc88227edac5184a5abf60f566d768427b7bdcb74d87db86a0ec839bc2aff0",
+      "size_bytes": 196,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    },
+    {
+      "path": "Backend/test_decorator.py",
+      "sha256": "b492805ab91a68c62922ad72ded9339f7625015a2c8252b68a2efaec6103eba9",
+      "size_bytes": 220,
+      "origin": "git",
+      "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4"
+    }
+  ],
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674"
+}

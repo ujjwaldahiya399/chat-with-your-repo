@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "purpose": "development",
+  "created_at_utc": "2026-11-03T07:10:08.396742+00:00",
+  "question_id": "R01",
+  "question": "What embedding model, ChromaDB directory, and collection name are configured by the backend?",
+  "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+  "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+  "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+  "experiment_id": "98e6fafdb47b3ae01783576f189773a4c7794fcc150883bb040c32787c551301",
+  "index_fingerprint": "8a4a5fbf5c087c0c4caababd33ef3242be3b5c409d3ad3b1f01226f7d3eb2767",
+  "labels_sha256": "02bd1e7e012b6e4d536cf4cee469cb35fece5f8efc8adadc4ab5e2ef2f741159",
+  "inspector_sha256": "29a2ba076907d879fd1c758a141685bb098d85520757588b5fc044816736d6fa",
+  "top_k": 5,
+  "retrieved_count": 5,
+  "retrieved": [
+    {
+      "rank": 1,
+      "chunk_id": "chunk:5509287643c39391d4139e940b9df09233951646a1b590bd95aba98ceb9fdae1",
+      "metadata": {
+        "start_line": 52,
+        "parent_id": "parent:6b00811167b2a84fe1e1335e68569ec535bf4f8c0d0980f299f5ce103caf6acc",
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_origin": "git",
+        "parent_start_line": 17,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "file_path": "Backend/embed_repo.py",
+        "end_line": 63,
+        "parent_kind": "definition",
+        "token_budget": 220,
+        "symbol": "embed_repo",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "parent_end_line": 63,
+        "token_count": 171
+      }
+    },
+    {
+      "rank": 2,
+      "chunk_id": "chunk:dfab639a71fd31530fecf87822d391b093e8806302ffc64ab77594b61620395b",
+      "metadata": {
+        "token_budget": 220,
+        "symbol": "<module>",
+        "file_path": "Backend/embed_repo.py",
+        "start_line": 1,
+        "end_line": 16,
+        "parent_id": "parent:0e4715e2f67c80c7870937642f92b07db33cd906be865062a4807c7674d9bcc9",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "token_count": 137,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_kind": "module",
+        "source_origin": "git",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "metadata_schema_version": 1,
+        "parent_start_line": 1,
+        "file_sha256": "e8921b3742d206af2a064f6233384390278ee8785261dcb94dc2adebcdb0ade2",
+        "parent_end_line": 16
+      }
+    },
+    {
+      "rank": 3,
+      "chunk_id": "chunk:2177767a1be5cdcf69708cff4384ee5b258d1da570d5210a967fedb48b95421e",
+      "metadata": {
+        "parent_end_line": 83,
+        "metadata_schema_version": 1,
+        "parent_start_line": 32,
+        "token_count": 209,
+        "start_line": 32,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "source_origin": "git",
+        "parent_kind": "definition",
+        "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_path": "Backend/embed.py",
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "end_line": 40,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_budget": 220,
+        "symbol": "embed_file"
+      }
+    },
+    {
+      "rank": 4,
+      "chunk_id": "chunk:df3b36b4d78635e801ebeb92ba5ad313a06824c1c413e864982319a4cde18d5d",
+      "metadata": {
+        "parent_start_line": 32,
+        "source_origin": "git",
+        "metadata_schema_version": 1,
+        "token_budget": 220,
+        "symbol": "embed_file",
+        "parent_end_line": 83,
+        "start_line": 57,
+        "parent_kind": "definition",
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "parent_id": "parent:210e34c4a41c9faa519d0ffb01d797281940cad038958c4a576b197b087da4f3",
+        "file_sha256": "9f56ea8d44928bec2185e37b5e6a8979218b4f72e34f9d2651e6f3b24f648a36",
+        "end_line": 67,
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "file_path": "Backend/embed.py",
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "token_count": 201,
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38"
+      }
+    },
+    {
+      "rank": 5,
+      "chunk_id": "chunk:d12fe0a481ef600fedf47376dd665cd462627c342645bf35dd349059baaf82e2",
+      "metadata": {
+        "source_commit": "5d28da6d4c499ddb6b887965e25d52a080278bc4",
+        "chunker_sha256": "31f619907dd3c9af4fde0d6791bdcc2d2b8f653f9e798b1ec646c9c8d6709d38",
+        "repo_id": "github.com/ujjwaldahiya399/chat-with-your-repo",
+        "metadata_schema_version": 1,
+        "snapshot_id": "50c2529de39ff78609626aad1fcbe0b8cebd49c4c552175b16041c8f3c6a7674",
+        "symbol": "<module>",
+        "parent_id": "parent:9783091cdde5372f849fccc53cead7e3124271cd3d5e845b65d10c0c00fc55b6",
+        "parent_kind": "module",
+        "parent_end_line": 78,
+        "start_line": 20,
+        "end_line": 34,
+        "file_path": "Backend/ask.py",
+        "parent_start_line": 20,
+        "file_sha256": "6d31ec85c629cf6ba68d4014dd2d08a917c2c30303276de90d0511643a6d679a",
+        "token_count": 216,
+        "token_budget": 220,
+        "source_origin": "git"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "embedding_model",
+      "file_path": "Backend/embed.py",
+      "start_line": 9,
+      "end_line": 9,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        9
+      ]
+    },
+    {
+      "id": "database_directory",
+      "file_path": "Backend/embed.py",
+      "start_line": 10,
+      "end_line": 10,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        10
+      ]
+    },
+    {
+      "id": "collection_name",
+      "file_path": "Backend/embed.py",
+      "start_line": 11,
+      "end_line": 11,
+      "required_lines": 1,
+      "covered_lines": 0,
+      "complete": false,
+      "missing_lines": [
+        11
+      ]
+    }
+  ],
+  "complete_evidence_units": 0,
+  "total_evidence_units": 3,
+  "evidence_unit_coverage_at_k": 0.0,
+  "parent_expansion": false,
+  "scope": "One development question; not an overall quality or baseline comparison."
+}

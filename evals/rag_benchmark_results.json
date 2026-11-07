@@ -1,0 +1,1458 @@
+{
+  "corpus_chunks": 32,
+  "index_sha256": "07ea544807b53b9c384eb2f0a9ad59cdebee060aeead0b1943956a8a5bb55609",
+  "collection": "rag_backend_eval",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "answerable_questions": 23,
+  "unanswerable_questions": 2,
+  "summary": {
+    "Semantic": {
+      "precision@5": 0.2521739130434783,
+      "recall@5": 0.8913043478260869,
+      "mrr@5": 0.8115942028985508,
+      "top1_accuracy": 0.6956521739130435
+    },
+    "BM25": {
+      "precision@5": 0.19130434782608696,
+      "recall@5": 0.6956521739130435,
+      "mrr@5": 0.686231884057971,
+      "top1_accuracy": 0.6086956521739131
+    },
+    "Hybrid_RRF": {
+      "precision@5": 0.21739130434782608,
+      "recall@5": 0.7608695652173914,
+      "mrr@5": 0.755072463768116,
+      "top1_accuracy": 0.6521739130434783
+    }
+  },
+  "questions": [
+    {
+      "id": "R01",
+      "category": "configuration",
+      "difficulty": "easy",
+      "question": "What embedding model, ChromaDB directory, and collection name are configured by the backend?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed.py:1"
+      ],
+      "label_rationale": "The constants MODEL_NAME, CHROMA_DB_PATH and COLLECTION_NAME are defined together.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:1",
+            "Backend/ask.py:1",
+            "Backend/embed.py:1",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.25,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:32",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:151"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:101",
+            "Backend/embed_repo.py:17"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R02",
+      "category": "chunking",
+      "difficulty": "medium",
+      "question": "How does Python chunking divide a source file around top-level functions and classes?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:13"
+      ],
+      "label_rationale": "The AST parser collects top-level functions/classes and creates one chunk for each boundary.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:68",
+            "Backend/ingest.py:84",
+            "Backend/ingest.py:97",
+            "Backend/NOTES.md:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:1",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:1",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R03",
+      "category": "chunking",
+      "difficulty": "hard",
+      "question": "How does the chunker keep decorators attached to the functions or classes they decorate?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:6",
+        "Backend/ingest.py:13"
+      ],
+      "label_rationale": "_def_start_line finds the first decorator; chunk_python_file uses it for each boundary.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ingest.py:6",
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:68",
+            "Backend/test_decorator.py:20",
+            "Backend/ingest.py:84"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:1",
+            "Backend/embed_repo.py:17",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:6",
+            "Backend/NOTES.md:1",
+            "Backend/embed.py:32",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R04",
+      "category": "chunking",
+      "difficulty": "hard",
+      "question": "What happens when Python AST parsing fails, and how are the fallback chunks created?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:13",
+        "Backend/ingest.py:68"
+      ],
+      "label_rationale": "AST parsing catches SyntaxError and delegates to fixed-size line chunking.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/ingest.py:97",
+            "Backend/ingest.py:1",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/embed.py:14",
+            "Backend/embed.py:32",
+            "Backend/query.py:1",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:1",
+            "Backend/ask.py:11",
+            "Backend/ingest.py:97"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R05",
+      "category": "chunking",
+      "difficulty": "medium",
+      "question": "How are non-Python documents chunked, and what is the default number of lines per chunk?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:84",
+        "Backend/ingest.py:68"
+      ],
+      "label_rationale": "get_chunks dispatches non-.py files to chunk_fixed_size, whose default chunk_size is 50.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ingest.py:68",
+            "Backend/ingest.py:84",
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:97",
+            "Backend/NOTES.md:1"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:1",
+            "Backend/ask.py:11",
+            "Backend/ingest.py:13",
+            "Backend/embed.py:32"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:1",
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:68",
+            "Backend/NOTES.md:151",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.3333333333333333,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R06",
+      "category": "chunking",
+      "difficulty": "easy",
+      "question": "How is a Python file with no top-level functions or classes represented in the index?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:13"
+      ],
+      "label_rationale": "The no-definitions branch returns one chunk covering the whole file.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/requirements.txt:1",
+            "Backend/ingest.py:13",
+            "Backend/ingest.py:6",
+            "Backend/test_decorator.py:1",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/NOTES.md:101",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ingest.py:13",
+            "Backend/NOTES.md:1",
+            "Backend/ask.py:11",
+            "Backend/requirements.txt:1",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R07",
+      "category": "error_handling",
+      "difficulty": "easy",
+      "question": "How does get_chunks respond when the requested file does not exist?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ingest.py:84"
+      ],
+      "label_rationale": "The function checks Path.exists, prints an error and exits.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ingest.py:84",
+            "Backend/ingest.py:68",
+            "Backend/ingest.py:97",
+            "Backend/NOTES.md:151",
+            "Backend/NOTES.md:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:14",
+            "Backend/ingest.py:84",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.25,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ingest.py:84",
+            "Backend/NOTES.md:151",
+            "Backend/ingest.py:97",
+            "Backend/NOTES.md:1",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R08",
+      "category": "repo_ingestion",
+      "difficulty": "hard",
+      "question": "Which folders and file extensions does repository ingestion skip or accept?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed_repo.py:1",
+        "Backend/embed_repo.py:17"
+      ],
+      "label_rationale": "The constants define excluded directories and allowed extensions; the walk loop applies them.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed_repo.py:17",
+            "Backend/embed.py:32",
+            "Backend/NOTES.md:101",
+            "Backend/embed_repo.py:103",
+            "Backend/embed.py:86"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:86",
+            "Backend/query.py:22",
+            "Backend/query.py:1",
+            "Backend/embed_repo.py:66",
+            "Backend/embed_repo.py:17"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.2,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:17",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:80",
+            "Backend/query.py:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R09",
+      "category": "repo_ingestion",
+      "difficulty": "easy",
+      "question": "Which GitHub URL formats are accepted and how is the canonical repository URL constructed?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed_repo.py:66"
+      ],
+      "label_rationale": "parse_github_url validates HTTPS github.com owner/repo URLs and builds canonical URL.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed_repo.py:66",
+            "Backend/embed.py:86",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:103",
+            "Backend/embed_repo.py:80"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed_repo.py:66",
+            "Backend/embed.py:14",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:80",
+            "Backend/NOTES.md:151"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed_repo.py:66",
+            "Backend/embed.py:86",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R10",
+      "category": "repo_ingestion",
+      "difficulty": "medium",
+      "question": "How is a GitHub branch shallow-cloned, and what happens if git clone fails?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed_repo.py:80"
+      ],
+      "label_rationale": "clone_repo runs git clone --depth 1 --branch and handles nonzero return codes.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:32",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:103",
+            "Backend/embed_repo.py:66"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:103",
+            "Backend/embed_repo.py:66",
+            "Backend/embed.py:86"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:103",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:66"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R11",
+      "category": "repo_ingestion",
+      "difficulty": "easy",
+      "question": "How is the temporary cloned repository removed after embedding finishes or raises an error?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed_repo.py:103"
+      ],
+      "label_rationale": "embed_repo_from_url removes the clone directory inside a finally block.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:103",
+            "Backend/NOTES.md:51",
+            "Backend/embed_repo.py:80",
+            "Backend/embed.py:86"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/NOTES.md:51",
+            "Backend/query.py:55",
+            "Backend/NOTES.md:1",
+            "Backend/embed.py:32",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:32",
+            "Backend/NOTES.md:151",
+            "Backend/embed_repo.py:80",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R12",
+      "category": "repo_ingestion",
+      "difficulty": "hard",
+      "question": "Trace the code path from a GitHub URL to embedded searchable chunks stored in ChromaDB.",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed_repo.py:103",
+        "Backend/embed_repo.py:80",
+        "Backend/embed_repo.py:17",
+        "Backend/embed.py:32"
+      ],
+      "label_rationale": "The wrapper clones, walks files, invokes embed_file, then embeds and upserts chunks.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:86",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:1",
+            "Backend/embed_repo.py:103",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:66",
+            "Backend/NOTES.md:51",
+            "Backend/embed_repo.py:80",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed.py:86",
+            "Backend/NOTES.md:101",
+            "Backend/embed_repo.py:66",
+            "Backend/embed_repo.py:80"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R13",
+      "category": "embedding",
+      "difficulty": "medium",
+      "question": "How are chunk IDs and metadata scoped to the correct GitHub repository and branch?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed.py:32"
+      ],
+      "label_rationale": "embed_file uses repo_url/branch prefixes and per-chunk metadata.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:80",
+            "Backend/embed_repo.py:103",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:103"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:32",
+            "Backend/embed.py:86",
+            "Backend/NOTES.md:51",
+            "Backend/embed_repo.py:103",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R14",
+      "category": "embedding",
+      "difficulty": "hard",
+      "question": "How does re-indexing a modified file prevent stale duplicate chunks from remaining in ChromaDB?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed.py:32",
+        "Backend/NOTES.md:51"
+      ],
+      "label_rationale": "embed_file deletes previous records for the file before upsert; notes explain the stale-line-ID failure.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:101",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:1",
+            "Backend/ingest.py:68"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:101",
+            "Backend/embed.py:32",
+            "Backend/ask.py:11",
+            "Backend/embed.py:14"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:101",
+            "Backend/embed.py:32",
+            "Backend/embed.py:14",
+            "Backend/ingest.py:68"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R15",
+      "category": "embedding",
+      "difficulty": "hard",
+      "question": "How does the backend normalize case-insensitive local file paths before generating chunk IDs?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed.py:14",
+        "Backend/embed.py:32"
+      ],
+      "label_rationale": "_real_case_path walks actual path components; embed_file calls it for local paths.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:17",
+            "Backend/NOTES.md:101"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:51",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:1",
+            "Backend/embed.py:32"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:51",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:17",
+            "Backend/NOTES.md:1"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R16",
+      "category": "citations",
+      "difficulty": "easy",
+      "question": "How is a GitHub blob URL with a source line number built from retrieved chunk metadata?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/embed.py:86"
+      ],
+      "label_rationale": "build_github_url uses repo_url, branch, file_path and #Lstart_line.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/embed.py:86",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:66",
+            "Backend/embed_repo.py:80",
+            "Backend/embed_repo.py:103"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:1",
+            "Backend/embed.py:86",
+            "Backend/query.py:1",
+            "Backend/embed_repo.py:66"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.3333333333333333,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:66",
+            "Backend/embed.py:32",
+            "Backend/embed_repo.py:80",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R17",
+      "category": "retrieval",
+      "difficulty": "medium",
+      "question": "How does the ask.py CLI filter retrieval to one repository when --repo-url is supplied?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ask.py:11"
+      ],
+      "label_rationale": "The CLI builds a Chroma where filter from the optional repository argument.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/embed_repo.py:66",
+            "Backend/embed_repo.py:80",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/NOTES.md:101",
+            "Backend/ask.py:11",
+            "Backend/query.py:1",
+            "Backend/embed_repo.py:80",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/embed_repo.py:80",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:101",
+            "Backend/embed_repo.py:66"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R18",
+      "category": "retrieval",
+      "difficulty": "medium",
+      "question": "How does ask.py encode the user's question and obtain its top-k matching ChromaDB chunks?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ask.py:11"
+      ],
+      "label_rationale": "ask.py loads SentenceTransformer, encodes the question and queries Chroma with n_results.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/NOTES.md:1",
+            "Backend/NOTES.md:101",
+            "Backend/ask.py:11",
+            "Backend/embed.py:1",
+            "Backend/ask.py:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.3333333333333333,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:101",
+            "Backend/NOTES.md:1",
+            "Backend/NOTES.md:51",
+            "Backend/query.py:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:1",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:101",
+            "Backend/query.py:1",
+            "Backend/query.py:46"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R19",
+      "category": "generation",
+      "difficulty": "hard",
+      "question": "How are retrieved chunks given source labels and then sent to Groq as a streamed response?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ask.py:11",
+        "Backend/query.py:22"
+      ],
+      "label_rationale": "ask.py labels and joins retrievals; query_stream makes a streamed Groq request.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/query.py:46",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:22",
+            "Backend/query.py:76",
+            "Backend/query.py:67"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.3333333333333333,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:151"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:1",
+            "Backend/query.py:22",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:51",
+            "Backend/query.py:46"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R20",
+      "category": "generation",
+      "difficulty": "easy",
+      "question": "What instructions tell the LLM to cite Source N and respond I don't know when retrieved context lacks an answer?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/query.py:1"
+      ],
+      "label_rationale": "SYSTEM_PROMPT contains source citation guidance and the abstention instruction.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/query.py:22",
+            "Backend/embed_repo.py:103",
+            "Backend/embed.py:86",
+            "Backend/ask.py:1"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/ask.py:11",
+            "Backend/query.py:22",
+            "Backend/NOTES.md:101",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/query.py:22",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:101",
+            "Backend/embed.py:32"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R21",
+      "category": "error_handling",
+      "difficulty": "easy",
+      "question": "How does the backend obtain GROQ_API_KEY, and what happens if it is missing?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/query.py:55"
+      ],
+      "label_rationale": "load_api_key loads .env, checks GROQ_API_KEY and exits on missing key.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/query.py:55",
+            "Backend/query.py:67",
+            "Backend/query.py:46",
+            "Backend/query.py:76",
+            "Backend/query.py:22"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/query.py:55",
+            "Backend/query.py:1",
+            "Backend/embed_repo.py:80",
+            "Backend/NOTES.md:151"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 0.5,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/query.py:55",
+            "Backend/NOTES.md:151",
+            "Backend/query.py:1",
+            "Backend/query.py:22",
+            "Backend/query.py:67"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "R22",
+      "category": "error_handling",
+      "difficulty": "medium",
+      "question": "How are Groq API exceptions handled during streaming in the command-line application?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/query.py:76",
+        "Backend/query.py:22"
+      ],
+      "label_rationale": "safe_query_stream catches GroqError around query_stream, which performs the streamed request.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/query.py:76",
+            "Backend/query.py:67",
+            "Backend/query.py:46",
+            "Backend/NOTES.md:151",
+            "Backend/query.py:22"
+          ],
+          "metrics": {
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/query.py:46",
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:151",
+            "Backend/ask.py:11"
+          ],
+          "metrics": {
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "mrr_contribution@5": 0.0,
+            "top1_hit": 0
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/query.py:46",
+            "Backend/NOTES.md:151",
+            "Backend/NOTES.md:51",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:22"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.2,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R23",
+      "category": "citations",
+      "difficulty": "hard",
+      "question": "How are the final source listings constructed from retrieval metadata instead of from the language model's citations?",
+      "answerable": true,
+      "relevant_chunks": [
+        "Backend/ask.py:11",
+        "Backend/embed.py:86"
+      ],
+      "label_rationale": "ask.py enumerates metadata as sources and calls build_github_url for remote links.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/ask.py:1",
+            "Backend/NOTES.md:101",
+            "Backend/embed.py:86",
+            "Backend/embed_repo.py:103"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.25,
+            "top1_hit": 0
+          }
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/ask.py:11",
+            "Backend/query.py:1",
+            "Backend/query.py:46",
+            "Backend/query.py:22",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 1.0,
+            "top1_hit": 1
+          }
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/query.py:1",
+            "Backend/NOTES.md:101",
+            "Backend/ask.py:11",
+            "Backend/NOTES.md:1",
+            "Backend/query.py:46"
+          ],
+          "metrics": {
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "mrr_contribution@5": 0.3333333333333333,
+            "top1_hit": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "R24",
+      "category": "out_of_scope",
+      "difficulty": "hard",
+      "question": "Which React component contains the search form submit handler in the frontend?",
+      "answerable": false,
+      "relevant_chunks": [],
+      "label_rationale": "No frontend component is indexed in this backend-only manifest.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/test_decorator.py:20",
+            "Backend/requirements.txt:1",
+            "Backend/query.py:1",
+            "Backend/ask.py:1",
+            "Backend/embed.py:14"
+          ],
+          "metrics": null
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/NOTES.md:151",
+            "Backend/embed_repo.py:66",
+            "Backend/NOTES.md:101",
+            "Backend/NOTES.md:51"
+          ],
+          "metrics": null
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/embed.py:14",
+            "Backend/test_decorator.py:20",
+            "Backend/query.py:1",
+            "Backend/NOTES.md:151",
+            "Backend/embed_repo.py:66"
+          ],
+          "metrics": null
+        }
+      }
+    },
+    {
+      "id": "R25",
+      "category": "out_of_scope",
+      "difficulty": "hard",
+      "question": "What exact HTTP request timeout in seconds is configured for the FastAPI /ask endpoint?",
+      "answerable": false,
+      "relevant_chunks": [],
+      "label_rationale": "No current FastAPI main.py implementation or timeout configuration is indexed.",
+      "results": {
+        "Semantic": {
+          "ranking": [
+            "Backend/NOTES.md:151",
+            "Backend/query.py:76",
+            "Backend/query.py:67",
+            "Backend/query.py:22",
+            "Backend/query.py:46"
+          ],
+          "metrics": null
+        },
+        "BM25": {
+          "ranking": [
+            "Backend/NOTES.md:151",
+            "Backend/query.py:1",
+            "Backend/ask.py:11",
+            "Backend/query.py:46",
+            "Backend/embed.py:14"
+          ],
+          "metrics": null
+        },
+        "Hybrid_RRF": {
+          "ranking": [
+            "Backend/NOTES.md:151",
+            "Backend/query.py:76",
+            "Backend/query.py:46",
+            "Backend/query.py:1",
+            "Backend/query.py:67"
+          ],
+          "metrics": null
+        }
+      }
+    }
+  ]
+}
