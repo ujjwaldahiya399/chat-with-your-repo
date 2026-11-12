@@ -3,7 +3,6 @@ import sys
 
 from dotenv import load_dotenv
 from groq import Groq, GroqError
-
 # The chunk passed to this prompt is made of one or more labeled sources, each
 # starting with a header like "[Source N: file_path:start_line]" (see ask.py /
 # main.py). The model is told to cite that same N inline so answers stay
@@ -18,6 +17,7 @@ SYSTEM_PROMPT = (
     "answer, respond with exactly: I don't know."
 )
 
+MODEL_ID = "openai/gpt-oss-120b"
 
 def query_stream(chunk, question, api_key):
     """Like query(), but yields the answer token by token as Groq streams it back.
@@ -29,7 +29,7 @@ def query_stream(chunk, question, api_key):
     client = Groq(api_key=api_key)
 
     stream = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model=MODEL_ID,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": f"Chunk:\n{chunk}\n\nQuestion:\n{question}"},
