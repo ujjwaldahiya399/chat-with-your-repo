@@ -131,3 +131,45 @@ In a separate six-question pilot using the same `openai/gpt-oss-120b` generation
 The original benchmark counts matching chunk IDs. The newer benchmark counts complete source spans and uses a different index. The six-case answer pilot uses one generation per method per question on a familiar development corpus. See the [answer-quality review](docs/WEEK2_ANSWER_QUALITY_REVIEW.md) for the scoring, timing scope, and source evidence.
 
 <!-- week2-evaluation-end -->
+## Week 5 observability and regression evidence
+
+The `/ask` workflow is traced in Langfuse as a root `chat-repo-request`
+observation with separate `retrieval` and `generation` steps. The trace
+records repository scope, retrieved source previews, model, latency, output,
+and technical failure category.
+
+### Diagnosing a retrieval failure
+
+The same question was run twice:
+
+> How does the ask endpoint scope retrieval to a specific repository?
+
+| Run | Repository scope | Retrieval result | Answer |
+|---|---|---|---|
+| Unscoped | `repo_url: null` | Mixed results from unrelated repositories and outdated notes | Incorrectly claimed that no repository filter existed |
+| Scoped | `chat-with-your-repo` | `Backend/main.py` ranked first | Correctly explained the optional Chroma `where` filter |
+
+The unscoped trace took `1.00s`: `0.15s` for retrieval and `0.85s` for
+generation. The scoped trace took `0.96s`: `0.03s` for retrieval and `0.93s`
+for generation. These are single local observations, not benchmark results.
+
+![Unscoped retrieval trace](docs/images/langfuse-before-unscoped.png)
+
+![Scoped retrieval trace](docs/images/langfuse-after-scoped.png)
+
+The trace showed that the original failure began in retrieval. The model did
+not receive the relevant `Backend/main.py` evidence, so generation relied on
+irrelevant context. Once retrieval was scoped correctly, the model produced
+the correct answer with source citations.
+
+### Repository URL regression check
+
+Repository URLs are canonicalized before creating the Chroma filter, so both
+of these forms resolve to the same indexed repository:
+
+```text
+https://github.com/ujjwaldahiya399/chat-with-your-repo
+https://github.com/ujjwaldahiya399/chat-with-your-repo.git
+
+
+The first is the normal browser URL. The second is commonly used as a Git clone URL.

@@ -2,7 +2,7 @@ import json
 import os
 import sys
 from contextlib import asynccontextmanager
-
+from langfuse import get_client
 import chromadb
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,8 +13,8 @@ from sentence_transformers import SentenceTransformer
 
 from ingest import get_chunks
 from embed import embed_file, build_github_url, CHROMA_DB_PATH, COLLECTION_NAME, MODEL_NAME
-from embed_repo import embed_repo_from_url
-from query import load_api_key, query_stream
+from embed_repo import embed_repo_from_url, parse_github_url
+from query import load_api_key, query_stream, MODEL_ID
 
 
 class EmbedRequest(BaseModel):
@@ -51,10 +51,15 @@ class AskRequest(BaseModel):
 async def lifespan(app: FastAPI):
     app.state.model = SentenceTransformer(MODEL_NAME)
     app.state.client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
-    app.state.collection = app.state.client.get_or_create_collection(COLLECTION_NAME)
+    app.state.collection = app.state.client.get_or_create_collection(
+        COLLECTION_NAME
+    )
     app.state.api_key = load_api_key()
+    app.state.langfuse = get_client()
+
     yield
 
+    app.state.langfuse.flush()
 
 app = FastAPI(lifespan=lifespan)
 
@@ -113,81 +118,235 @@ def embed_repo_endpoint(body: EmbedRepoRequest):
 
 @app.post("/ask")
 def ask(body: AskRequest, request: Request):
-    # No response_model here — a StreamingResponse's body is built by the
-    # generator below, not a single Pydantic object FastAPI can validate.
-    #
-    # No re-embedding here anymore. /ask used to take a single file_path,
-    # validate it with get_chunks(), and re-embed it via embed_file() on
-    # every call — that made sense when there was only ever one local file
-    # in play. Now that whole repos are pre-embedded via /embed_repo (and
-    # single files via /embed), there's no single file_path to re-embed,
-    # and re-cloning+re-embedding a whole repo per question would be
-    # wildly wasteful. /ask is now read-only against the collection —
-    # writes happen exclusively through /embed and /embed_repo.
-    question_embedding = request.app.state.model.encode([body.question]).tolist()
+    normalized_repo_url = None
 
-    # Only build a `where` filter when repo_url was given. Unlike embed.py's
-    # dedup delete — which always combines file_path + repo_url and needs
-    # $and for that — there's only ever one possible condition here, so a
-    # plain single-key dict is the right-sized version of that same
-    # pattern; wrapping one clause in $and would just be noise.
-    where = {"repo_url": body.repo_url} if body.repo_url else None
+    if body.repo_url:
+        try:
+            _, _, normalized_repo_url = parse_github_url(body.repo_url)
+        except ValueError as error:
+            raise HTTPException(status_code=400, detail=str(error)) from error
+    langfuse = request.app.state.langfuse
 
-    # Capture the full query result so metadata (file_path/start_line) is
-    # available alongside the chunk text, same as ask.py.
-    query_result = request.app.state.collection.query(
-        query_embeddings=question_embedding, n_results=body.top_k, where=where
+    root = langfuse.start_observation(
+        name="chat-repo-request",
+        as_type="chain",
+        input={
+            "question": body.question,
+            "top_k": body.top_k,
+            "requested_repo_url": body.repo_url,
+            "normalized_repo_url": normalized_repo_url,
+        },
+        metadata={"failure_category": "none"},
     )
-    retrieved_chunks = query_result["documents"][0]
-    retrieved_metadatas = query_result["metadatas"][0]
+
+    retrieval = root.start_observation(
+        name="retrieval",
+        as_type="retriever",
+        input={
+            "question": body.question,
+            "top_k": body.top_k,
+            "requested_repo_url": body.repo_url,
+            "normalized_repo_url": normalized_repo_url,
+        },
+    )
+
+    try:
+        question_embedding = request.app.state.model.encode(
+            [body.question]
+        ).tolist()
+
+        where = (
+            {"repo_url": normalized_repo_url}
+            if normalized_repo_url
+            else None
+        )
+
+
+        query_result = request.app.state.collection.query(
+            query_embeddings=question_embedding,
+            n_results=body.top_k,
+            where=where,
+        )
+
+        retrieved_chunks = query_result["documents"][0]
+        retrieved_metadatas = query_result["metadatas"][0]
+
+        retrieval.update(
+            output={
+                "source_count": len(retrieved_chunks),
+                "sources": [
+                    {
+                        "source_number": index,
+                        "file_path": metadata["file_path"],
+                        "start_line": metadata["start_line"],
+                        "content_preview": content[:1000],
+                    }
+                    for index, (content, metadata) in enumerate(
+                        zip(retrieved_chunks, retrieved_metadatas),
+                        start=1,
+                    )
+                ],
+            }
+        )
+
+    except Exception as error:
+        retrieval.update(
+            level="ERROR",
+            status_message=str(error),
+        )
+        retrieval.end()
+
+        root.update(
+            level="ERROR",
+            status_message=str(error),
+            output={"failure_category": "retrieval_error"},
+            metadata={"failure_category": "retrieval_error"},
+        )
+        root.end()
+        langfuse.flush()
+        raise
+
+    retrieval.end()
 
     if not retrieved_chunks:
-        raise HTTPException(status_code=400, detail="No chunks found in the collection")
+        root.update(
+            level="WARNING",
+            status_message="No chunks found in the collection.",
+            output={"failure_category": "retrieval_empty"},
+            metadata={"failure_category": "retrieval_empty"},
+        )
+        root.end()
+        langfuse.flush()
 
-    # Label each chunk with "[Source N: file:line]" — query.py's SYSTEM_PROMPT
-    # now always describes this format, so /ask must build it the same way
-    # ask.py does, or the model would be told to expect headers that aren't there.
+        raise HTTPException(
+            status_code=400,
+            detail="No chunks found in the collection",
+        )
+
     labeled_chunks = [
-        f"[Source {i}: {meta['file_path']}:{meta['start_line']}]\n{content}"
-        for i, (content, meta) in enumerate(zip(retrieved_chunks, retrieved_metadatas), start=1)
+        (
+            f"[Source {index}: "
+            f"{metadata['file_path']}:{metadata['start_line']}]\n"
+            f"{content}"
+        )
+        for index, (content, metadata) in enumerate(
+            zip(retrieved_chunks, retrieved_metadatas),
+            start=1,
+        )
     ]
     combined_chunk = "\n\n".join(labeled_chunks)
     api_key = request.app.state.api_key
 
+    sources = [
+        {
+            "file_path": metadata["file_path"],
+            "start_line": metadata["start_line"],
+            "github_url": build_github_url(metadata),
+        }
+        for metadata in retrieved_metadatas
+    ]
+
     def event_stream():
-        # SSE format: each event is "event: <name>\ndata: <json>\n\n" — the name
-        # lets a client (EventSource / fetch+ReadableStream) tell token events
-        # apart from the one final sources event without parsing the text.
-        #
-        # query_stream is used directly here, NOT safe_query_stream/safe_query:
-        # those call sys.exit() on a Groq failure, which is fine for the ask.py
-        # CLI but would try to kill the whole server process if it ever ran
-        # inside a request handler. A live server has to turn the failure into
-        # an SSE event instead, so the GroqError is caught right here.
+        generation = root.start_observation(
+            name="generation",
+            as_type="generation",
+            model=MODEL_ID,
+            model_parameters={"stream": True},
+            input={
+                "question": body.question,
+                "context": combined_chunk,
+            },
+        )
+
+        answer_parts = []
+
         try:
-            for token in query_stream(combined_chunk, body.question, api_key):
+            for token in query_stream(
+                combined_chunk,
+                body.question,
+                api_key,
+            ):
+                answer_parts.append(token)
                 yield f"event: token\ndata: {json.dumps(token)}\n\n"
-        except GroqError as e:
-            yield f"event: error\ndata: {json.dumps(str(e))}\n\n"
-            return
 
-        # Sources are sent once, after the token stream ends — not interleaved
-        # with tokens — since retrieval already finished before the model
-        # started answering, and this list is ground truth from
-        # retrieved_metadatas, not parsed from the model's own citations.
-        sources = [
-            {
-                "file_path": meta["file_path"],
-                "start_line": meta["start_line"],
-                # None for chunks embedded via plain /embed (no repo_url on
-                # the metadata) — not every source has a browsable remote.
-                "github_url": build_github_url(meta),
-            }
-            for meta in retrieved_metadatas
-        ]
-        yield f"event: sources\ndata: {json.dumps(sources)}\n\n"
+            answer = "".join(answer_parts)
 
-    return StreamingResponse(event_stream(), media_type="text/event-stream")
+            generation.update(output=answer)
+            root.update(
+                output={
+                    "answer": answer,
+                    "sources": sources,
+                    "failure_category": "none",
+                },
+                metadata={"failure_category": "none"},
+            )
+
+            yield (
+                "event: sources\n"
+                f"data: {json.dumps(sources)}\n\n"
+            )
+
+        except GroqError as error:
+            generation.update(
+                level="ERROR",
+                status_message=str(error),
+                output={"error": str(error)},
+            )
+            root.update(
+                level="ERROR",
+                status_message=str(error),
+                output={"failure_category": "provider_error"},
+                metadata={"failure_category": "provider_error"},
+            )
+
+            yield (
+                "event: error\n"
+                f"data: {json.dumps(str(error))}\n\n"
+            )
+
+        except GeneratorExit:
+            generation.update(
+                level="WARNING",
+                status_message=(
+                    "Client disconnected before streaming completed."
+                ),
+                output={"partial_answer": "".join(answer_parts)},
+            )
+            root.update(
+                level="WARNING",
+                status_message="Client disconnected.",
+                output={"failure_category": "client_disconnect"},
+                metadata={"failure_category": "client_disconnect"},
+            )
+            raise
+
+        except Exception as error:
+            generation.update(
+                level="ERROR",
+                status_message=str(error),
+                output={
+                    "partial_answer": "".join(answer_parts),
+                    "error": str(error),
+                },
+            )
+            root.update(
+                level="ERROR",
+                status_message=str(error),
+                output={"failure_category": "stream_error"},
+                metadata={"failure_category": "stream_error"},
+            )
+            raise
+
+        finally:
+            generation.end()
+            root.end()
+            langfuse.flush()
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+    )
+
 
 
 if __name__ == '__main__':
