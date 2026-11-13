@@ -168,6 +168,35 @@ of these forms resolve to the same indexed repository:
 ```text
 https://github.com/ujjwaldahiya399/chat-with-your-repo
 https://github.com/ujjwaldahiya399/chat-with-your-repo.git
-
+```
 
 The first is the normal browser URL. The second is commonly used as a Git clone URL.
+
+### Mocked AI behaviour regressions
+
+The backend tests exercise the real `/ask` endpoint with mocked retrieval,
+Groq output, and Langfuse observations. They require no API key or running
+Langfuse server.
+
+- A citation to a retrieved source succeeds. A citation such as `(Source 2)`
+  when only Source 1 was retrieved produces an SSE `error` event and no
+  `sources` event. Langfuse records `invalid_citation`.
+- A mocked out-of-scope response preserves the exact `I don't know.` text.
+  This checks the endpoint's handling of that response. The prompt still
+  guides the model's decision to use the fallback.
+- A mocked Groq error produces an SSE `error` event without terminating
+  the request handler.
+- The existing tests cover `.git` URL normalization and rejection of
+  non-GitHub repository URLs.
+
+Citation validation runs after generation completes. If tokens have already
+reached the browser, the frontend clears the partial answer when it receives
+the error event. The check recognizes citations in the prompted `(Source N)`
+format.
+
+Run the complete backend suite from `Backend`:
+
+    python -m pytest -q tests
+
+GitHub Actions runs the same suite on relevant pull requests and pushes to
+`main`. The local result for this change was 6 passing tests.

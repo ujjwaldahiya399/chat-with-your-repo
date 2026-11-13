@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import sys
 from contextlib import asynccontextmanager
 from langfuse import get_client
@@ -270,6 +271,35 @@ def ask(body: AskRequest, request: Request):
                 yield f"event: token\ndata: {json.dumps(token)}\n\n"
 
             answer = "".join(answer_parts)
+            cited_numbers = {
+                int(number)
+                for number in re.findall(r"\(Source\s+(\d+)\)", answer)
+            }
+            invalid_citations = sorted(
+                cited_numbers - set(range(1, len(sources) + 1))
+            )
+
+            if invalid_citations:
+                message = "The answer cited a source that was not retrieved."
+                generation.update(
+                    level="ERROR",
+                    status_message=message,
+                    output={
+                        "answer": answer,
+                        "invalid_citations": invalid_citations,
+                    },
+                )
+                root.update(
+                    level="ERROR",
+                    status_message=message,
+                    output={"failure_category": "invalid_citation"},
+                    metadata={"failure_category": "invalid_citation"},
+                )
+                yield (
+                    "event: error\n"
+                    f"data: {json.dumps(message)}\n\n"
+                )
+                return
 
             generation.update(output=answer)
             root.update(
