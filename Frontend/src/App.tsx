@@ -95,12 +95,16 @@ export default function App() {
             setSources(data)
             setStreaming(false)
           } else if (event === 'error') {
+            setAnswer('')
+            setSources([])
             setError(data)
             setStreaming(false)
           }
         }
       }
     } catch (err) {
+      setAnswer('')
+      setSources([])
       setError(err instanceof Error ? err.message : String(err))
     } finally {
       setBusy(false)
