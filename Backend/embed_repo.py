@@ -9,18 +9,21 @@ from pathlib import Path
 import chromadb
 
 from embed import embed_file, CHROMA_DB_PATH, COLLECTION_NAME
+from embedding_model import EmbeddingModel
 
 SKIP_DIRS = {".git", "venv", "__pycache__", "node_modules", "chroma_db"}
 ALLOWED_EXTENSIONS = {".py", ".txt", ".md"}
 
 
-def embed_repo(folder_path, *, repo_root=None, repo_url=None, branch=None):
+def embed_repo(folder_path, *, repo_root=None, repo_url=None, branch=None, model=None):
     """Walk a folder and embed every relevant file in it, skipping the rest.
 
     repo_root/repo_url/branch are passed straight through to embed_file() —
     see its docstring. Left unset (the plain local-folder CLI usage below),
     behavior is unchanged from before this file supported repo-URL ingestion.
     """
+    model = model or EmbeddingModel()
+
     dirs_skipped = 0
     files_walked = 0
     files_skipped_extension = 0
@@ -41,7 +44,7 @@ def embed_repo(folder_path, *, repo_root=None, repo_url=None, branch=None):
                 continue
 
             try:
-                embed_file(file_path, repo_root=repo_root, repo_url=repo_url, branch=branch)
+                embed_file(file_path, model=model, repo_root=repo_root, repo_url=repo_url, branch=branch)
                 files_embedded += 1
             except SystemExit:
                 print(f"Warning: skipped {file_path} (no content to embed)", file=sys.stderr)
@@ -100,13 +103,16 @@ def clone_repo(url, branch="main"):
     return dest, repo_url
 
 
-def embed_repo_from_url(github_url, branch="main"):
+def embed_repo_from_url(github_url, branch="main", model=None):
     """Clone a GitHub repo and embed every file in it, tagging each chunk
     with repo_url/branch so retrieval can build a real GitHub citation link.
     """
     dest, repo_url = clone_repo(github_url, branch=branch)
     try:
-        return embed_repo(str(dest), repo_root=dest, repo_url=repo_url, branch=branch)
+        return embed_repo(
+            str(dest), repo_root=dest, repo_url=repo_url,
+            branch=branch, model=model,
+        )
     finally:
         shutil.rmtree(dest, ignore_errors=True)
 

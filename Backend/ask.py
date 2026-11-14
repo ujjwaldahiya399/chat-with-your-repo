@@ -2,9 +2,9 @@ import sys
 import argparse
 
 import chromadb
-from sentence_transformers import SentenceTransformer
+from embedding_model import EmbeddingModel
 
-from embed import build_github_url, CHROMA_DB_PATH, COLLECTION_NAME, MODEL_NAME
+from embed import build_github_url, CHROMA_DB_PATH, COLLECTION_NAME
 from query import load_api_key, safe_query_stream
 
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     # embed_file() directly), there's no single file to re-embed — ask.py
     # is now a pure query against whatever's already in the collection,
     # matching main.py's /ask.
-    model = SentenceTransformer(MODEL_NAME)
+    model = EmbeddingModel()
 
     client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
     collection = client.get_or_create_collection(COLLECTION_NAME)
