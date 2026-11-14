@@ -68,15 +68,20 @@ code blocks.
   including subfolder paths)
 - ✅ Frontend: chat UI, live streaming, clickable GitHub citations,
   markdown rendering with syntax-highlighted code blocks
-- ✅ Deployment — backend live on Google Cloud Run, frontend live on
-  Vercel, fully connected and verified end to end (repo embedding,
-  streaming answers, citations all tested against the live URLs, not
-  just locally)
-- ⚠️ **Known limitation (Cloud Run):** the container filesystem is
-  ephemeral, so `chroma_db/` is wiped on every redeploy or cold start.
-  Any repo you've embedded will need to be re-embedded after that.
-  Accepted for this portfolio demo — not something a persistent
-  volume/managed vector DB has been added to solve yet.
+- ✅ Deployment — [frontend](https://chat-with-your-repo.vercel.app)
+  on Vercel and [backend API](https://chat-with-your-repo.onrender.com/docs)
+  on Render Free. A public API request returned a scoped streamed answer
+  and sources; the frontend displayed an answer and working GitHub source
+  link. Repository embedding on Render has not been tested in this check.
+- ✅ Demo index — startup loads a bundled 55-chunk snapshot of selected
+  backend files, so visitors can ask about this project without first
+  embedding a repository.
+- ⚠️ **Known limitation (Render Free):** local Chroma changes are lost
+  when the service spins down, restarts, or redeploys. Startup restores
+  the bundled demo index; repositories embedded during a session are
+  temporary. A first request after inactivity may take longer.
+- ⚠️ Langfuse instrumentation is present, but tracing is disabled on
+  the public instance until Langfuse credentials are configured.
 
 ## Running locally
 
@@ -191,12 +196,16 @@ Langfuse server.
 
 Citation validation runs after generation completes. If tokens have already
 reached the browser, the frontend clears the partial answer when it receives
-the error event. The check recognizes citations in the prompted `(Source N)`
-format.
+the error event. The check examines each `Source N` mention, including grouped
+citations and Unicode spacing, and rejects numbers outside the retrieved
+source list. It does not verify whether a cited chunk supports the claim.
 
 Run the complete backend suite from `Backend`:
 
     python -m pytest -q tests
 
 GitHub Actions runs the same suite on relevant pull requests and pushes to
-`main`. The local result for this change was 6 passing tests.
+`main`. The current local backend suite has 12 passing tests. When a file in
+`demo_seed.py`'s `SOURCE_FILES` changes, regenerate the bundle with
+`cd Backend && python demo_seed.py`; the seed freshness test detects stale
+source text.

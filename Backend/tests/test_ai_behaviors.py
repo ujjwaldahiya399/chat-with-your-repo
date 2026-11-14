@@ -80,3 +80,21 @@ def test_provider_error_returns_sse_error(monkeypatch):
 
     assert "event: error" in stream
     assert "event: sources" not in stream
+
+
+def test_invalid_source_inside_group_reports_error(monkeypatch):
+    stream = ask_with_mocked_answer(
+        monkeypatch, "The answer (Source 1, Source 2)."
+    )
+
+    assert "event: error" in stream
+    assert "event: sources" not in stream
+
+
+def test_invalid_group_with_narrow_spaces_reports_error(monkeypatch):
+    stream = ask_with_mocked_answer(
+        monkeypatch, "The answer (Source\u202f1, Source\u202f2)."
+    )
+
+    assert "event: error" in stream
+    assert "event: sources" not in stream
