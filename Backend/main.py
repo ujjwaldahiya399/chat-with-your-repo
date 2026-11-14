@@ -10,11 +10,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from groq import GroqError
 from pydantic import BaseModel
-from sentence_transformers import SentenceTransformer
+from embedding_model import EmbeddingModel
 
 from ingest import get_chunks
-from embed import embed_file, build_github_url, CHROMA_DB_PATH, COLLECTION_NAME, MODEL_NAME
+from embed import embed_file, build_github_url, CHROMA_DB_PATH, COLLECTION_NAME
 from embed_repo import embed_repo_from_url, parse_github_url
+from demo_seed import seed_collection
 from query import load_api_key, query_stream, MODEL_ID
 
 
@@ -50,11 +51,12 @@ class AskRequest(BaseModel):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.model = SentenceTransformer(MODEL_NAME)
+    app.state.model = EmbeddingModel()
     app.state.client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
     app.state.collection = app.state.client.get_or_create_collection(
         COLLECTION_NAME
     )
+    seed_collection(app.state.collection)
     app.state.api_key = load_api_key()
     app.state.langfuse = get_client()
 
@@ -93,14 +95,13 @@ def embed(body: EmbedRequest, request: Request):
 
 
 @app.post("/embed_repo", response_model=EmbedRepoResponse)
-def embed_repo_endpoint(body: EmbedRepoRequest):
-    # ponytail: embed_repo() (unchanged) doesn't thread a model through its
-    # per-file embed_file() calls, so each file reloads SentenceTransformer
-    # from scratch — same pre-existing behavior as the local-folder CLI path,
-    # not something introduced here. Worth fixing if repo embedding is slow
-    # enough to matter; out of scope for this metadata/URL-plumbing change.
+def embed_repo_endpoint(body: EmbedRepoRequest, request: Request):
     try:
-        files_embedded, total = embed_repo_from_url(body.github_url, branch=body.branch)
+        files_embedded, total = embed_repo_from_url(
+            body.github_url,
+            branch=body.branch,
+            model=request.app.state.model,
+        )
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except RuntimeError as e:

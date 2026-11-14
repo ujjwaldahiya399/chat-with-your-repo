@@ -2,11 +2,10 @@ import sys
 from pathlib import Path
 
 import chromadb
-from sentence_transformers import SentenceTransformer
+from embedding_model import EmbeddingModel, MODEL_NAME
 
 from ingest import get_chunks
 
-MODEL_NAME = "all-MiniLM-L6-v2"
 CHROMA_DB_PATH = Path(__file__).parent / "chroma_db"
 COLLECTION_NAME = "code_chunks"
 
@@ -55,7 +54,7 @@ def embed_file(file_path, model=None, *, repo_root=None, repo_url=None, branch=N
         print(f"Error: no content to embed in {stored_path}", file=sys.stderr)
         sys.exit(1)
 
-    model = model or SentenceTransformer(MODEL_NAME)
+    model = model or EmbeddingModel()
     client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
     collection = client.get_or_create_collection(COLLECTION_NAME)
 
