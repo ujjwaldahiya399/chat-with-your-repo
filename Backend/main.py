@@ -274,7 +274,7 @@ def ask(body: AskRequest, request: Request):
             answer = "".join(answer_parts)
             cited_numbers = {
                 int(number)
-                for number in re.findall(r"\(Source\s+(\d+)\)", answer)
+                for number in re.findall(r"\bSource\s+(\d+)\b", answer)
             }
             invalid_citations = sorted(
                 cited_numbers - set(range(1, len(sources) + 1))
