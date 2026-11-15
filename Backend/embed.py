@@ -28,7 +28,15 @@ def _real_case_path(path):
     return real
 
 
-def embed_file(file_path, model=None, *, repo_root=None, repo_url=None, branch=None):
+def embed_file(
+    file_path,
+    model=None,
+    *,
+    repo_root=None,
+    repo_url=None,
+    branch=None,
+    collection=None,
+):
     """Chunk a file, embed each chunk, and upsert it into the Chroma collection.
 
     repo_root/repo_url/branch are optional and only passed by repo-clone
@@ -55,8 +63,13 @@ def embed_file(file_path, model=None, *, repo_root=None, repo_url=None, branch=N
         sys.exit(1)
 
     model = model or EmbeddingModel()
-    client = chromadb.PersistentClient(path=str(CHROMA_DB_PATH))
-    collection = client.get_or_create_collection(COLLECTION_NAME)
+    if collection is None:
+        client = chromadb.PersistentClient(
+            path=str(CHROMA_DB_PATH)
+        )
+        collection = client.get_or_create_collection(
+            COLLECTION_NAME
+        )
 
     # repo_url/branch prefix keeps IDs unique across repos that happen to
     # share a relative path (e.g. every repo has a README.md).

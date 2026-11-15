@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "purpose": "micrograd_claim_faithfulness_development_set_not_independent_holdout",
+  "repository_url": "https://github.com/karpathy/micrograd",
+  "source_commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+  "snapshot_id": "2d319a78dffd90aa6fa26bf69d8c92a258b3ed4179b6d2129e8fbde280c55541",
+  "retrieval_files": [
+    "README.md",
+    "micrograd/engine.py",
+    "micrograd/nn.py",
+    "setup.py",
+    "test/test_engine.py"
+  ],
+  "claim_labels": [
+    "SUPPORTED",
+    "CONTRADICTED",
+    "NOT_IN_SOURCE"
+  ],
+  "questions": [
+    {
+      "id": "F01",
+      "case_kind": "simple_summary",
+      "answerable": true,
+      "question": "According to the repository, what does micrograd implement, what kind of computation graph and value granularity does it use, and what is its intended purpose?",
+      "expected_claims": [
+        "micrograd implements reverse-mode automatic differentiation.",
+        "It operates over a dynamically built directed acyclic graph.",
+        "The graph operates on individual scalar values rather than tensors.",
+        "It includes a small neural-network library with a PyTorch-like API.",
+        "The project is intended primarily for educational use."
+      ],
+      "evidence": [
+        {
+          "file_path": "README.md",
+          "start_line": 6,
+          "end_line": 6,
+          "text_sha256": "2abd099cd5303843a8bee6ddba43773ef4fde737b3b2935e631d0564e05a01b6"
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "case_kind": "code_behavior",
+      "answerable": true,
+      "question": "When Value.backward() is called, where does traversal begin, how is the topological list constructed, what gradient is seeded, and in what direction are the stored backward functions executed?",
+      "expected_claims": [
+        "Traversal begins from the Value on which backward() is called.",
+        "The recursive traversal visits each node's _prev values before appending the node.",
+        "The starting output Value has its gradient set to 1.",
+        "The backward functions execute in reversed topological order, from the output toward its input values."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 54,
+          "end_line": 70,
+          "text_sha256": "3f06441db6e5835ffc98f66e51de82150a2edd07efba1fa430e2bea053711173"
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "case_kind": "shared_operand_gradient",
+      "answerable": true,
+      "question": "For x = Value(3.0) and y = x + x, what should x.grad be after y.backward(), and which implementation details produce that result?",
+      "expected_claims": [
+        "x.grad should be 2.",
+        "The output gradient is seeded to 1.",
+        "Both operands of the addition refer to the same x object.",
+        "The addition backward function accumulates the output gradient into both operand references using +=."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 13,
+          "end_line": 20,
+          "text_sha256": "b2633a102e38b5db8e6ec6ae859df86a9b1090cef06b325430e49a668e3afccc"
+        },
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 54,
+          "end_line": 70,
+          "text_sha256": "3f06441db6e5835ffc98f66e51de82150a2edd07efba1fa430e2bea053711173"
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "case_kind": "relu_edge_case",
+      "answerable": true,
+      "question": "How does Value.relu() behave in both the forward and backward passes for negative, exactly zero, and positive inputs?",
+      "expected_claims": [
+        "A negative input produces forward output 0.",
+        "An input of exactly zero produces forward output 0.",
+        "A positive input is passed through unchanged.",
+        "The backward contribution is zero for negative and exactly zero outputs.",
+        "For a positive output, the incoming output gradient is accumulated into the input gradient."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 45,
+          "end_line": 50,
+          "text_sha256": "b647e82c26dc656d2f20e0f8e1166ae28d7c03761040630b3c5adaac19106c91"
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "case_kind": "operator_reuse",
+      "answerable": true,
+      "question": "How are self / other and other / self implemented by Value, and which existing operations do those implementations reuse?",
+      "expected_claims": [
+        "self / other is implemented as self multiplied by other raised to -1.",
+        "other / self is implemented as other multiplied by self raised to -1.",
+        "Division therefore reuses multiplication and power operations.",
+        "Value.__pow__ accepts only integer or floating-point exponents."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 35,
+          "end_line": 41,
+          "text_sha256": "8ecc9df573cd600ff8195487fb3026960937bcedfdfeb6ec2d9d0ec4455419aa"
+        },
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 87,
+          "end_line": 91,
+          "text_sha256": "e2300772a3a48ee8ed9b4d4aee395143ab1603ad54687cb8985ba0564dc80e30"
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "case_kind": "network_architecture",
+      "answerable": true,
+      "question": "How does MLP construct and execute its layers, and why is its final layer linear rather than ReLU?",
+      "expected_claims": [
+        "MLP prepends the input size to the requested output sizes.",
+        "It creates a Layer between every consecutive pair of sizes.",
+        "All layers except the last are constructed with nonlinearity enabled.",
+        "The last layer is constructed with nonlinearity disabled.",
+        "The input is passed through the layers sequentially."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 54,
+          "text_sha256": "598e1955782ea8780282b5a308b098eec097873f1c49885410bdb58bd102bb29"
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "case_kind": "parameter_reasoning",
+      "answerable": true,
+      "question": "How many trainable Value parameters does MLP(3, [4, 4, 1]) contain? Show the count for each layer and explain how the parameters are collected.",
+      "expected_claims": [
+        "Each neuron contains one weight per input plus one bias.",
+        "The first layer has 4 times (3 plus 1), or 16, parameters.",
+        "The second layer has 4 times (4 plus 1), or 20, parameters.",
+        "The final layer has 1 times (4 plus 1), or 5, parameters.",
+        "The MLP contains 41 trainable Value parameters in total.",
+        "Layer and MLP parameter methods flatten parameters from their contained neurons and layers."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 25,
+          "text_sha256": "ee96ef4d03a8a54a2da20ba488ac8f7ccd3be8604b71ea5820f53d1322259776"
+        },
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 40,
+          "text_sha256": "130afee8a441cc8692ba167b567039ddf8e0f3fd7b13152849df500a81fcc4ba"
+        },
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 57,
+          "text_sha256": "570f13ff4f1cce4671caf39e2f119d7a5372a49dec2fe0e62fc66f9211ce3b68"
+        }
+      ]
+    },
+    {
+      "id": "F08",
+      "case_kind": "multi_file_testing",
+      "answerable": true,
+      "question": "How do the engine tests use PyTorch as a reference for both forward values and gradients, and how do the assertion strategies differ between test_sanity_check and test_more_ops?",
+      "expected_claims": [
+        "The tests recreate equivalent expressions using micrograd Value objects and PyTorch tensors.",
+        "The PyTorch tensors use double precision and require gradients.",
+        "Both tests compare forward results and backward gradients.",
+        "test_sanity_check uses exact equality for its output and gradient comparisons.",
+        "test_more_ops uses an absolute tolerance of 1e-6 for its output and two gradient comparisons."
+      ],
+      "evidence": [
+        {
+          "file_path": "README.md",
+          "start_line": 63,
+          "end_line": 69,
+          "text_sha256": "13afdbe85fbdda22b3da8caa7eedb087d733a75efea61d432615f2444d65c5bf"
+        },
+        {
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 26,
+          "text_sha256": "f19350437ddf615bd5179719e8cbf55e8b40d0c8a809d349e1625a9649bcd689"
+        },
+        {
+          "file_path": "test/test_engine.py",
+          "start_line": 28,
+          "end_line": 67,
+          "text_sha256": "acb4cb22c6e65bc0aaa2526aba51c914c2e4936b6c57b3ee660dd5fafe9e6756"
+        }
+      ]
+    },
+    {
+      "id": "U01",
+      "case_kind": "unsupported_metric",
+      "answerable": false,
+      "question": "What exact numerical classification accuracy did the demonstrated moon-dataset neural network achieve?",
+      "expected_claims": [
+        "Exact refusal: I don't know.",
+        "The retrieval corpus does not report a numerical classification accuracy.",
+        "The model should not infer an accuracy from the displayed decision-boundary image."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "U02",
+      "case_kind": "unsupported_performance",
+      "answerable": false,
+      "question": "What exact training time and hardware were used to train the demonstrated moon-dataset neural network?",
+      "expected_claims": [
+        "Exact refusal: I don't know.",
+        "The retrieval corpus does not report training duration or hardware."
+      ],
+      "evidence": []
+    }
+  ],
+  "limitations": "Ten hand-authored development questions over a known small repository. This is not an independent holdout or production accuracy estimate. Notebooks and images are excluded because the application does not index their file extensions."
+}
