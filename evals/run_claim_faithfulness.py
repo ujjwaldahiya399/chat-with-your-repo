@@ -141,18 +141,39 @@ def validate_inputs(snapshot, cases_path):
 
     questions = cases["questions"]
 
-    if len(questions) != 10:
-        raise ValueError("Expected exactly ten questions.")
+    if not questions:
+        raise ValueError("Cases file must contain questions.")
 
-    if len({question["id"] for question in questions}) != 10:
+    if (
+        len({question["id"] for question in questions})
+        != len(questions)
+    ):
         raise ValueError("Question IDs must be unique.")
 
-    if sum(question["answerable"] for question in questions) != 8:
+    answerable_count = sum(
+        question["answerable"]
+        for question in questions
+    )
+
+    if answerable_count == 0:
         raise ValueError(
-            "Expected eight answerable questions."
+            "Cases file must contain answerable questions."
+        )
+
+    if answerable_count == len(questions):
+        raise ValueError(
+            "Cases file must contain unanswerable questions."
         )
 
     for question in questions:
+        if question["answerable"] != bool(
+            question["evidence"]
+        ):
+            raise ValueError(
+                f"Evidence configuration is invalid for "
+                f"{question['id']}."
+            )
+
         for evidence in question["evidence"]:
             path = snapshot / evidence["file_path"]
             lines = path.read_text(
@@ -440,6 +461,11 @@ def main():
         row["all_required_evidence_retrieved"] is True
         for row in rows
     )
+    answerable_count = sum(
+        row["answerable"]
+        for row in rows
+    )
+    unanswerable_count = len(rows) - answerable_count
 
     report = {
         "purpose": cases["purpose"],
@@ -474,14 +500,8 @@ def main():
         },
         "summary": {
             "questions": len(rows),
-            "answerable_questions": sum(
-                row["answerable"]
-                for row in rows
-            ),
-            "unanswerable_questions": sum(
-                not row["answerable"]
-                for row in rows
-            ),
+            "answerable_questions": answerable_count,
+            "unanswerable_questions": unanswerable_count,
             "answerable_with_all_required_evidence": (
                 fully_covered
             ),
@@ -502,7 +522,7 @@ def main():
     print(f"Questions: {len(rows)}")
     print(
         "Answerable with all required evidence:",
-        f"{fully_covered}/8",
+        f"{fully_covered}/{answerable_count}",
     )
     print(f"Saved: {output.relative_to(ROOT)}")
 
