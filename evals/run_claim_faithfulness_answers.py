@@ -96,6 +96,12 @@ def validate_inputs(preflight_path, cases_path):
         raise ValueError("Unexpected preflight mode.")
 
     if (
+        not isinstance(preflight.get("purpose"), str)
+        or not preflight["purpose"].strip()
+    ):
+        raise ValueError("Preflight purpose is missing.")
+
+    if (
         preflight.get("cases_sha256")
         != file_sha256(cases_path)
     ):
@@ -496,7 +502,11 @@ def main():
     review_path = run_directory / "review.md"
 
     report = {
-        "purpose": cases["purpose"],
+        "purpose": preflight["purpose"],
+        "cases_purpose": cases["purpose"],
+        "retrieval_preflight_limitations": preflight.get(
+            "limitations"
+        ),
         "created_at_utc": datetime.now(
             timezone.utc
         ).isoformat(),
