@@ -2,7 +2,7 @@
 
 Default mode validates the frozen preflight and current generation
 configuration without making API calls. Add --live to make one application
- generation attempt for each of the ten frozen questions.
+ generation attempt for each frozen question.
  The Groq SDK retains the current application's default retry behaviour.
 """
 
@@ -104,17 +104,6 @@ def validate_inputs(preflight_path, cases_path):
         )
 
     if (
-        preflight["summary"][
-            "answerable_with_all_required_evidence"
-        ]
-        != 8
-    ):
-        raise ValueError(
-            "Not all answerable questions have their "
-            "required evidence."
-        )
-
-    if (
         preflight.get("snapshot_id")
         != cases.get("snapshot_id")
     ):
@@ -149,15 +138,19 @@ def validate_inputs(preflight_path, cases_path):
     }
     rows = preflight["questions"]
 
-    if len(rows) != 10:
-        raise ValueError(
-            "Expected ten preflight questions."
-        )
+    if not case_lookup:
+        raise ValueError("Expected at least one frozen case.")
 
-    if len({row["question_id"] for row in rows}) != 10:
-        raise ValueError(
-            "Preflight question IDs must be unique."
-        )
+    if len(case_lookup) != len(cases["questions"]):
+        raise ValueError("Frozen case IDs must be unique.")
+
+    if len(rows) != len(case_lookup):
+        raise ValueError("Preflight must contain one row per frozen case.")
+
+    if len({row["question_id"] for row in rows}) != len(rows):
+        raise ValueError("Preflight question IDs must be unique.")
+
+    covered_count = 0
 
     for row in rows:
         question_id = row["question_id"]
@@ -178,6 +171,16 @@ def validate_inputs(preflight_path, cases_path):
             raise ValueError(
                 f"Answerability differs for {question_id}."
             )
+
+        if case["answerable"]:
+            covered = row.get("all_required_evidence_retrieved")
+
+            if type(covered) is not bool:
+                raise ValueError(
+                    f"Expected a boolean evidence coverage flag for {question_id}."
+                )
+
+            covered_count += int(covered)
 
         sources = row["sources"]
 
@@ -219,6 +222,13 @@ def validate_inputs(preflight_path, cases_path):
                 f"Context reconstruction differs for "
                 f"{question_id}."
             )
+
+    reported_count = preflight["summary"][
+        "answerable_with_all_required_evidence"
+    ]
+
+    if type(reported_count) is not int or reported_count != covered_count:
+        raise ValueError("Evidence coverage summary differs from the frozen rows.")
 
     return preflight, cases, case_lookup
 
@@ -425,7 +435,19 @@ def main():
         "contexts, and application code."
     )
     print(f"Generation model: {MODEL_ID}")
-    print("Questions: 10")
+    question_count = len(preflight["questions"])
+    answerable_count = sum(
+        1 for row in preflight["questions"] if row["answerable"]
+    )
+    covered_count = preflight["summary"][
+        "answerable_with_all_required_evidence"
+    ]
+
+    print(f"Questions: {question_count}")
+    print(
+        f"Required evidence coverage: {covered_count}/{answerable_count} "
+        "answerable questions"
+    )
 
     if not args.live:
         print(
@@ -489,6 +511,11 @@ def main():
         "query_py_sha256": file_sha256(
             BACKEND / "query.py"
         ),
+        "question_count": question_count,
+        "retrieval_coverage": {
+            "answerable_questions": answerable_count,
+            "answerable_with_all_required_evidence": covered_count,
+        },
         "generation_configuration": {
             "model": MODEL_ID,
             "system_prompt": SYSTEM_PROMPT,
@@ -503,8 +530,7 @@ def main():
         },
         "questions": [],
         "limitations": (
-            "Ten hand-authored development questions from "
-            "a known repository; not an independent holdout. "
+            "Hand-authored evaluation questions from one known repository. "
             "One stochastic generation per question. "
             "The reused application query_stream interface "
             "does not expose finish reason, token usage, or "
@@ -522,6 +548,9 @@ def main():
             ),
             "case_kind": preflight_row["case_kind"],
             "answerable": preflight_row["answerable"],
+            "all_required_evidence_retrieved": preflight_row.get(
+                "all_required_evidence_retrieved"
+            ),
             "question": preflight_row["question"],
             "sources": preflight_row["sources"],
             "labeled_context": (
