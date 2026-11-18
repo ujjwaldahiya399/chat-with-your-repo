@@ -205,7 +205,69 @@ Run the complete backend suite from `Backend`:
     python -m pytest -q tests
 
 GitHub Actions runs the same suite on relevant pull requests and pushes to
-`main`. The current local backend suite has 12 passing tests. When a file in
+`main`. The current backend suite has 17 passing tests. When a file in
 `demo_seed.py`'s `SOURCE_FILES` changes, regenerate the bundle with
 `cd Backend && python demo_seed.py`; the seed freshness test detects stale
 source text.
+
+## Week 6 claim-faithfulness evaluation
+
+Week 6 tested a narrower question than citation formatting: whether each
+factual claim in an answer is supported by the retrieved code. The evaluation
+froze `karpathy/micrograd` at commit `7bc720e9` and stored the exact source
+snapshot, questions, retrieved contexts, raw answers, and manual annotations.
+
+### Pilot and untouched holdout
+
+The 10-question pilot contained eight answerable and two unanswerable cases.
+After correcting one manual label, 42 of 43 factual claims were supported,
+seven of eight answerable responses were fully faithful, and both
+unanswerable questions returned the exact fallback.
+
+The separate 12-question holdout contained eight answerable and four
+unanswerable cases. Semantic top-five retrieval found all required evidence
+for six of eight answerable questions.
+
+| Holdout measure | Semantic baseline | AST-expanded development run |
+|---|---:|---:|
+| Required-evidence retrieval | 6/8 | 8/8 |
+| Supported factual claims | 52/58 (89.7%) | 57/59 (96.6%) |
+| Citation coverage | 46/58 (79.3%) | 55/59 (93.2%) |
+| Fully faithful answerable responses | 4/8 | 6/8 |
+| Exact refusals | 4/4 | 4/4 |
+| Correct overall outcomes | 8/12 | 10/12 |
+
+### AST relationship retrieval
+
+Semantic results remain the ordered seeds. For indexed Python chunks, the
+retriever parses an abstract syntax tree, finds references to indexed
+top-level class and function definitions, and inserts related chunks
+breadth-first for up to two hops. The final context remains limited to the
+requested `top_k`, normally five chunks. Repository and branch metadata keep
+relationships within the same indexed scope.
+
+The API and CLI use the same helper. Retrieval traces record whether a chunk
+came from semantic search or an AST relationship and record its relationship
+depth. Non-Python chunks remain valid semantic results, and unparseable Python
+falls back safely without breaking retrieval.
+
+The production helper reproduced the saved AST-expanded selection on all 12
+holdout questions. It recovered the missing evidence for H02 and H05 while
+keeping five final chunks. On the 13-chunk micrograd index, helper overhead was
+1.44 ms median and 2.27 ms at the slowest observed call.
+
+### Interpretation and limitations
+
+The AST-expanded results are post-hoc development results. The strategy was
+selected after inspecting two holdout failures, so the improved numbers are
+not a fresh independent holdout result. The relationship resolver is
+name-based, supports top-level Python definitions, and may create ambiguous
+links when different files define the same name. It also reads and parses the
+scoped index for each question; the small micrograd timing does not establish
+large-repository scalability.
+
+Better evidence retrieval also does not guarantee a faithful answer. One
+expanded-run claim remained contradicted: repeated backward calls increased a
+gradient linearly, while the answer said it doubled each time. A future
+independent evaluation should test transfer to another repository and measure
+larger-index latency before broader production claims are made.
