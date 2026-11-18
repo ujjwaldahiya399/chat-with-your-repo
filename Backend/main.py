@@ -17,6 +17,7 @@ from embed import embed_file, build_github_url, CHROMA_DB_PATH, COLLECTION_NAME
 from embed_repo import embed_repo_from_url, parse_github_url
 from demo_seed import seed_collection
 from query import load_api_key, query_stream, MODEL_ID
+from ast_relationship_retrieval import expand_ast_relationships
 
 
 class EmbedRequest(BaseModel):
@@ -170,8 +171,16 @@ def ask(body: AskRequest, request: Request):
             where=where,
         )
 
-        retrieved_chunks = query_result["documents"][0]
-        retrieved_metadatas = query_result["metadatas"][0]
+        (
+            retrieved_chunks,
+            retrieved_metadatas,
+            retrieval_selection,
+        ) = expand_ast_relationships(
+            request.app.state.collection,
+            query_result,
+            where=where,
+            final_k=body.top_k,
+        )
 
         retrieval.update(
             output={
@@ -182,6 +191,12 @@ def ask(body: AskRequest, request: Request):
                         "file_path": metadata["file_path"],
                         "start_line": metadata["start_line"],
                         "content_preview": content[:1000],
+                        "selection_origin": retrieval_selection[index - 1][
+                            "selection_origin"
+                        ],
+                        "relationship_depth": retrieval_selection[index - 1][
+                            "relationship_depth"
+                        ],
                     }
                     for index, (content, metadata) in enumerate(
                         zip(retrieved_chunks, retrieved_metadatas),

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "purpose": "micrograd_posthoc_retrieval_evidence_diagnostic",
+  "repository_url": "https://github.com/karpathy/micrograd",
+  "source_commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+  "snapshot_id": "2d319a78dffd90aa6fa26bf69d8c92a258b3ed4179b6d2129e8fbde280c55541",
+  "retrieval_files": [
+    "README.md",
+    "micrograd/engine.py",
+    "micrograd/nn.py",
+    "setup.py",
+    "test/test_engine.py"
+  ],
+  "claim_labels": [
+    "SUPPORTED",
+    "CONTRADICTED",
+    "NOT_IN_SOURCE"
+  ],
+  "questions": [
+    {
+      "id": "H02",
+      "case_kind": "cross_file_mixed_arithmetic",
+      "answerable": true,
+      "question": "How does Neuron compute an activation when its input list contains ordinary Python numbers, and which Value operations keep the weighted sum differentiable?",
+      "expected_claims": [
+        "Neuron pairs weights and inputs with zip.",
+        "Each paired weight and input are multiplied.",
+        "Value.__mul__ converts a non-Value operand into a Value.",
+        "Python sum starts the accumulated activation from the neuron's bias.",
+        "Value.__add__ creates graph nodes and its backward closure accumulates gradients into both operands.",
+        "The activation is passed through ReLU only when the neuron's nonlin flag is true."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 15,
+          "end_line": 25,
+          "text_sha256": "f81183e03a61708ad0f3180b4b3f9dbeb371cbd62829ca809d7400526246d6fc"
+        },
+        {
+          "file_path": "micrograd/engine.py",
+          "start_line": 13,
+          "end_line": 33,
+          "text_sha256": "0065ea6df12ec2913b0a4e282d71e2381f605c2735af1e738078f2a7f8fb8258"
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "case_kind": "nested_parameter_reset",
+      "answerable": true,
+      "question": "When zero_grad() is called on an MLP, how does it reach every weight and bias, and what value is assigned to each gradient?",
+      "expected_claims": [
+        "MLP inherits zero_grad from Module.",
+        "Module.zero_grad calls self.parameters().",
+        "MLP.parameters flattens parameters from every layer.",
+        "Layer.parameters flattens parameters from every neuron.",
+        "Neuron.parameters returns its weights followed by its bias.",
+        "zero_grad assigns 0 to every returned parameter's grad field."
+      ],
+      "evidence": [
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 4,
+          "end_line": 11,
+          "text_sha256": "a63814eaf15a3975786ad7f47a82abe93c1532394a8f008ca2c9af1d4a5c7fbf"
+        },
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 24,
+          "end_line": 25,
+          "text_sha256": "7903f0ec8e72f9ae847f9197b38a31248897ce85e030c4df6fb79c030c093ab6"
+        },
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 39,
+          "end_line": 40,
+          "text_sha256": "d988532a884d503ddffb0ab8b73101507081e7d81c324955d840c2832592a81d"
+        },
+        {
+          "file_path": "micrograd/nn.py",
+          "start_line": 56,
+          "end_line": 57,
+          "text_sha256": "f437d228e2d6db2396a4062d7060a79387397fe6b035684d245adc3aab424fcd"
+        }
+      ]
+    }
+  ],
+  "limitations": "Post-hoc diagnostic created after reviewing the holdout. It is not an independent holdout and must not be combined with the original holdout metrics. Questions and expected claims are unchanged.",
+  "parent_cases_sha256": "83ba558b093908d785ffa337ddefd7b06c7dc7c548f48d43aad09dc07525b63c"
+}

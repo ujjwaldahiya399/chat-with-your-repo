@@ -12,6 +12,7 @@ SEED_PATH = Path(__file__).with_name("demo_seed.json.gz")
 
 SOURCE_FILES = (
     "Backend/ask.py",
+    "Backend/ast_relationship_retrieval.py",
     "Backend/embed.py",
     "Backend/embed_repo.py",
     "Backend/embedding_model.py",

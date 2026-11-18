@@ -1,0 +1,823 @@
+{
+  "purpose": "micrograd_claim_faithfulness_development_set_not_independent_holdout",
+  "created_at_utc": "2026-11-15T07:02:31.155576+00:00",
+  "repository_url": "https://github.com/karpathy/micrograd",
+  "source_commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+  "snapshot_id": "2d319a78dffd90aa6fa26bf69d8c92a258b3ed4179b6d2129e8fbde280c55541",
+  "preflight_sha256": "9ca585a6ac61647770cd4699309465a009d845940bbcdf0165b24661b3947ff7",
+  "cases_sha256": "efc234622e34ed1471a6912598cc4ee3fb6fd4485a3c7500ec928c3e02f674d2",
+  "runner_sha256": "001e242a67425da5825ec0fec25d97b6c9f4bbc641068dee9ac893267ff7d9d9",
+  "query_py_sha256": "d9aebb3c6c0602f1f1ba6d045e9bdff61d8beb96bc9e0adb288cb635a2e0a282",
+  "generation_configuration": {
+    "model": "openai/gpt-oss-120b",
+    "system_prompt": "Answer the question using only the information in the provided chunk of text. The chunk is made up of one or more sources, each starting with a header like \"[Source N: file_path:start_line]\". When your answer uses information from a source, cite it inline like \"(Source N)\", using the same N from that source's header. If the chunk does not contain the answer, respond with exactly: I don't know.",
+    "stream": true,
+    "temperature": "provider default; omitted",
+    "max_tokens": "provider default; omitted",
+    "seed": "omitted"
+  },
+  "questions": [
+    {
+      "question_id": "F01",
+      "case_kind": "simple_summary",
+      "answerable": true,
+      "question": "According to the repository, what does micrograd implement, what kind of computation graph and value granularity does it use, and what is its intended purpose?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.1756150722503662,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.242700457572937,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.288482427597046,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:setup.py:1",
+          "file_path": "setup.py",
+          "start_line": 1,
+          "end_line": 22,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/setup.py#L1",
+          "distance": 1.2992219924926758,
+          "text": "import setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:1",
+          "file_path": "micrograd/nn.py",
+          "start_line": 1,
+          "end_line": 3,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L1",
+          "distance": 1.3741965293884277,
+          "text": "import random\nfrom micrograd.engine import Value\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 2: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 3: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n\n\n[Source 4: setup.py:1]\nimport setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n\n\n[Source 5: micrograd/nn.py:1]\nimport random\nfrom micrograd.engine import Value\n\n",
+      "status": "ok",
+      "answer": "Micrograd provides a **tiny autograd engine** (with a small PyTorch‑like neural‑network library on top) that implements **reverse‑mode (back‑propagation) autodiff** over a **dynamically built directed‑acyclic graph (DAG)**. The graph is constructed **at the level of individual scalar values** – each neuron is broken down into its constituent scalar adds, multiplies, etc. The library is meant to be **educational**, showing how deep neural nets can be built from such a minimal engine. (Source 1)",
+      "answer_sha256": "0f2cfdb91f99e63296d2fb5409757338a059ed4d2bcdb65cae33dd12a7e385b2",
+      "generation_seconds": 0.9059250420032186,
+      "time_to_first_token_seconds": 0.6561857500055339,
+      "cited_source_numbers": [
+        1
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F02",
+      "case_kind": "code_behavior",
+      "answerable": true,
+      "question": "When Value.backward() is called, where does traversal begin, how is the topological list constructed, what gradient is seeded, and in what direction are the stored backward functions executed?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.0710699558258057,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.34639573097229,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.415278434753418,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:4",
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 27,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L4",
+          "distance": 1.4621500968933105,
+          "text": "def test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:4",
+          "file_path": "micrograd/nn.py",
+          "start_line": 4,
+          "end_line": 12,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L4",
+          "distance": 1.531294822692871,
+          "text": "class Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n\n\n[Source 2: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 3: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 4: test/test_engine.py:4]\ndef test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n\n\n[Source 5: micrograd/nn.py:4]\nclass Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n",
+      "status": "ok",
+      "answer": "When you call `Value.backward()`, the algorithm starts the traversal at the node on which you invoked the method (the output node, `self`).  \nIt builds a topological ordering of all nodes reachable from that output by a depth‑first recursion: each node is added to a list **after** all of its children have been visited (`topo.append(v)` inside `build_topo`). This yields a post‑order list of the graph.  \nBefore the backward pass it seeds the gradient of the output node with `1` (`self.grad = 1`).  \nFinally, it walks the list in reverse order (`for v in reversed(topo):`) and calls each node’s stored `_backward` closure, thereby executing the backward functions from the output back toward the leaves. (Source 1)",
+      "answer_sha256": "ad7fc5cd3d12e10238fab07cb0c9284991483c73111116c5f21f40186cbef33c",
+      "generation_seconds": 1.1872892920000595,
+      "time_to_first_token_seconds": 0.8352735829976154,
+      "cited_source_numbers": [
+        1
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F03",
+      "case_kind": "shared_operand_gradient",
+      "answerable": true,
+      "question": "For x = Value(3.0) and y = x + x, what should x.grad be after y.backward(), and which implementation details produce that result?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.0183871984481812,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:4",
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 27,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L4",
+          "distance": 1.155663013458252,
+          "text": "def test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:4",
+          "file_path": "micrograd/nn.py",
+          "start_line": 4,
+          "end_line": 12,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L4",
+          "distance": 1.2750940322875977,
+          "text": "class Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.3178631067276,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:28",
+          "file_path": "test/test_engine.py",
+          "start_line": 28,
+          "end_line": 67,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L28",
+          "distance": 1.3346258401870728,
+          "text": "def test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n\n\n[Source 2: test/test_engine.py:4]\ndef test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n\n\n[Source 3: micrograd/nn.py:4]\nclass Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n\n\n[Source 4: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 5: test/test_engine.py:28]\ndef test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n",
+      "status": "ok",
+      "answer": "`x.grad` will be **2** after calling `y.backward()`.\n\nThe reason is the way `Value.__add__` and `Value.backward` are implemented:\n\n* `__add__` creates a new `Value` node whose `_prev` set contains the two operands and defines a `_backward` function that adds the output’s gradient to **both** operands’ `grad` fields:\n\n```python\ndef __add__(self, other):\n    ...\n    out = Value(self.data + other.data, (self, other), '+')\n    def _backward():\n        self.grad += out.grad\n        other.grad += out.grad\n    out._backward = _backward\n    return out\n```\n(Source 1)\n\n* `backward()` first sets the gradient of the final node (`y`) to 1 and then, in reverse topological order, calls each node’s `_backward` function. When `y`’s `_backward` runs, it adds `out.grad` (which is 1) to `self.grad` **twice**—once for `self` and once for `other`. Since `x` is both operands (`x + x`), the two additions accumulate, giving `x.grad = 1 + 1 = 2`. (Source 1)",
+      "answer_sha256": "a7c9e71f86218a827836c1e914d9f13c9133a0e0cd9fab7589f94b88eefca51d",
+      "generation_seconds": 1.7263909579996835,
+      "time_to_first_token_seconds": 1.0295737080014078,
+      "cited_source_numbers": [
+        1
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F04",
+      "case_kind": "relu_edge_case",
+      "answerable": true,
+      "question": "How does Value.relu() behave in both the forward and backward passes for negative, exactly zero, and positive inputs?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:13",
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 29,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L13",
+          "distance": 1.277212142944336,
+          "text": "class Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:28",
+          "file_path": "test/test_engine.py",
+          "start_line": 28,
+          "end_line": 67,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L28",
+          "distance": 1.2830328941345215,
+          "text": "def test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:4",
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 27,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L4",
+          "distance": 1.3022996187210083,
+          "text": "def test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.3347108364105225,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.4066593647003174,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/nn.py:13]\nclass Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n\n\n[Source 2: test/test_engine.py:28]\ndef test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n\n\n[Source 3: test/test_engine.py:4]\ndef test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n\n\n[Source 4: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n\n\n[Source 5: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n",
+      "status": "ok",
+      "answer": "`Value.relu()` creates a new `Value` whose data is the ReLU of the input:\n\n* **Forward pass** – the output data is `0` if the input’s `data` is **negative**; otherwise it is the input’s data unchanged. Since the test uses `self.data < 0`, an input of exactly `0` falls into the “else” branch and also yields `0` (so both negative and zero inputs produce `0`, positive inputs pass through unchanged) (Source 4).\n\n* **Backward pass** – the gradient w.r.t. the input is multiplied by the Boolean `(out.data > 0)`. Because `out.data` is the forward‑pass result, the gradient is propagated **only when the output is strictly positive**. For a negative input (output = 0) the condition is false → gradient = 0. For an input of exactly zero the output is also 0, so the condition is false → gradient = 0. For a positive input the output is positive, the condition is true → the upstream gradient is passed unchanged to the input (Source 4).",
+      "answer_sha256": "0af36792d9cd0049a567544335b12da3a100992a9d4b9099af67f5860ab548bf",
+      "generation_seconds": 1.429586833997746,
+      "time_to_first_token_seconds": 0.9344553339979029,
+      "cited_source_numbers": [
+        4
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F05",
+      "case_kind": "operator_reuse",
+      "answerable": true,
+      "question": "How are self / other and other / self implemented by Value, and which existing operations do those implementations reuse?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:13",
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 29,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L13",
+          "distance": 1.302367925643921,
+          "text": "class Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.3234009742736816,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:30",
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 44,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L30",
+          "distance": 1.383229374885559,
+          "text": "class Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:45",
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 60,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L45",
+          "distance": 1.424684762954712,
+          "text": "class MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.5457662343978882,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/nn.py:13]\nclass Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n\n\n[Source 2: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n\n\n[Source 3: micrograd/nn.py:30]\nclass Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n\n\n[Source 4: micrograd/nn.py:45]\nclass MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n\n\n[Source 5: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n",
+      "status": "ok",
+      "answer": "`Value` implements division in terms of multiplication and exponentiation:\n\n- **`self / other`** (`__truediv__`) returns `self * other**-1` – it multiplies `self` by the reciprocal of `other`, re‑using the `__mul__` and `__pow__` methods. (Source 2)\n\n- **`other / self`** (`__rtruediv__`) returns `other * self**-1` – it multiplies `other` by the reciprocal of `self`, also re‑using the `__mul__` and `__pow__` methods. (Source 2)",
+      "answer_sha256": "40709ef4af77cd9385407977f8105629dd5bc92f99c8a27bab4a41034bbb4c8e",
+      "generation_seconds": 0.9630398329973104,
+      "time_to_first_token_seconds": 0.6735019170009764,
+      "cited_source_numbers": [
+        2
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F06",
+      "case_kind": "network_architecture",
+      "answerable": true,
+      "question": "How does MLP construct and execute its layers, and why is its final layer linear rather than ReLU?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:45",
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 60,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L45",
+          "distance": 0.9395182728767395,
+          "text": "class MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:30",
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 44,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L30",
+          "distance": 1.3387150764465332,
+          "text": "class Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:13",
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 29,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L13",
+          "distance": 1.4099527597427368,
+          "text": "class Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.4714367389678955,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.5941448211669922,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/nn.py:45]\nclass MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n\n\n[Source 2: micrograd/nn.py:30]\nclass Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n\n\n[Source 3: micrograd/nn.py:13]\nclass Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n\n\n[Source 4: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 5: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n",
+      "status": "ok",
+      "answer": "The **MLP** builds its network in two steps:\n\n1. **Construction of the layers** – In `MLP.__init__` it creates a list of `Layer` objects, one for each entry in the `nouts` list.  \n   ```python\n   self.layers = [Layer(sz[i], sz[i+1],\n                       nonlin=i!=len(nouts)-1)   # ← non‑linear unless it’s the last layer\n                for i in range(len(nouts))]\n   ```  \n   (Source 1). The `nonlin` flag is set to `True` for every layer except the one whose index `i` equals `len(nouts)-1`, i.e., the final layer.\n\n2. **Execution of the layers** – The `__call__` method simply feeds the input through each layer in order:\n   ```python\n   for layer in self.layers:\n       x = layer(x)\n   return x\n   ```  \n   (Source 1). Each `Layer` in turn calls all of its `Neuron`s (Source 2), and each `Neuron` applies either a ReLU activation or a plain linear combination depending on its `nonlin` flag (Source 3).\n\n**Why the final layer is linear:**  \nWhen a `Layer` is created for the last index, `nonlin` is set to `False` (`i != len(nouts)-1` is `False`). Consequently each `Neuron` in that layer is instantiated with `nonlin=False`, causing its `__call__` to return the raw affine sum `act` instead of `act.relu()` (Source 3). Therefore the MLP’s last layer performs only a linear transformation, while all preceding layers use ReLU.",
+      "answer_sha256": "82677e1a8a2c701928da7898c059c4c1b6af8ca4170bbea7ea10e4cf370a13a9",
+      "generation_seconds": 1.265048208006192,
+      "time_to_first_token_seconds": 0.5046885000047041,
+      "cited_source_numbers": [
+        1,
+        2,
+        3
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F07",
+      "case_kind": "parameter_reasoning",
+      "answerable": true,
+      "question": "How many trainable Value parameters does MLP(3, [4, 4, 1]) contain? Show the count for each layer and explain how the parameters are collected.",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:45",
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 60,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L45",
+          "distance": 0.9702872037887573,
+          "text": "class MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:30",
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 44,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L30",
+          "distance": 1.2199511528015137,
+          "text": "class Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:13",
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 29,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L13",
+          "distance": 1.3998255729675293,
+          "text": "class Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:4",
+          "file_path": "micrograd/nn.py",
+          "start_line": 4,
+          "end_line": 12,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L4",
+          "distance": 1.5122959613800049,
+          "text": "class Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:4",
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 27,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L4",
+          "distance": 1.523536205291748,
+          "text": "def test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: micrograd/nn.py:45]\nclass MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n\n\n[Source 2: micrograd/nn.py:30]\nclass Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n\n\n[Source 3: micrograd/nn.py:13]\nclass Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n\n\n[Source 4: micrograd/nn.py:4]\nclass Module:\n\n    def zero_grad(self):\n        for p in self.parameters():\n            p.grad = 0\n\n    def parameters(self):\n        return []\n\n\n\n[Source 5: test/test_engine.py:4]\ndef test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n",
+      "status": "ok",
+      "answer": "The MLP constructor builds a list of Layer objects, and each Layer creates a list of Neuron objects.  \n\n* **MLP parameters** – `MLP.parameters()` walks through every layer and returns the concatenation of each layer’s parameters (Source 1).  \n* **Layer parameters** – `Layer.parameters()` returns the parameters of each neuron in the layer (Source 2).  \n* **Neuron parameters** – each Neuron stores a weight `self.w` list of length *nin* and a bias `self.b`; its `parameters()` method returns all those Value objects (Source 3).\n\nFor `MLP(3, [4, 4, 1])` the architecture is:\n\n| Layer | nin | nout | Params per neuron = nin + 1 (bias) | Total params in layer |\n|-------|-----|------|-----------------------------------|------------------------|\n| 0 (hidden) | 3 | 4 | 3 + 1 = 4 | 4 neurons × 4 = **16** |\n| 1 (hidden) | 4 | 4 | 4 + 1 = 5 | 4 neurons × 5 = **20** |\n| 2 (output) | 4 | 1 | 4 + 1 = 5 | 1 neuron × 5 = **5** |\n\n**Total trainable Value parameters:** 16 + 20 + 5 = **41**.\n\nThus, the MLP contains 16 parameters in the first layer, 20 in the second layer, 5 in the final layer, for a total of 41 trainable Value objects, collected by the nested `parameters()` calls described above. (Sources 1‑3)",
+      "answer_sha256": "0fa90dab74b7fed62ef5e4d82af092b7c664b50cb93f765159802517664b4169",
+      "generation_seconds": 2.105453750002198,
+      "time_to_first_token_seconds": 1.2230287499987753,
+      "cited_source_numbers": [
+        1,
+        2,
+        3
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "F08",
+      "case_kind": "multi_file_testing",
+      "answerable": true,
+      "question": "How do the engine tests use PyTorch as a reference for both forward values and gradients, and how do the assertion strategies differ between test_sanity_check and test_more_ops?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:4",
+          "file_path": "test/test_engine.py",
+          "start_line": 4,
+          "end_line": 27,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L4",
+          "distance": 0.92180997133255,
+          "text": "def test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.103980541229248,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:test/test_engine.py:28",
+          "file_path": "test/test_engine.py",
+          "start_line": 28,
+          "end_line": 67,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/test/test_engine.py#L28",
+          "distance": 1.276689887046814,
+          "text": "def test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.2794103622436523,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/engine.py:2",
+          "file_path": "micrograd/engine.py",
+          "start_line": 2,
+          "end_line": 94,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/engine.py#L2",
+          "distance": 1.3008917570114136,
+          "text": "class Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n"
+        }
+      ],
+      "labeled_context": "[Source 1: test/test_engine.py:4]\ndef test_sanity_check():\n\n    x = Value(-4.0)\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xmg, ymg = x, y\n\n    x = torch.Tensor([-4.0]).double()\n    x.requires_grad = True\n    z = 2 * x + 2 + x\n    q = z.relu() + z * x\n    h = (z * z).relu()\n    y = h + q + q * x\n    y.backward()\n    xpt, ypt = x, y\n\n    # forward pass went well\n    assert ymg.data == ypt.data.item()\n    # backward pass went well\n    assert xmg.grad == xpt.grad.item()\n\n\n\n[Source 2: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 3: test/test_engine.py:28]\ndef test_more_ops():\n\n    a = Value(-4.0)\n    b = Value(2.0)\n    c = a + b\n    d = a * b + b**3\n    c += c + 1\n    c += 1 + c + (-a)\n    d += d * 2 + (b + a).relu()\n    d += 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g += 10.0 / f\n    g.backward()\n    amg, bmg, gmg = a, b, g\n\n    a = torch.Tensor([-4.0]).double()\n    b = torch.Tensor([2.0]).double()\n    a.requires_grad = True\n    b.requires_grad = True\n    c = a + b\n    d = a * b + b**3\n    c = c + c + 1\n    c = c + 1 + c + (-a)\n    d = d + d * 2 + (b + a).relu()\n    d = d + 3 * d + (b - a).relu()\n    e = c - d\n    f = e**2\n    g = f / 2.0\n    g = g + 10.0 / f\n    g.backward()\n    apt, bpt, gpt = a, b, g\n\n    tol = 1e-6\n    # forward pass went well\n    assert abs(gmg.data - gpt.data.item()) < tol\n    # backward pass went well\n    assert abs(amg.grad - apt.grad.item()) < tol\n    assert abs(bmg.grad - bpt.grad.item()) < tol\n\n\n[Source 4: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 5: micrograd/engine.py:2]\nclass Value:\n    \"\"\" stores a single scalar value and its gradient \"\"\"\n\n    def __init__(self, data, _children=(), _op=''):\n        self.data = data\n        self.grad = 0\n        # internal variables used for autograd graph construction\n        self._backward = lambda: None\n        self._prev = set(_children)\n        self._op = _op # the op that produced this node, for graphviz / debugging / etc\n\n    def __add__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data + other.data, (self, other), '+')\n\n        def _backward():\n            self.grad += out.grad\n            other.grad += out.grad\n        out._backward = _backward\n\n        return out\n\n    def __mul__(self, other):\n        other = other if isinstance(other, Value) else Value(other)\n        out = Value(self.data * other.data, (self, other), '*')\n\n        def _backward():\n            self.grad += other.data * out.grad\n            other.grad += self.data * out.grad\n        out._backward = _backward\n\n        return out\n\n    def __pow__(self, other):\n        assert isinstance(other, (int, float)), \"only supporting int/float powers for now\"\n        out = Value(self.data**other, (self,), f'**{other}')\n\n        def _backward():\n            self.grad += (other * self.data**(other-1)) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def relu(self):\n        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')\n\n        def _backward():\n            self.grad += (out.data > 0) * out.grad\n        out._backward = _backward\n\n        return out\n\n    def backward(self):\n\n        # topological order all of the children in the graph\n        topo = []\n        visited = set()\n        def build_topo(v):\n            if v not in visited:\n                visited.add(v)\n                for child in v._prev:\n                    build_topo(child)\n                topo.append(v)\n        build_topo(self)\n\n        # go one variable at a time and apply the chain rule to get its gradient\n        self.grad = 1\n        for v in reversed(topo):\n            v._backward()\n\n    def __neg__(self): # -self\n        return self * -1\n\n    def __radd__(self, other): # other + self\n        return self + other\n\n    def __sub__(self, other): # self - other\n        return self + (-other)\n\n    def __rsub__(self, other): # other - self\n        return other + (-self)\n\n    def __rmul__(self, other): # other * self\n        return self * other\n\n    def __truediv__(self, other): # self / other\n        return self * other**-1\n\n    def __rtruediv__(self, other): # other / self\n        return other * self**-1\n\n    def __repr__(self):\n        return f\"Value(data={self.data}, grad={self.grad})\"\n",
+      "status": "ok",
+      "answer": "The engine tests create a **reference implementation with PyTorch**: each test builds the same computation graph twice – once with `micrograd.Value` objects and once with `torch.Tensor`s that have `requires_grad=True`. After running the forward pass and calling `.backward()` on both graphs, the tests compare the `micrograd` results (`.data` and `.grad`) to the corresponding PyTorch results (`.item()` for the scalar value and `.grad.item()` for the gradient) (Source 1, Source 3).\n\n**Assertion style differences**\n\n| Test | Forward‑value check | Gradient check |\n|------|---------------------|----------------|\n| **`test_sanity_check`** | Uses exact equality: `assert ymg.data == ypt.data.item()` | Uses exact equality: `assert xmg.grad == xpt.grad.item()` |\n| **`test_more_ops`** | Uses a tolerance: `assert abs(gmg.data - gpt.data.item()) < tol` (where `tol = 1e-6`) | Uses the same tolerance for each gradient: `assert abs(amg.grad - apt.grad.item()) < tol` and `assert abs(bmg.grad - bpt.grad.item()) < tol` |\n\nThus, **`test_sanity_check`** asserts strict equality for both forward and backward results, while **`test_more_ops`** allows small numerical differences by checking that the absolute error is below a 1 e‑6 tolerance. (Source 1, Source 3)",
+      "answer_sha256": "947bb02621c4e89e8d70746b66f196d471b4ad263c99a96702a88e2404336515",
+      "generation_seconds": 1.4893143750014133,
+      "time_to_first_token_seconds": 0.8328863749993616,
+      "cited_source_numbers": [
+        1,
+        3
+      ],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": false
+    },
+    {
+      "question_id": "U01",
+      "case_kind": "unsupported_metric",
+      "answerable": false,
+      "question": "What exact numerical classification accuracy did the demonstrated moon-dataset neural network achieve?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.4034260511398315,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:setup.py:1",
+          "file_path": "setup.py",
+          "start_line": 1,
+          "end_line": 22,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/setup.py#L1",
+          "distance": 1.650742769241333,
+          "text": "import setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.6519057750701904,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:30",
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 44,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L30",
+          "distance": 1.6741440296173096,
+          "text": "class Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:13",
+          "file_path": "micrograd/nn.py",
+          "start_line": 13,
+          "end_line": 29,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L13",
+          "distance": 1.7000668048858643,
+          "text": "class Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n"
+        }
+      ],
+      "labeled_context": "[Source 1: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 2: setup.py:1]\nimport setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n\n\n[Source 3: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 4: micrograd/nn.py:30]\nclass Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n\n\n[Source 5: micrograd/nn.py:13]\nclass Neuron(Module):\n\n    def __init__(self, nin, nonlin=True):\n        self.w = [Value(random.uniform(-1,1)) for _ in range(nin)]\n        self.b = Value(0)\n        self.nonlin = nonlin\n\n    def __call__(self, x):\n        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b)\n        return act.relu() if self.nonlin else act\n\n    def parameters(self):\n        return self.w + [self.b]\n\n    def __repr__(self):\n        return f\"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})\"\n\n",
+      "status": "ok",
+      "answer": "I don't know.",
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "generation_seconds": 0.3987011670033098,
+      "time_to_first_token_seconds": 0.3864196249996894,
+      "cited_source_numbers": [],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": true
+    },
+    {
+      "question_id": "U02",
+      "case_kind": "unsupported_performance",
+      "answerable": false,
+      "question": "What exact training time and hardware were used to train the demonstrated moon-dataset neural network?",
+      "sources": [
+        {
+          "source_number": 1,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:1",
+          "file_path": "README.md",
+          "start_line": 1,
+          "end_line": 50,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L1",
+          "distance": 1.4902029037475586,
+          "text": "\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n"
+        },
+        {
+          "source_number": 2,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:setup.py:1",
+          "file_path": "setup.py",
+          "start_line": 1,
+          "end_line": 22,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/setup.py#L1",
+          "distance": 1.6321356296539307,
+          "text": "import setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n"
+        },
+        {
+          "source_number": 3,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:README.md:51",
+          "file_path": "README.md",
+          "start_line": 51,
+          "end_line": 73,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/README.md#L51",
+          "distance": 1.6598091125488281,
+          "text": "For added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n"
+        },
+        {
+          "source_number": 4,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:30",
+          "file_path": "micrograd/nn.py",
+          "start_line": 30,
+          "end_line": 44,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L30",
+          "distance": 1.7159464359283447,
+          "text": "class Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n"
+        },
+        {
+          "source_number": 5,
+          "chunk_id": "https://github.com/karpathy/micrograd@7bc720e951fe422b8f8814aa5aa1b64121d26b4c:micrograd/nn.py:45",
+          "file_path": "micrograd/nn.py",
+          "start_line": 45,
+          "end_line": 60,
+          "repo_url": "https://github.com/karpathy/micrograd",
+          "branch": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+          "github_url": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/micrograd/nn.py#L45",
+          "distance": 1.7689919471740723,
+          "text": "class MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n"
+        }
+      ],
+      "labeled_context": "[Source 1: README.md:1]\n\n# micrograd\n\n![awww](puppy.jpg)\n\nA tiny Autograd engine (with a bite! :)). Implements backpropagation (reverse-mode autodiff) over a dynamically built DAG and a small neural networks library on top of it with a PyTorch-like API. Both are tiny, with about 100 and 50 lines of code respectively. The DAG only operates over scalar values, so e.g. we chop up each neuron into all of its individual tiny adds and multiplies. However, this is enough to build up entire deep neural nets doing binary classification, as the demo notebook shows. Potentially useful for educational purposes.\n\n### Installation\n\n```bash\npip install micrograd\n```\n\n### Example usage\n\nBelow is a slightly contrived example showing a number of possible supported operations:\n\n```python\nfrom micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\nc += c + 1\nc += 1 + c + (-a)\nd += d * 2 + (b + a).relu()\nd += 3 * d + (b - a).relu()\ne = c - d\nf = e**2\ng = f / 2.0\ng += 10.0 / f\nprint(f'{g.data:.4f}') # prints 24.7041, the outcome of this forward pass\ng.backward()\nprint(f'{a.grad:.4f}') # prints 138.8338, i.e. the numerical value of dg/da\nprint(f'{b.grad:.4f}') # prints 645.5773, i.e. the numerical value of dg/db\n```\n\n### Training a neural net\n\nThe notebook `demo.ipynb` provides a full demo of training an 2-layer neural network (MLP) binary classifier. This is achieved by initializing a neural net from `micrograd.nn` module, implementing a simple svm \"max-margin\" binary classification loss and using SGD for optimization. As shown in the notebook, using a 2-layer neural net with two 16-node hidden layers we achieve the following decision boundary on the moon dataset:\n\n![2d neuron](moon_mlp.png)\n\n### Training a GPT\n\nFor a more advanced example, see [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95), which trains and samples from a full GPT-2-like transformer in pure, dependency-free Python. It builds on a more efficient and better version of the autograd engine here (storing local gradients at forward time instead of per-op backward closures), and is the complete algorithm in a single file — everything else is just efficiency. See also the accompanying [explainer post](https://karpathy.github.io/2026/02/12/microgpt/) for a detailed walkthrough.\n\n### Tracing / visualization\n\n\n\n[Source 2: setup.py:1]\nimport setuptools\n\nwith open(\"README.md\", \"r\") as fh:\n    long_description = fh.read()\n\nsetuptools.setup(\n    name=\"micrograd\",\n    version=\"0.1.0\",\n    author=\"Andrej Karpathy\",\n    author_email=\"andrej.karpathy@gmail.com\",\n    description=\"A tiny scalar-valued autograd engine with a small PyTorch-like neural network library on top.\",\n    long_description=long_description,\n    long_description_content_type=\"text/markdown\",\n    url=\"https://github.com/karpathy/micrograd\",\n    packages=setuptools.find_packages(),\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"License :: OSI Approved :: MIT License\",\n        \"Operating System :: OS Independent\",\n    ],\n    python_requires='>=3.6',\n)\n\n\n[Source 3: README.md:51]\nFor added convenience, the notebook `trace_graph.ipynb` produces graphviz visualizations. E.g. this one below is of a simple 2D neuron, arrived at by calling `draw_dot` on the code below, and it shows both the data (left number in each node) and the gradient (right number in each node).\n\n```python\nfrom micrograd import nn\nn = nn.Neuron(2)\nx = [Value(1.0), Value(-2.0)]\ny = n(x)\ndot = draw_dot(y)\n```\n\n![2d neuron](gout.svg)\n\n### Running tests\n\nTo run the unit tests you will have to install [PyTorch](https://pytorch.org/), which the tests use as a reference for verifying the correctness of the calculated gradients. Then simply:\n\n```bash\npython -m pytest\n```\n\n### License\n\nMIT\n\n\n[Source 4: micrograd/nn.py:30]\nclass Layer(Module):\n\n    def __init__(self, nin, nout, **kwargs):\n        self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]\n\n    def __call__(self, x):\n        out = [n(x) for n in self.neurons]\n        return out[0] if len(out) == 1 else out\n\n    def parameters(self):\n        return [p for n in self.neurons for p in n.parameters()]\n\n    def __repr__(self):\n        return f\"Layer of [{', '.join(str(n) for n in self.neurons)}]\"\n\n\n\n[Source 5: micrograd/nn.py:45]\nclass MLP(Module):\n\n    def __init__(self, nin, nouts):\n        sz = [nin] + nouts\n        self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]\n\n    def __call__(self, x):\n        for layer in self.layers:\n            x = layer(x)\n        return x\n\n    def parameters(self):\n        return [p for layer in self.layers for p in layer.parameters()]\n\n    def __repr__(self):\n        return f\"MLP of [{', '.join(str(layer) for layer in self.layers)}]\"\n",
+      "status": "ok",
+      "answer": "I don't know.",
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "generation_seconds": 0.3699969999943278,
+      "time_to_first_token_seconds": 0.3578381669940427,
+      "cited_source_numbers": [],
+      "invalid_citations": [],
+      "application_outcome": "success",
+      "exact_refusal": true
+    }
+  ],
+  "limitations": "Ten hand-authored development questions from a known repository; not an independent holdout. One stochastic generation per question. The reused application query_stream interface does not expose finish reason, token usage, or provider-reported cost. Claim grading remains manual and is not included in this raw run."
+}

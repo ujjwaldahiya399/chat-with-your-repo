@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "review_type": "manual_claim_by_claim",
+  "source_file": "answers.json",
+  "source_run_created_at_utc": "2026-11-15T07:02:31.155576+00:00",
+  "repository_url": "https://github.com/karpathy/micrograd",
+  "source_commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+  "snapshot_id": "2d319a78dffd90aa6fa26bf69d8c92a258b3ed4179b6d2129e8fbde280c55541",
+  "review_policy": {
+    "evidence_boundary": "Only the retrieved sources stored with each question were used.",
+    "claim_unit": "A separately verifiable factual proposition in an answer.",
+    "labels": {
+      "SUPPORTED": "The cited retrieved source directly supports the claim or the claim follows by simple deterministic calculation from it.",
+      "CONTRADICTED": "The retrieved source conflicts with the claim.",
+      "NOT_IN_SOURCE": "The retrieved source neither supports nor contradicts the claim."
+    },
+    "citation_covered": "At least one answer citation points to a retrieved source that supports the claim."
+  },
+  "metrics": {
+    "answerable_questions": 8,
+    "unanswerable_questions": 2,
+    "atomic_claims": 43,
+    "supported_claims": 42,
+    "contradicted_claims": 1,
+    "not_in_source_claims": 0,
+    "supported_claim_rate": 0.9767441860465116,
+    "citation_covered_claims": 42,
+    "citation_coverage_rate": 0.9767441860465116,
+    "fully_faithful_answerable_answers": 7,
+    "fully_faithful_answer_rate": 0.875,
+    "correct_exact_abstentions": 2,
+    "correct_exact_abstention_rate": 1.0,
+    "false_refusals_on_answerable_questions": 0,
+    "invalid_citation_numbers": 0,
+    "correct_question_outcomes": 9,
+    "overall_question_outcome_rate": 0.9
+  },
+  "questions": [
+    {
+      "question_id": "F01",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "Micrograd provides a tiny autograd engine.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "README Source 1 explicitly calls it a tiny Autograd engine."
+        },
+        {
+          "claim": "Micrograd includes a small PyTorch-like neural-network library on top.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "README Source 1 states this directly."
+        },
+        {
+          "claim": "It implements reverse-mode autodiff over a dynamically built DAG.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "README Source 1 explicitly describes backpropagation (reverse-mode autodiff) over a dynamically built DAG."
+        },
+        {
+          "claim": "The graph operates on individual scalar values, breaking a neuron into scalar operations.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "README Source 1 describes scalar values and individual adds and multiplies."
+        },
+        {
+          "claim": "The project is intended for education and demonstrates that deep neural networks can be built from the small engine.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "README Source 1 says the engine is enough for deep neural nets and is potentially useful for educational purposes."
+        }
+      ]
+    },
+    {
+      "question_id": "F02",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "Traversal starts at the Value on which backward is invoked, self.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 calls build_topo(self)."
+        },
+        {
+          "claim": "The traversal recursively visits nodes reachable through _prev.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 recursively calls build_topo for each child in v._prev."
+        },
+        {
+          "claim": "A node is appended to the topological list after its predecessors have been visited.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 places topo.append(v) after the recursive loop."
+        },
+        {
+          "claim": "The output gradient is seeded to 1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 sets self.grad = 1."
+        },
+        {
+          "claim": "The stored backward functions run in reversed topological order from the output toward the leaves.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 iterates reversed(topo) and calls v._backward()."
+        }
+      ]
+    },
+    {
+      "question_id": "F03",
+      "fully_faithful": false,
+      "claims": [
+        {
+          "claim": "For y = x + x, x.grad is 2 after y.backward().",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "This follows deterministically from the addition closure and the output gradient seed shown in Source 1."
+        },
+        {
+          "claim": "For y = x + x, the output node's _prev set contains the two operands.",
+          "label": "CONTRADICTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "reason": "Source 1 passes (self, other) to Value, but Value.__init__ stores set(_children). When both operands are the same object x, _prev contains one distinct predecessor, not two."
+        },
+        {
+          "claim": "The addition backward closure adds out.grad to each operand's grad field.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 contains both += statements."
+        },
+        {
+          "claim": "backward seeds y.grad to 1 before executing the closures in reverse topological order.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Both operations appear directly in Source 1."
+        },
+        {
+          "claim": "Because x is both operands, the two increments accumulate as 1 + 1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "The two += operations target the same Value when self and other are both x."
+        }
+      ]
+    },
+    {
+      "question_id": "F04",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "A negative input produces forward output 0.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "Source 4 uses 0 if self.data < 0."
+        },
+        {
+          "claim": "An input of exactly zero produces forward output 0.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "At zero the else branch returns self.data, which is zero."
+        },
+        {
+          "claim": "A positive input passes through unchanged in the forward pass.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "For nonnegative input Source 4 returns self.data."
+        },
+        {
+          "claim": "A negative input receives zero local gradient in the backward pass.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "Its output is zero, making out.data > 0 false."
+        },
+        {
+          "claim": "An input of exactly zero receives zero local gradient in the backward pass.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "Its output is zero, making out.data > 0 false."
+        },
+        {
+          "claim": "A positive input receives the upstream gradient unchanged.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "reason": "For a positive output, the Boolean multiplier is true, numerically 1."
+        }
+      ]
+    },
+    {
+      "question_id": "F05",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "self / other returns self * other**-1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "reason": "Source 2 shows this exact __truediv__ implementation."
+        },
+        {
+          "claim": "self / other reuses multiplication and exponentiation.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "reason": "The expression in Source 2 invokes * and **."
+        },
+        {
+          "claim": "other / self returns other * self**-1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "reason": "Source 2 shows this exact __rtruediv__ implementation."
+        },
+        {
+          "claim": "other / self also reuses multiplication and exponentiation.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "reason": "The expression in Source 2 invokes * and **."
+        }
+      ]
+    },
+    {
+      "question_id": "F06",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "MLP creates one Layer for each entry in nouts.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 iterates range(len(nouts)) when constructing layers."
+        },
+        {
+          "claim": "The nonlin flag is true for every layer except the final layer.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 sets nonlin=i!=len(nouts)-1."
+        },
+        {
+          "claim": "MLP executes its layers sequentially, passing each result to the next layer.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 loops through self.layers and assigns x = layer(x)."
+        },
+        {
+          "claim": "Each Layer calls all of its Neurons.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "reason": "Source 2 builds out = [n(x) for n in self.neurons]."
+        },
+        {
+          "claim": "A Neuron returns act.relu() when nonlin is true and raw act otherwise.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Source 3 contains this conditional return."
+        },
+        {
+          "claim": "The final MLP layer is linear because its neurons receive nonlin=False and return the raw affine activation.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "This follows directly by combining the final-layer flag in Source 1 with Neuron.__call__ in Source 3."
+        }
+      ]
+    },
+    {
+      "question_id": "F07",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "MLP.parameters collects parameters from every layer, and Layer.parameters collects them from every neuron.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            2
+          ],
+          "citation_covered": true,
+          "reason": "Sources 1 and 2 show the nested list comprehensions."
+        },
+        {
+          "claim": "Each Neuron has nin weight Values and one bias Value.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Source 3 creates nin weights, one bias, and returns self.w + [self.b]."
+        },
+        {
+          "claim": "The 3-to-4 first layer contains 16 parameters.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            2,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Four neurons times three weights plus one bias equals 16."
+        },
+        {
+          "claim": "The 4-to-4 second layer contains 20 parameters.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            2,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Four neurons times four weights plus one bias equals 20."
+        },
+        {
+          "claim": "The 4-to-1 output layer contains 5 parameters.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            2,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "One neuron times four weights plus one bias equals 5."
+        },
+        {
+          "claim": "MLP(3, [4, 4, 1]) contains 41 trainable Value parameters in total.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            2,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "The source-derived layer counts sum to 16 + 20 + 5 = 41."
+        }
+      ]
+    },
+    {
+      "question_id": "F08",
+      "fully_faithful": true,
+      "claims": [
+        {
+          "claim": "Each test builds the same computation with micrograd Values and PyTorch tensors.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Sources 1 and 3 show parallel micrograd and PyTorch computations."
+        },
+        {
+          "claim": "The PyTorch inputs have requires_grad enabled.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Both cited test sources set requires_grad = True."
+        },
+        {
+          "claim": "The tests call backward on both implementations and compare scalar forward values and gradients.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Both cited sources call backward and contain value and gradient assertions."
+        },
+        {
+          "claim": "test_sanity_check uses exact equality for the forward value.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 uses == for ymg.data and ypt.data.item()."
+        },
+        {
+          "claim": "test_sanity_check uses exact equality for the gradient.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "reason": "Source 1 uses == for xmg.grad and xpt.grad.item()."
+        },
+        {
+          "claim": "test_more_ops uses absolute-error checks below 1e-6 for the forward value and both gradients.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            3
+          ],
+          "citation_covered": true,
+          "reason": "Source 3 defines tol = 1e-6 and applies it to all three comparisons."
+        }
+      ]
+    },
+    {
+      "question_id": "U01",
+      "fully_faithful": true,
+      "claims": [],
+      "abstention": {
+        "expected": true,
+        "observed_answer": "I don't know.",
+        "exact_required_form": true,
+        "correct": true,
+        "reason": "The retrieved sources describe a decision boundary but supply no exact numerical classification accuracy."
+      }
+    },
+    {
+      "question_id": "U02",
+      "fully_faithful": true,
+      "claims": [],
+      "abstention": {
+        "expected": true,
+        "observed_answer": "I don't know.",
+        "exact_required_form": true,
+        "correct": true,
+        "reason": "The retrieved sources supply no exact training time or hardware for the moon-dataset demonstration."
+      }
+    }
+  ],
+  "limitations": [
+    "This is a small ten-question development pilot, not an independent holdout evaluation.",
+    "The questions were designed from the frozen corpus, so the result must not be presented as general production accuracy.",
+    "Only one stochastic generation sample was reviewed for each question.",
+    "Claim segmentation and support labels were assigned manually and were not independently double-reviewed."
+  ]
+}

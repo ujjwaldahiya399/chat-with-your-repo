@@ -1,0 +1,1342 @@
+{
+  "schema_version": 1,
+  "review_type": "manual_claim_by_claim",
+  "source_file": "answers.json",
+  "source_file_sha256": "786932a7b7817385b056f43c11b886aeb13c0100d970c9928f66fddd0a25c1a0",
+  "source_run_created_at_utc": "2026-11-16T05:53:14.626263+00:00",
+  "repository_url": "https://github.com/karpathy/micrograd",
+  "source_commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+  "snapshot_id": "2d319a78dffd90aa6fa26bf69d8c92a258b3ed4179b6d2129e8fbde280c55541",
+  "preflight_sha256": "f541e59f4180516187c7d421bccc8190732fd9c6a185587472d5d567b584995e",
+  "cases_sha256": "83ba558b093908d785ffa337ddefd7b06c7dc7c548f48d43aad09dc07525b63c",
+  "generation_model": "openai/gpt-oss-120b",
+  "review_policy": {
+    "evidence_boundary": "Only the five retrieved sources for the individual question were used as evidence. Expected claims from the generated review were used as a completeness rubric.",
+    "claim_unit": "A separately verifiable factual proposition in the answer, including assertions made in code or comments. Rephrasings of the same proposition are counted once.",
+    "labels": {
+      "SUPPORTED": "The retrieved material establishes the claim directly or by deterministic reasoning.",
+      "CONTRADICTED": "A retrieved source conflicts with the claim as stated.",
+      "NOT_IN_SOURCE": "The retrieved material neither establishes nor contradicts the claim."
+    },
+    "citation_covered": "The nearby citation or jointly cited sources establish the claim. Clear end-of-answer attributions and bracketed numbered references count for semantic coverage. Exact citation formatting is tracked separately.",
+    "fully_faithful": "An answerable response addresses the required parts and every factual claim is supported. Citation coverage is reported independently.",
+    "exact_refusal": "The response equals I don't know. exactly. Exact refusals are scored as abstentions and contribute zero factual claims."
+  },
+  "questions_with_citation_style_deviation": [
+    "H06"
+  ],
+  "metrics": {
+    "answerable_questions": 8,
+    "unanswerable_questions": 4,
+    "answerable_with_all_required_evidence": 6,
+    "atomic_claims": 58,
+    "supported_claims": 52,
+    "contradicted_claims": 1,
+    "not_in_source_claims": 5,
+    "supported_claim_rate": 0.896551724137931,
+    "citation_covered_claims": 46,
+    "citation_coverage_rate": 0.7931034482758621,
+    "fully_faithful_answerable_answers": 4,
+    "fully_faithful_answer_rate": 0.5,
+    "correct_exact_abstentions": 4,
+    "correct_exact_abstention_rate": 1.0,
+    "false_refusals_on_answerable_questions": 0,
+    "invalid_citation_numbers": 0,
+    "correct_question_outcomes": 8,
+    "overall_question_outcome_rate": 0.6666666666666666
+  },
+  "questions": [
+    {
+      "question_id": "H01",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": false,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": false,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "0afbfcaabf2f46f7b166cf462203d6b450db83d5ce97817560ab297369fd96f9",
+      "claims": [
+        {
+          "claim": "The package requires Python 3.6 or newer.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "21",
+              "file_path": "setup.py"
+            }
+          ],
+          "reason": "The setup metadata gives this minimum.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "The setup configuration declares no runtime dependencies.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "6-22",
+              "file_path": "setup.py"
+            }
+          ],
+          "reason": "The complete setup call has no install_requires argument.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "The README instructs installation with pip install micrograd.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 4,
+              "lines": "8-12",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The installation block gives the exact command.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "Running the unit tests requires PyTorch.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "63-68",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The README tells users to install PyTorch for the tests.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The tests use PyTorch as a reference to verify gradients.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "65",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The README explicitly gives that purpose.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "The library itself does not depend on PyTorch at runtime.",
+          "label": "NOT_IN_SOURCE",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "6-22",
+              "file_path": "setup.py"
+            },
+            {
+              "source_number": 2,
+              "lines": "63-68",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The setup metadata establishes what is declared. The README describes test use. The retrieved material does not establish actual dependency behavior across the whole library.",
+          "claim_id": "C6"
+        }
+      ]
+    },
+    {
+      "question_id": "H02",
+      "answerable": true,
+      "all_required_evidence_retrieved": false,
+      "fully_faithful": false,
+      "complete": false,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": false,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "e38e0014232a3b2fdc379a3a5f89c07cefd3ab1dd84d3d4dcd1fae0c310413fe",
+      "claims": [
+        {
+          "claim": "Neuron pairs the weights with the corresponding inputs.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The generator expression iterates over zip(self.w, x).",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "The activation sums the products of paired weights and inputs.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The generator yields wi*xi and sum consumes it.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "The summation starts from the bias Value self.b.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "17-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The constructor wraps the bias and the call passes it as sum's starting argument.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "A Value can be multiplied by an ordinary Python number on the right.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 4,
+              "lines": "19-28",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The README demonstrates d * 2 on a Value expression. The cited Neuron expression alone does not establish mixed-type support.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The mixed multiplication is executed by Value.__mul__.",
+          "label": "NOT_IN_SOURCE",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-21",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 4,
+              "lines": "19-28",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The excerpts show operator use but do not identify or show this engine implementation.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "Mixed multiplication produces a Value result that participates in the computation graph.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 4,
+              "lines": "6",
+              "file_path": "README.md"
+            },
+            {
+              "source_number": 4,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The README describes the DAG's multiplication operations and demonstrates a mixed multiplication contributing to a later backward pass. The Neuron citation alone only shows operator usage.",
+          "claim_id": "C6"
+        },
+        {
+          "claim": "Python sum uses Value.__add__ to combine the terms.",
+          "label": "NOT_IN_SOURCE",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "17-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 4,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The source establishes summation from a Value bias, but the retrieved engine implementation is absent and no retrieved snippet identifies the named method.",
+          "claim_id": "C7"
+        },
+        {
+          "claim": "The weighted sum remains a Value.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "17-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 4,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "Neuron calls relu on the result on one path, and the README shows chained arithmetic producing results that support relu and backward. The Neuron excerpt alone does not establish the result type.",
+          "claim_id": "C8"
+        },
+        {
+          "claim": "The activation is passed to relu if the neuron is nonlinear.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-22",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The return expression explicitly tests self.nonlin.",
+          "claim_id": "C9"
+        },
+        {
+          "claim": "Value.relu returns a new Value for the ReLU of the sum.",
+          "label": "NOT_IN_SOURCE",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 4,
+              "lines": "23-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The sources demonstrate calling relu but do not show its allocation or return-object identity.",
+          "claim_id": "C10"
+        },
+        {
+          "claim": "Multiplication, addition, and ReLU participate in the autodiff path.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "20-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 4,
+              "lines": "6",
+              "file_path": "README.md"
+            },
+            {
+              "source_number": 4,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The README shows these operations in an expression traced to gradients. The Neuron excerpt alone does not establish their backward behavior.",
+          "claim_id": "C11"
+        }
+      ],
+      "completeness_reason": "The answer omits how __mul__ wraps a non-Value operand and how the addition backward closure accumulates into both operands. The retrieved README illustrates mixed arithmetic and autodiff, while the required engine span was missing."
+    },
+    {
+      "question_id": "H03",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": true,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "1747504346dd3edd00478594e267821b9cf1685a2331611e9926820d9efe738d",
+      "claims": [
+        {
+          "claim": "Neuron(3) creates three weight Values.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "15-17",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The constructor creates one Value per iteration of range(nin).",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "The zip pairs weights and inputs up to the length of the shorter input.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "20-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "This follows from ordinary Python zip semantics applied to the shown expression.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "With two inputs, only the first two weights participate.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "15-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "A three-weight list zipped with two inputs produces two pairs.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "With four inputs, the fourth input is ignored.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "15-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "A three-weight list zipped with four inputs produces three pairs.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The activation still includes the bias.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "20-21",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The answer includes the expression with self.b as sum's starting value.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "The Neuron call performs no explicit input-length validation.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "20-22",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The complete call shows the summation and return only.",
+          "claim_id": "C6"
+        },
+        {
+          "claim": "The input count mismatch alone does not raise an error in these examples.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "20-22",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "zip handles the length mismatch by truncating. This assumes otherwise valid input elements.",
+          "claim_id": "C7"
+        }
+      ]
+    },
+    {
+      "question_id": "H04",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": true,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "29aafe2641c8177e2f5cfcfec94e667fb564ba74a009fd07ead2c41952aa54e0",
+      "claims": [
+        {
+          "claim": "A one-neuron layer returns its sole activation directly.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "35-37",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "Layer returns out[0] when there is exactly one output.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "A layer with multiple neurons returns a list of activations.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 2,
+              "lines": "35-37",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "Layer returns the comprehension list for multiple outputs.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "The first layer is Layer(2, 3, nonlin=True).",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "47-49",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 2,
+              "lines": "32-33",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "Substituting input sizes into the constructor yields these values.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "The second layer is Layer(3, 1, nonlin=False).",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "47-49",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 2,
+              "lines": "32-33",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The final iteration sets the flag false and takes one output.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The first layer returns a list of three Value objects.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "47-53",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 2,
+              "lines": "32-37",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 3,
+              "lines": "15-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 5,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The cited pair establishes list shape. The exact element type needs the retrieved Neuron and Value usage beyond those citations.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "The final layer returns a single Value object.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "47-54",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 2,
+              "lines": "32-37",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 3,
+              "lines": "15-22",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 5,
+              "lines": "19-36",
+              "file_path": "README.md"
+            }
+          ],
+          "reason": "The cited pair establishes the singleton is unwrapped. The exact output type needs the retrieved Neuron and Value usage beyond those citations.",
+          "claim_id": "C6"
+        },
+        {
+          "claim": "The first layer's output becomes the second layer's input.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            2,
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "51-54",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The MLP loop reassigns x after each layer.",
+          "claim_id": "C7"
+        }
+      ]
+    },
+    {
+      "question_id": "H05",
+      "answerable": true,
+      "all_required_evidence_retrieved": false,
+      "fully_faithful": false,
+      "complete": false,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": false,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "7e099512d86888f41c05a55a82aed6da1f058ce8e3e43822d28a64855e8f8c44",
+      "claims": [
+        {
+          "claim": "MLP inherits zero_grad from Module.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "4-8",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 3,
+              "lines": "45-60",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "Module defines the method and MLP inherits Module without overriding it.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "zero_grad iterates over self.parameters().",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "6-8",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The loop appears directly in Module.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "MLP.parameters flattens the parameters returned by each layer.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            3
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 3,
+              "lines": "56-57",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The nested comprehension flattens the layer results.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "The flattened list reaches every weight and bias in the network.",
+          "label": "NOT_IN_SOURCE",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "6-8",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 3,
+              "lines": "56-57",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The sources stop at layer.parameters(). The bodies that connect layer parameters to each neuron and then to its weights and bias were not retrieved.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "zero_grad sets the grad attribute of each returned parameter to 0.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1,
+            3
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "6-8",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The assignment is explicit; its scope is whichever parameters are returned.",
+          "claim_id": "C5"
+        }
+      ],
+      "completeness_reason": "The answer omits Layer.parameters calling each Neuron.parameters and Neuron.parameters returning weights followed by bias. The retrieved MLP and Module excerpts stop at the layer boundary."
+    },
+    {
+      "question_id": "H06",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": false,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": false,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "5653e6f4f97334e0a26a2e3d6b8dd1b5140207d36147406cd987060e82435efc",
+      "claims": [
+        {
+          "claim": "Multiplication creates a new Value output node with a backward closure.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "24-33",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The operator constructs out and attaches the closure.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "In this example the multiplication closure adds 3 times out.grad to x.grad.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "24-29",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The other operand's data is 3.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "The multiplication closure adds 2 times out.grad to the node for the constant 3.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "24-31",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The numeric operand is wrapped and the base data is 2.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "Calling y.backward() seeds y.grad with 1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "65-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The output object is self and its grad is assigned 1.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The backward call runs the stored backward functions.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "54-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The method builds a topological list and calls v._backward() on its reverse.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "After the first backward call x.grad is 3.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "5-7",
+              "file_path": "micrograd/engine.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "24-31",
+              "file_path": "micrograd/engine.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "68-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "x starts at 0 and accumulates 3 times the output seed of 1.",
+          "claim_id": "C6"
+        },
+        {
+          "claim": "After the second backward call without clearing x.grad is 6.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "24-31",
+              "file_path": "micrograd/engine.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "65-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The root is seeded again and x accumulates a second contribution of 3.",
+          "claim_id": "C7"
+        },
+        {
+          "claim": "backward does not clear the existing gradient on x in this example.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "24-31",
+              "file_path": "micrograd/engine.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "65-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The root assignment targets y; x is incremented by its operator's closure.",
+          "claim_id": "C8"
+        },
+        {
+          "claim": "backward does not reset any other node's grad before accumulating.",
+          "label": "CONTRADICTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": false,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "65-70",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "Read literally as a claim about every other node, it conflicts with the root assignment to y.grad before the closure loop. The answer separately states that assignment correctly.",
+          "claim_id": "C9"
+        },
+        {
+          "claim": "Module.zero_grad sets each returned network parameter gradient to zero.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            4
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 4,
+              "lines": "4-8",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The Module helper explicitly assigns 0 to each returned parameter.",
+          "claim_id": "C10"
+        }
+      ]
+    },
+    {
+      "question_id": "H07",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": true,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "43b7890c22d460d70039adecdac822305ae2494bd108ebda4c0f05e781418bb8",
+      "claims": [
+        {
+          "claim": "The exponent is restricted by an int-or-float isinstance check.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "35-36",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The answer describes the numeric check correctly for the two examples.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "x ** 2 passes the check and creates a Value with the powered data.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "35-37",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "2 passes the assertion and the constructor computes the power.",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "x ** Value(2) raises AssertionError under normal execution.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "35-37",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The shown assertion runs before output construction and rejects a Value exponent.",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "Only the base x is stored as a predecessor of the valid power output.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "5-10",
+              "file_path": "micrograd/engine.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "35-37",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The output receives (self,) and Value stores its children in _prev.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "The backward closure accumulates the power derivative into the base gradient.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "39-41",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The closure applies the power rule multiplied by out.grad to self.grad.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "The exponent has no predecessor node or gradient update in the valid call.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "35-41",
+              "file_path": "micrograd/engine.py"
+            }
+          ],
+          "reason": "The scalar exponent appears in the formula but there is no gradient target for it.",
+          "claim_id": "C6"
+        }
+      ]
+    },
+    {
+      "question_id": "H08",
+      "answerable": true,
+      "all_required_evidence_retrieved": true,
+      "fully_faithful": true,
+      "complete": true,
+      "exact_refusal": false,
+      "correct_exact_refusal": null,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "d1892d217126b700018a8797c6b7998c7d028499cdc2fdad146ea11165c01491",
+      "claims": [
+        {
+          "claim": "Neuron(3, nonlin=False) creates three weight Value objects.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "15-16",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The weight comprehension creates one object for each of the three positions.",
+          "claim_id": "C1"
+        },
+        {
+          "claim": "Each weight is initialized from a random number in the range -1 to 1.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "16",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The initializer is random.uniform(-1,1).",
+          "claim_id": "C2"
+        },
+        {
+          "claim": "The bias is initialized as Value(0).",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "17",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The constructor sets the bias to Value(0).",
+          "claim_id": "C3"
+        },
+        {
+          "claim": "The nonlin flag is stored as False.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "15-18",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The constructor stores the supplied flag.",
+          "claim_id": "C4"
+        },
+        {
+          "claim": "parameters() returns the three weights in order followed by the bias.",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "16-17",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "24-25",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "The return expression appends the bias to the three-element weight list.",
+          "claim_id": "C5"
+        },
+        {
+          "claim": "The exact representation is LinearNeuron(3).",
+          "label": "SUPPORTED",
+          "cited_sources": [
+            1
+          ],
+          "citation_covered": true,
+          "evidence_spans": [
+            {
+              "source_number": 1,
+              "lines": "18",
+              "file_path": "micrograd/nn.py"
+            },
+            {
+              "source_number": 1,
+              "lines": "27-28",
+              "file_path": "micrograd/nn.py"
+            }
+          ],
+          "reason": "False selects Linear and the weight list length is three.",
+          "claim_id": "C6"
+        }
+      ]
+    },
+    {
+      "question_id": "HU01",
+      "answerable": false,
+      "all_required_evidence_retrieved": null,
+      "fully_faithful": null,
+      "complete": null,
+      "exact_refusal": true,
+      "correct_exact_refusal": true,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "claims": [],
+      "refusal_reason": "The neuron constructor gives a random initializer, with no specific draws for the requested instance."
+    },
+    {
+      "question_id": "HU02",
+      "answerable": false,
+      "all_required_evidence_retrieved": null,
+      "fully_faithful": null,
+      "complete": null,
+      "exact_refusal": true,
+      "correct_exact_refusal": true,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "claims": [],
+      "refusal_reason": "The README identifies PyTorch as a test dependency and supplies no exact version."
+    },
+    {
+      "question_id": "HU03",
+      "answerable": false,
+      "all_required_evidence_retrieved": null,
+      "fully_faithful": null,
+      "complete": null,
+      "exact_refusal": true,
+      "correct_exact_refusal": true,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "claims": [],
+      "refusal_reason": "The README points to the demo notebook and names SGD. The two exact training settings are absent."
+    },
+    {
+      "question_id": "HU04",
+      "answerable": false,
+      "all_required_evidence_retrieved": null,
+      "fully_faithful": null,
+      "complete": null,
+      "exact_refusal": true,
+      "correct_exact_refusal": true,
+      "correct_question_outcome": true,
+      "invalid_citation_numbers": [],
+      "answer_sha256": "810d7c3ca6aa6411102588f8636833035138a35f32f5e7b2df96d2ab2dc4d660",
+      "claims": [],
+      "refusal_reason": "The five sources contain no LICENSE file text or the requested copyright details."
+    }
+  ]
+}
