@@ -6,6 +6,7 @@ from embedding_model import EmbeddingModel
 
 from embed import build_github_url, CHROMA_DB_PATH, COLLECTION_NAME
 from query import load_api_key, safe_query_stream
+from ast_relationship_retrieval import expand_ast_relationships
 
 
 def parse_args():
@@ -41,8 +42,13 @@ if __name__ == '__main__':
     query_result = collection.query(
         query_embeddings=question_embedding, n_results=args.top_k, where=where
     )
-    retrieved_chunks = query_result["documents"][0]
-    retrieved_metadatas = query_result["metadatas"][0]
+    (
+        retrieved_chunks,
+        retrieved_metadatas,
+        _,
+    ) = expand_ast_relationships(
+        collection, query_result, where=where, final_k=args.top_k
+    )
 
     if not retrieved_chunks:
         print("Error: no chunks found in the collection", file=sys.stderr)

@@ -12,12 +12,19 @@ def ask_with_mocked_answer(monkeypatch, answer):
     model.encode.return_value.tolist.return_value = [[0.1, 0.2]]
 
     collection = MagicMock()
+    chunk_metadata = {
+        "file_path": "Backend/main.py",
+        "start_line": 1,
+    }
     collection.query.return_value = {
+        "ids": [["Backend/main.py:1"]],
         "documents": [["The answer is in this chunk."]],
-        "metadatas": [[{
-            "file_path": "Backend/main.py",
-            "start_line": 1,
-        }]],
+        "metadatas": [[chunk_metadata]],
+    }
+    collection.get.return_value = {
+        "ids": ["Backend/main.py:1"],
+        "documents": ["The answer is in this chunk."],
+        "metadatas": [chunk_metadata],
     }
 
     root = MagicMock()
